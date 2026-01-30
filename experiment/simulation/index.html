@@ -1,13 +1,447 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-		<!-- Your code goes here-->
+<html lang="en">
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activation Functions & Optimization Visualizer</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div class="simulation-container">
+        <!-- Step Indicator Sidebar -->
+        <aside class="step-sidebar">
+            <div class="step-sidebar-header">
+                <h3>Experiment Steps</h3>
+            </div>
+            <div class="step-list">
+                <div class="step-item active unlocked idle" data-step="1">
+                    <div class="step-indicator">
+                        <span class="step-number">1</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Import Libraries</span>
+                    </div>
+                </div>
+                <div class="step-item" data-step="2">
+                    <div class="step-indicator">
+                        <span class="step-number">2</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Load Dataset</span>
+                    </div>
+                </div>
+                <div class="step-item" data-step="3">
+                    <div class="step-indicator">
+                        <span class="step-number">3</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Model Definition</span>
+                    </div>
+                </div>
+                <div class="step-item" data-step="4">
+                    <div class="step-indicator">
+                        <span class="step-number">4</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Training Loop</span>
+                    </div>
+                </div>
+                <div class="step-item" data-step="5">
+                    <div class="step-indicator">
+                        <span class="step-number">5</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Run Experiments</span>
+                    </div>
+                </div>
+                <div class="step-item" data-step="6">
+                    <div class="step-indicator">
+                        <span class="step-number">6</span>
+                    </div>
+                    <div class="step-content-wrapper">
+                        <span class="step-title">Visualization</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Notebook Area -->
+        <main class="notebook-area">
+            <!-- Header -->
+            <div class="notebook-header">
+                <h1>Activation Functions & Optimization</h1>
+                <p class="notebook-subtitle">Studying and comparing different activation functions and optimizers on
+                    Fashion-MNIST</p>
+            </div>
+
+            <!-- Step 1: Import Libraries -->
+            <div class="step-content active" id="step-1">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block">
+                            <pre><code><span class="keyword">import</span> torch
+<span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+<span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim
+<span class="keyword">import</span> torchvision
+<span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># Set random seed for reproducibility</span>
+torch.manual_seed(<span class="number">42</span>)
+
+device = torch.device(<span class="string">'cuda'</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">'cpu'</span>)
+<span class="builtin">print</span>(<span class="string">f"Using device: {device}"</span>)</code></pre>
+                        </div>
+                        <button class="run-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div class="output-text" id="output-1" style="display: none;">Using device: cpu<br>✓
+                                Libraries imported successfully</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Load Dataset -->
+            <div class="step-content" id="step-2">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block">
+                            <pre><code>transform = transforms.Compose([
+    transforms.ToTensor(), 
+    transforms.Normalize((<span class="number">0.5</span>,), (<span class="number">0.5</span>,))
+])
+
+<span class="comment"># Download and load training data</span>
+train_dataset = torchvision.datasets.FashionMNIST(
+    root=<span class="string">'./data'</span>, 
+    train=<span class="keyword">True</span>, 
+    download=<span class="keyword">True</span>, 
+    transform=transform
+)
+train_loader = torch.utils.data.DataLoader(
+    train_dataset, 
+    batch_size=<span class="number">64</span>, 
+    shuffle=<span class="keyword">True</span>
+)
+
+<span class="comment"># Download and load test data</span>
+test_dataset = torchvision.datasets.FashionMNIST(
+    root=<span class="string">'./data'</span>, 
+    train=<span class="keyword">False</span>, 
+    download=<span class="keyword">True</span>, 
+    transform=transform
+)
+test_loader = torch.utils.data.DataLoader(
+    test_dataset, 
+    batch_size=<span class="number">64</span>, 
+    shuffle=<span class="keyword">False</span>
+)
+
+classes = (<span class="string">'T-shirt/top'</span>, <span class="string">'Trouser'</span>, <span class="string">'Pullover'</span>, <span class="string">'Dress'</span>, <span class="string">'Coat'</span>, 
+           <span class="string">'Sandal'</span>, <span class="string">'Shirt'</span>, <span class="string">'Sneaker'</span>, <span class="string">'Bag'</span>, <span class="string">'Ankle boot'</span>)
+
+<span class="builtin">print</span>(<span class="string">f"Training samples: {len(train_dataset)}"</span>)
+<span class="builtin">print</span>(<span class="string">f"Test samples: {len(test_dataset)}"</span>)</code></pre>
+                        </div>
+                        <button class="run-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div id="output-2" style="display: none;">
+                                <div class="output-text">
+                                    Training samples: 60000<br>
+                                    Test samples: 10000<br><br>
+                                    ✓ Fashion-MNIST dataset loaded successfully
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Model Definition -->
+            <div class="step-content" id="step-3">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block">
+                            <pre><code><span class="keyword">class</span> <span class="class-name">SimpleMLP</span>(nn.Module):
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="self">self</span>, activation_name=<span class="string">'relu'</span>):
+        <span class="builtin">super</span>(SimpleMLP, <span class="self">self</span>).__init__()
+        <span class="self">self</span>.flatten = nn.Flatten()
+        <span class="self">self</span>.fc1 = nn.Linear(<span class="number">28</span> * <span class="number">28</span>, <span class="number">256</span>)
+        <span class="self">self</span>.fc2 = nn.Linear(<span class="number">256</span>, <span class="number">128</span>)
+        <span class="self">self</span>.fc3 = nn.Linear(<span class="number">128</span>, <span class="number">10</span>)
+        
+        <span class="keyword">if</span> activation_name == <span class="string">'relu'</span>:
+            <span class="self">self</span>.activation = nn.ReLU()
+        <span class="keyword">elif</span> activation_name == <span class="string">'sigmoid'</span>:
+            <span class="self">self</span>.activation = nn.Sigmoid()
+        <span class="keyword">elif</span> activation_name == <span class="string">'tanh'</span>:
+            <span class="self">self</span>.activation = nn.Tanh()
+        <span class="keyword">else</span>:
+            <span class="keyword">raise</span> <span class="builtin">ValueError</span>(<span class="string">f"Unsupported activation: {activation_name}"</span>)
+            
+    <span class="keyword">def</span> <span class="function">forward</span>(<span class="self">self</span>, x):
+        x = <span class="self">self</span>.flatten(x)
+        x = <span class="self">self</span>.activation(<span class="self">self</span>.fc1(x))
+        x = <span class="self">self</span>.activation(<span class="self">self</span>.fc2(x))
+        x = <span class="self">self</span>.fc3(x)
+        <span class="keyword">return</span> x
+
+<span class="builtin">print</span>(<span class="string">"✓ Model architecture defined"</span>)</code></pre>
+                        </div>
+                        <button class="run-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div id="output-3" style="display: none;">
+                                <div class="architecture-visual" id="architecture">
+                                    <div style="font-size: 1.2em; line-height: 2.5;">
+                                        <strong>Input Layer:</strong> 784 neurons (28×28)<br>
+                                        ↓<br>
+                                        <strong>Dense(256, activation=<span
+                                                id="arch-activation">ReLU</span>)</strong><br>
+                                        ↓<br>
+                                        <strong>Dense(128, activation=<span
+                                                id="arch-activation2">ReLU</span>)</strong><br>
+                                        ↓<br>
+                                        <strong>Output Layer:</strong> 10 neurons<br><br>
+                                        <em>Architecture: 784 → 256 → 128 → 10</em>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Training Loop -->
+            <div class="step-content" id="step-4">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block">
+                            <pre><code><span class="keyword">def</span> <span class="function">train_model</span>(activation_name, optimizer_name, epochs=<span class="number">5</span>, lr=<span class="number">0.001</span>):
+    model = SimpleMLP(activation_name).to(device)
+    criterion = nn.CrossEntropyLoss()
+    
+    <span class="keyword">if</span> optimizer_name == <span class="string">'sgd'</span>:
+        optimizer = optim.SGD(model.parameters(), lr=lr)
+    <span class="keyword">elif</span> optimizer_name == <span class="string">'adam'</span>:
+        optimizer = optim.Adam(model.parameters(), lr=lr)
+    <span class="keyword">else</span>:
+        <span class="keyword">raise</span> <span class="builtin">ValueError</span>(<span class="string">f"Unsupported optimizer: {optimizer_name}"</span>)
+    
+    loss_history = []
+    acc_history = []
+    
+    <span class="builtin">print</span>(<span class="string">f"Training: Activation={activation_name}, Optimizer={optimizer_name}"</span>)
+    
+    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="builtin">range</span>(epochs):
+        running_loss = <span class="number">0.0</span>
+        correct = <span class="number">0</span>
+        total = <span class="number">0</span>
+        
+        <span class="keyword">for</span> i, data <span class="keyword">in</span> <span class="builtin">enumerate</span>(train_loader, <span class="number">0</span>):
+            inputs, labels = data[<span class="number">0</span>].to(device), data[<span class="number">1</span>].to(device)
+            
+            optimizer.zero_grad()
+            outputs = model(inputs)
+            loss = criterion(outputs, labels)
+            loss.backward()
+            optimizer.step()
+            
+            running_loss += loss.item()
+            _, predicted = torch.max(outputs.data, <span class="number">1</span>)
+            total += labels.size(<span class="number">0</span>)
+            correct += (predicted == labels).sum().item()
+            
+        epoch_loss = running_loss / <span class="builtin">len</span>(train_loader)
+        epoch_acc = <span class="number">100</span> * correct / total
+        loss_history.append(epoch_loss)
+        acc_history.append(epoch_acc)
+        
+        <span class="builtin">print</span>(<span class="string">f"Epoch {epoch+1}/{epochs} | Loss: {epoch_loss:.4f} | Acc: {epoch_acc:.2f}%"</span>)
+        
+    <span class="keyword">return</span> loss_history, acc_history
+
+<span class="builtin">print</span>(<span class="string">"✓ Training function defined"</span>)</code></pre>
+                        </div>
+                        <button class="run-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div class="output-text" id="output-4" style="display: none;">
+                                ✓ Training function defined
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: Run Experiments -->
+            <div class="step-content" id="step-5">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block" id="trainingCodeBlock">
+                            <pre id="trainingCode"><code>configs = [
+    (<span class="string">'<span class="highlight" id="config-activation">relu</span>'</span>, <span class="string">'<span class="highlight" id="config-optimizer">sgd</span>'</span>),
+]
+
+results = {}
+
+<span class="keyword">for</span> act, opt <span class="keyword">in</span> configs:
+    key = <span class="string">f"{act}_{opt}"</span>
+    results[key] = train_model(act, opt, epochs=<span class="highlight" id="config-epochs">5</span>, lr=<span class="highlight" id="config-lr">0.001</span>)
+
+<span class="builtin">print</span>(<span class="string">"✓ Training completed!"</span>)</code></pre>
+                        </div>
+
+                        <div class="training-controls">
+                            <div class="control-group">
+                                <label>Activation Function:</label>
+                                <select id="activation" class="param-select">
+                                    <option value="relu">ReLU</option>
+                                    <option value="sigmoid">Sigmoid</option>
+                                    <option value="tanh">Tanh</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Optimizer:</label>
+                                <select id="optimizer" class="param-select">
+                                    <option value="sgd">SGD</option>
+                                    <option value="adam">Adam</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Epochs:</label>
+                                <select id="epochs" class="param-select">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Learning Rate:</label>
+                                <select id="learningRate" class="param-select">
+                                    <option value="0.001">0.001</option>
+                                    <option value="0.01">0.01</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button class="run-btn" id="trainBtn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                            Run Training
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div id="output-5" style="display: none;">
+                                <canvas id="networkCanvas"></canvas>
+                                <div class="training-metrics">
+                                    <div class="metric-box">
+                                        <div class="metric-label">Epoch</div>
+                                        <div class="metric-value" id="currentEpoch">0</div>
+                                    </div>
+                                    <div class="metric-box">
+                                        <div class="metric-label">Loss</div>
+                                        <div class="metric-value" id="lossValue">-</div>
+                                    </div>
+                                    <div class="metric-box">
+                                        <div class="metric-label">Accuracy</div>
+                                        <div class="metric-value" id="accuracy">-</div>
+                                    </div>
+                                </div>
+                                <div class="output-text" id="trainingStatus">Ready to train...</div>
+                                <div id="step5-bottom-nav"
+                                    style="display: none; margin-top: 20px; text-align: right; border-top: 1px solid #eee; padding-top: 15px;">
+                                    <button id="btnNextStep5" class="run-btn completed"
+                                        style="margin-left: auto; display: inline-flex;">
+                                        Proceed to Visualization →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6: Visualization -->
+            <div class="step-content" id="step-6">
+                <div class="content-grid">
+                    <div class="code-panel">
+                        <div class="code-block">
+                            <pre><code>plt.figure(figsize=(<span class="number">12</span>, <span class="number">5</span>))
+
+plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)
+<span class="keyword">for</span> key, (loss, _) <span class="keyword">in</span> results.items():
+    plt.plot(loss, label=key)
+plt.title(<span class="string">"Training Loss"</span>)
+plt.xlabel(<span class="string">"Epoch"</span>)
+plt.ylabel(<span class="string">"Loss"</span>)
+plt.legend()
+
+plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)
+<span class="keyword">for</span> key, (_, acc) <span class="keyword">in</span> results.items():
+    plt.plot(acc, label=key)
+plt.title(<span class="string">"Training Accuracy"</span>)
+plt.xlabel(<span class="string">"Epoch"</span>)
+plt.ylabel(<span class="string">"Accuracy (%)"</span>)
+plt.legend()
+
+plt.show()</code></pre>
+                        </div>
+                        <button class="run-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                            Run
+                        </button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="output-box">
+                            <div id="output-6" style="display: none;">
+                                <div class="chart-container">
+                                    <canvas id="lossChart"></canvas>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="accuracyChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
