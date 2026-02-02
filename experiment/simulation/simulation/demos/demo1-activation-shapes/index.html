@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 1: Activation Function Shape Explorer</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="../../index.html" class="nav-link">← Home</a>
+            <a href="../demo2-gradient-flow/index.html" class="nav-link">Next: Gradient Flow →</a>
+        </div>
+
+        <header class="header">
+            <h1>Activation Function Shape Explorer</h1>
+            <p>Understand the mathematical foundations of activation functions</p>
+        </header>
+
+        <div class="demo-container">
+            <!-- Controls Panel -->
+            <div class="demo-panel controls-panel">
+                <h3>Controls</h3>
+
+                <div class="control-group">
+                    <label for="activation-select">Activation Function</label>
+                    <select id="activation-select">
+                        <option value="linear">Linear</option>
+                        <option value="sigmoid">Sigmoid</option>
+                        <option value="tanh">Tanh</option>
+                        <option value="relu" selected>ReLU</option>
+                        <option value="leakyrelu">Leaky ReLU</option>
+                        <option value="gelu">GELU</option>
+                        <option value="swish">Swish</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="x-range">Input Range: <span id="x-range-value">-6 to 6</span></label>
+                    <input type="range" id="x-range" min="2" max="10" value="6" step="0.5">
+                </div>
+
+                <div class="control-group" id="alpha-control-group" style="display: none;">
+                    <label for="alpha-slider">Leaky ReLU α: <span id="alpha-value">0.01</span></label>
+                    <input type="range" id="alpha-slider" min="0" max="0.5" value="0.01" step="0.01">
+                </div>
+
+                <button id="reset-btn" class="btn btn-secondary btn-full">Reset View</button>
+            </div>
+
+            <!-- Visualization Panel (Middle) -->
+            <div class="demo-panel visualization-panel">
+                <div class="canvas-container">
+                    <div class="canvas-label">Function Output: f(x)</div>
+                    <canvas id="function-canvas" width="800" height="300"></canvas>
+                </div>
+
+                <div class="canvas-container">
+                    <div class="canvas-label">Derivative: f'(x)</div>
+                    <canvas id="derivative-canvas" width="800" height="300"></canvas>
+                </div>
+            </div>
+
+            <!-- Intuition Panel (Right) -->
+            <div class="demo-panel intuition-panel">
+                <h3>Understanding Activation Functions</h3>
+                <div id="intuition-content" class="intuition-content">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/math.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="demo.js"></script>
+</body>
+
+</html>

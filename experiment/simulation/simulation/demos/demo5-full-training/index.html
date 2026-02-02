@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 5: Full Training Overlay</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="../demo4-learning-rate/index.html" class="nav-link">← Previous: Learning Rate</a>
+            <a href="../../index.html" class="nav-link">Home</a>
+        </div>
+
+        <header class="header">
+            <h1>Full Training Overlay</h1>
+            <p>Train real neural networks on Fashion-MNIST</p>
+        </header>
+
+        <div class="demo-container">
+            <!-- Controls Panel -->
+            <div class="demo-panel controls-panel">
+                <h3>Model Configuration</h3>
+
+                <div class="control-group">
+                    <label for="activation-select">Activation Function</label>
+                    <select id="activation-select">
+                        <option value="sigmoid">Sigmoid</option>
+                        <option value="tanh">Tanh</option>
+                        <option value="relu" selected>ReLU</option>
+                        <option value="elu">ELU</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="optimizer-select">Optimizer</label>
+                    <select id="optimizer-select">
+                        <option value="sgd">SGD</option>
+                        <option value="adam" selected>Adam</option>
+                        <option value="rmsprop">RMSprop</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="learning-rate">Learning Rate: <span id="lr-value">0.001</span></label>
+                    <input type="range" id="learning-rate" min="0.0001" max="0.01" value="0.001" step="0.0001">
+                </div>
+
+                <div class="control-group">
+                    <label for="batch-size">Batch Size: <span id="batch-value">128</span></label>
+                    <input type="range" id="batch-size" min="32" max="512" value="128" step="32">
+                </div>
+
+                <div class="control-group">
+                    <label for="epochs">Epochs: <span id="epochs-value">10</span></label>
+                    <input type="range" id="epochs" min="5" max="20" value="10" step="1">
+                </div>
+
+                <button id="train-btn" class="btn btn-primary btn-full" disabled>Train Model (Loading...)</button>
+                <button id="stop-btn" class="btn btn-secondary btn-full" disabled>Stop Training</button>
+                <button id="clear-btn" class="btn btn-secondary btn-full">Clear All Runs</button>
+
+                <div id="status-box"
+                    style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; font-size: 0.875rem;">
+                    <div><strong>Status:</strong> <span id="status-text">Initializing...</span></div>
+                    <div id="progress-container" style="display: none; margin-top: 0.5rem;">
+                        <div>Epoch: <span id="current-epoch">0</span>/<span id="total-epochs">0</span></div>
+                        <div>Loss: <span id="current-loss">-</span></div>
+                        <div>Accuracy: <span id="current-accuracy">-</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualization Panel (Middle) -->
+            <div class="demo-panel visualization-panel">
+                <div class="canvas-container">
+                    <div class="canvas-label">Training Loss</div>
+                    <canvas id="loss-canvas" width="800" height="300"></canvas>
+                </div>
+
+                <div class="canvas-container">
+                    <div class="canvas-label">Validation Accuracy</div>
+                    <canvas id="accuracy-canvas" width="800" height="300"></canvas>
+                </div>
+            </div>
+
+            <!-- Intuition Panel (Right) -->
+            <div class="demo-panel intuition-panel">
+                <h3>Bringing It All Together</h3>
+                <div class="intuition-content">
+                    <h3>Try This: Experiments</h3>
+                    <ol>
+                        <li>Train with Sigmoid + SGD (slow, poor performance)</li>
+                        <li>Train with ReLU + Adam (fast, good performance)</li>
+                        <li>Compare different learning rates with same config</li>
+                        <li>Use "Clear All Runs" to reset and try new combinations</li>
+                    </ol>
+
+                    <p style="margin-top: 2rem; border-top: 1px solid #e0e0e0; padding-top: 1rem;">This demo trains real
+                        neural networks on the Fashion-MNIST dataset, allowing you to see how
+                        activation functions and optimizers interact in practice.</p>
+
+                    <h3>Fashion-MNIST Dataset</h3>
+                    <p>A dataset of 70,000 grayscale images of clothing items in 10 categories (T-shirts, trousers,
+                        dresses, etc.). Each image is 28×28 pixels.</p>
+
+                    <h3>Network Architecture</h3>
+                    <p>Simple Multi-Layer Perceptron (MLP):</p>
+                    <ul>
+                        <li>Input: 784 pixels (28×28 flattened)</li>
+                        <li>Hidden Layer 1: 128 neurons + activation</li>
+                        <li>Hidden Layer 2: 64 neurons + activation</li>
+                        <li>Output: 10 classes (softmax)</li>
+                    </ul>
+
+                    <h3>What to Observe</h3>
+
+                    <div class="intuition-highlight">
+                        <strong>Activation Functions:</strong>
+                        <ul>
+                            <li><strong>Sigmoid/Tanh:</strong> Slower convergence, lower final accuracy due to vanishing
+                                gradients</li>
+                            <li><strong>ReLU:</strong> Fast convergence, good final accuracy</li>
+                            <li><strong>ELU:</strong> Similar to ReLU, sometimes smoother training</li>
+                        </ul>
+                    </div>
+
+                    <div class="intuition-highlight">
+                        <strong>Optimizers:</strong>
+                        <ul>
+                            <li><strong>SGD:</strong> Slower, may need higher learning rate</li>
+                            <li><strong>Adam:</strong> Fast, adaptive, generally best default</li>
+                            <li><strong>RMSprop:</strong> Good middle ground</li>
+                        </ul>
+                    </div>
+
+                    <h3>Key Takeaways</h3>
+                    <p>Modern defaults (ReLU + Adam) exist for good reasons. They converge faster and reach better
+                        accuracy. However, understanding why other combinations fail helps you debug training issues in
+                        real projects.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
+    <script src="../../js/math.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="demo.js"></script>
+</body>
+
+</html>

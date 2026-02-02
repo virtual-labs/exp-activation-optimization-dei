@@ -1,4 +1,12 @@
-### Theory
+**Experiment-3** 
+
+**Activation Functions & Optimization**
+
+**1\. Aim**
+
+To study and compare different activation functions and optimizers and analyse their effect on training dynamics.
+
+**3\. Theory**
 
 Neural network learning is governed by the interaction between activation functions and optimization algorithms. Activation functions introduce non-linearity into the network, enabling it to learn complex input–output mappings, while optimization algorithms determine how model parameters are updated to minimize the loss function. The choice of activation function and optimizer significantly affects gradient propagation, convergence speed, training stability, and overall model performance. This experiment studies these effects using a Multilayer Perceptron trained on the Fashion-MNIST dataset.
 
@@ -170,6 +178,290 @@ Adam provides faster convergence, stable training, and performs well with noisy 
 * **Risk of overfitting (Adam):**  
   Adam’s aggressive optimization can sometimes lead to overfitting on training data.
 
+
+**3\. Pre-Test (MCQs)**
+
+1. What is the primary role of activation functions in neural networks?  
+   a) To linearly transform input data  
+   (Incorrect because linear transformation alone cannot model complex relationships.)  
+   b) To introduce non-linearity into the model  
+   (Correct because activation functions enable learning complex patterns.)  
+   c) To reduce the dataset size  
+   (Incorrect because activation functions do not affect dataset size.)  
+   d) To initialize weights  
+   (Incorrect because weight initialization is a separate step.)  
+   **Answer:** b
+
+2. Which activation function outputs values between 0 and 1?  
+   a) ReLU  
+   (Incorrect because ReLU outputs zero or positive values with no upper bound.)  
+   b) Tanh  
+   (Incorrect because Tanh outputs values between \-1 and 1.)  
+   c) Sigmoid  
+   (Correct because Sigmoid outputs values in the range (0, 1).)  
+   d) Linear  
+   (Incorrect because linear activation outputs any real number.)  
+   **Answer:** c
+
+3. Which optimizer adjusts the learning rate individually for each parameter?  
+   a) SGD  
+   (Incorrect because SGD uses a fixed learning rate for all parameters.)  
+   b) Adam  
+   (Correct because Adam adapts learning rates based on past gradients per parameter.)  
+   c) Batch Gradient Descent  
+   (Incorrect because it uses a fixed learning rate.)  
+   d) RMSProp  
+   (Incorrect because although RMSProp adapts learning rates, Adam also incorporates momentum.)  
+   **Answer:** b
+
+4. What problem is commonly associated with Sigmoid and Tanh activation functions?  
+   a) Dying neurons  
+   (Incorrect because dying neurons are mostly associated with ReLU.)  
+   b) Vanishing gradients  
+   (Correct because sigmoid and tanh saturate for large inputs causing gradients to vanish.)  
+   c) Overfitting  
+   (Incorrect because overfitting relates to model complexity, not activation function.)  
+   d) Data normalization  
+   (Incorrect because normalization is a preprocessing step.)  
+   **Answer:** b
+
+5. What does SGD stand for?  
+   a) Stochastic Gradient Descent  
+   (Correct because SGD updates weights using small batches or single samples, making training faster and more flexible.)  
+   b) Standard Gradient Descent  
+   (Incorrect; usually called Batch Gradient Descent.)  
+   c) Simple Gradient Descent  
+   (Incorrect; not a standard term.)  
+   d) Steady Gradient Descent  
+   (Incorrect; not a recognized term.)  
+   **Answer:** a
+
+6. Which activation function outputs zero for negative inputs?  
+   a) Sigmoid  
+   (Incorrect because Sigmoid outputs values between 0 and 1.)  
+   b) Tanh  
+   (Incorrect because Tanh outputs negative values for negative inputs.)  
+   c) ReLU  
+   (Correct because ReLU outputs zero for negative inputs and positive linear values otherwise.)  
+   d) Linear  
+   (Incorrect because Linear outputs the input as is.)  
+   Answer: c
+
+7. What is the learning rate in optimization algorithms?  
+   a) Speed of updating parameters  
+   (Correct because learning rate controls step size in parameter updates.)  
+   b) Number of layers in the network  
+   (Incorrect as this is architectural.)  
+   c) Size of input data  
+   (Incorrect as data size doesn’t control learning rate.)  
+   d) Number of neurons  
+   (Incorrect, network size is unrelated.)  
+   **Answer:** a
+
+8. Which activation function is zero-centred?  
+   a) Sigmoid  
+   (Incorrect because sigmoid outputs in (0,1).)  
+   b) Tanh  
+   (Correct because tanh outputs in (-1,1), centred at zero.)  
+   c) ReLU  
+   (Incorrect since output is always ≥ 0.)  
+   d) Linear  
+   (Incorrect as linear just outputs the input.)  
+   **Answer:** b
+
+9.  Which optimizer uses momentum and adaptive learning rates?  
+   a) SGD  
+   (Incorrect because SGD does not use adaptive learning rates or momentum by default.)  
+   b) Adam  
+   (Correct because Adam combines momentum and adaptive learning rates.)  
+   c) Batch Gradient Descent  
+   (Incorrect, similar to SGD.)  
+   d) RMSProp  
+   (Incorrect because although RMSProp uses adaptive learning rates, Adam also uses momentum.)  
+   **Answer:** b
+
+10. Which activation function helps reduce the vanishing gradient problem?  
+    a) Sigmoid  
+    (Incorrect because sigmoid saturates causing vanishing gradients.)  
+    b) Tanh  
+    (Incorrect for similar reasons.)  
+    c) ReLU  
+    (Correct because ReLU outputs zero or positive linear values, mitigating vanishing gradients.)  
+    d) Linear  
+    (Incorrect because linear activation does not add non-linearity.)  
+    **Answer:** c
+
+    
+
+**4\. Procedure**
+
+The objective of this experiment is to study and compare the effect of different activation functions and optimization algorithms on the training dynamics of a neural network. A simple Multilayer Perceptron (MLP) is trained on the Fashion-MNIST dataset, and the impact of Sigmoid, Tanh, and ReLU activation functions in combination with SGD and Adam optimizers is analysed. The experiment focuses on understanding convergence speed, gradient flow behaviour, training stability, and classification performance using loss and accuracy curves.
+
+1. **Import Libraries:**  
+   o Import PyTorch for tensor computation and neural network implementation, torchvision for dataset loading and data transformations, torch.optim for optimization algorithms, NumPy for numerical operations, and Matplotlib for visualization of training dynamics.
+
+2. **Dataset Loading and Description:**  
+   o Load the Fashion-MNIST dataset using torchvision.datasets.FashionMNIST.  
+   o The dataset contains 60,000 training images and 10,000 test images, each of size 28 × 28 pixels in grayscale, divided into 10 distinct classes: T-shirt/top, Trouser, Pullover, Dress, Coat, Sandal, Shirt, Sneaker, Bag, and Ankle boot.
+
+3. **Data Preprocessing:**  
+   o Convert input images into tensors using ToTensor().  
+   o Normalize pixel values using Normalize((0.5,), (0.5,)) to scale inputs to the range \[-1, 1\].  
+   o Load the data using DataLoader with a batch size of 64, enabling shuffling for training data and disabling shuffling for test data.
+
+4. **Model Architecture Definition:**  
+   o Define a simple Multilayer Perceptron (MLP) with an input layer of 784 neurons (flattened 28 × 28 images), two hidden layers with 256 and 128 neurons respectively, and an output layer with 10 neurons representing class logits.  
+   o Apply different activation functions (Sigmoid, Tanh and ReLU) in the hidden layers to study their impact on learning behaviour.
+
+5. **Optimizer Selection:**  
+   o Train the MLP using two optimization algorithms: Stochastic Gradient Descent (SGD) and Adaptive Moment Estimation (Adam).  
+   o Evaluate all combinations of activation functions and optimizers under identical training conditions.
+
+6. **Model Training:**  
+   o Train the network for a fixed number of epochs (short training runs).  
+   o During each epoch, perform forward propagation, compute loss using cross-entropy loss, and update model parameters using backpropagation.  
+   o Record training loss and training accuracy at each epoch.
+
+7. **Model Evaluation:**  
+   o Evaluate the trained model on the test dataset.  
+   o Compute overall test accuracy and class-wise accuracy for all ten classes.  
+   o Generate and visualize the confusion matrix for detailed error analysis.
+
+8. **Training Dynamics Analysis:**  
+   o Plot training loss and test loss versus epochs for individual activation–optimizer combinations to analyse learning behaviour.  
+   o Plot training accuracy and test accuracy curves to study convergence speed and generalization performance.  
+   o Observe differences in convergence rate, stability, and oscillations across different activation functions and optimizers.  
+   o Compute and visualize gradient norms for each layer to analyse gradient flow and detect vanishing gradients. Vanishing gradients occur when gradients become very small during backpropagation, hindering effective learning and slowing or preventing convergence.
+
+9. **Comparative Study:**  
+   o Compare the effect of Sigmoid, Tanh, and ReLU activation functions on convergence speed and gradient propagation.  
+   o Compare SGD and Adam optimizers in terms of training stability, convergence rate, and final classification accuracy.  
+   o Summarize observations related to vanishing gradients, learning efficiency, and overall model performance.
+
+   
+
+**5\. Post-Test (MCQs)**
+
+1. Which activation function is zero-centred with output range (-1, 1)?  
+   a) Sigmoid  
+   (Incorrect because Sigmoid outputs (0,1).)  
+   b) Tanh  
+   (Correct because Tanh outputs values from \-1 to 1 and is zero-centred.)  
+   c) ReLU  
+   (Incorrect because ReLU outputs zero or positive.)  
+   d) Linear  
+   (Incorrect because linear has no bounds.)  
+   Answer: b
+
+2. What is a potential drawback of using ReLU activation?  
+   a) It saturates for large positive inputs  
+   (Incorrect because ReLU is linear for positive inputs.)  
+   b) It causes vanishing gradients for all inputs  
+   (Incorrect because vanishing gradients mostly occur in Sigmoid/Tanh.)  
+   c) Dying ReLU problem where neurons stop learning  
+   (Correct because neurons output zero for all inputs and stop updating.)  
+   d) It outputs values between 0 and 1 only  
+   (Incorrect because ReLU outputs zero or any positive value.)  
+   **Answer:** c
+
+3. What is the update rule of parameters in Stochastic Gradient Descent?  
+   a) θ\_(t+1) \= θ\_t \+ η ∇θ L(θ\_t)  
+   (Incorrect because update subtracts gradient to minimize loss.)  
+   b) θ(t+1) \= θ\_t \- η ∇θ L(θ\_t)  
+   (Correct because parameters are updated opposite to the gradient, which points toward the steepest increase in loss. Subtracting it reduces the loss. The learning rate  controls the update size.)  
+   c) θ(t+1) \= η ∇θ L(θ\_t)  
+   (Incorrect because parameters are not replaced by gradient.)  
+   d) θ(t+1) \= θ\_t / η  
+   (Incorrect because parameters are not divided by learning rate.)  
+   **Answer:** b
+
+4. What does the term "moment" refer to in Adam optimizer?  
+   a) The number of epochs  
+   (Incorrect because moments are related to gradients, not epochs.)  
+   b) Running averages of past gradients and squared gradients  
+   (Correct because Adam uses the first moment, which is the average of past gradients to capture update direction, and the second moment, which is the average of squared gradients to adjust step size based on gradient variability, enabling adaptive and efficient optimization.)  
+   c) The time taken per update  
+   (Incorrect as moment is not related to time.)  
+   d) The size of the training batch  
+   (Incorrect as batch size is independent.)  
+   **Answer:** b
+
+5. What is a drawback of the "dying ReLU" problem?  
+   a) Neurons output zero and stop learning  
+   (Correct because neurons that output zero for all inputs receive no gradient updates, causing them to stop learning and reducing the model’s capacity.)  
+   b) Neurons output large positive values  
+   (Incorrect because dying ReLU neurons output zero, not positive values.)  
+   c) Training is faster  
+   (Incorrect because dying ReLU slows or halts learning, negatively affecting training.)  
+   d) Model becomes more complex  
+   (Incorrect because dying ReLU reduces effective model capacity by disabling neurons.)  
+   **Answer:** a
+
+6. Which optimizer combines momentum and adaptive learning rates?  
+   a) SGD  
+   (Incorrect because SGD does not adapt learning rates.)  
+   b) Adam  
+   (Correct because Adam uses both momentum and adaptive rates.)  
+   c) RMSProp  
+   (Incorrect because it does not use momentum in the same way.)  
+   d) AdaGrad  
+   (Incorrect as it only adapts learning rate without momentum.)  
+   **Answer:** b
+
+7. Which activation function is non-differentiable at zero?  
+   a) Sigmoid  
+   (Incorrect because sigmoid is differentiable everywhere.)  
+   b) ReLU  
+   (Correct because ReLU has a sharp corner at zero.)  
+   c) Tanh  
+   (Incorrect as tanh is differentiable everywhere.)  
+   d) Softmax  
+   (Incorrect as softmax is differentiable.)  
+   **Answer:** b
+
+8. Why can Sigmoid activation slow down training?  
+   a) Because it causes neurons to die  
+   (Incorrect because dying neurons are mostly related to ReLU.)  
+   b) Because it is not differentiable  
+   (Incorrect because Sigmoid is differentiable.)  
+   c) Because it saturates and causes vanishing gradients  
+   (Correct because large inputs push gradients close to zero.)  
+   d) Because it outputs values only in negative range  
+   (Incorrect because Sigmoid outputs between 0 and 1.)  
+   **Answer:** c
+
+9. How does the Adam optimizer differ from standard SGD?  
+   a) Adam uses fixed learning rate for all parameters  
+   (Incorrect because Adam adapts learning rates individually.)  
+   b) Adam maintains moving averages of past gradients and squared gradients  
+   (Correct because this enables adaptive moment estimation.)  
+   c) Adam ignores gradient information during updates  
+   (Incorrect because Adam heavily relies on gradients.)  
+   d) Adam always requires manual tuning of momentum separately  
+   (Incorrect because momentum is part of Adam’s built-in mechanism.)  
+   **Answer:** b
+
+10. What is the main advantage of using adaptive optimizers like Adam?  
+    a) They adjust learning rates individually for each parameter  
+    (Correct because this allows faster and more stable convergence.)  
+    b) They require no hyperparameter tuning at all  
+    (Incorrect because learning rate and other params still need tuning.)  
+    c) They eliminate the need for backpropagation  
+    (Incorrect because backpropagation is essential for gradient calculation.)  
+    d) They always prevent overfitting  
+    (Incorrect because overfitting depends on model complexity and data.)
+
+    **Answer:** a
+
+    
+
+**6\. References**
+
+1. I. Goodfellow, Y. Bengio, and A. Courville, Deep Learning. Cambridge, MA, USA: MIT Press, 2016\.
+
+2. M. A. Nielsen, Neural Networks and Deep Learning. Determination Press, 2015\.
+
+3. D. P. Kingma and J. Ba, “Adam: A Method for Stochastic Optimization,” *International Conference on Learning Representations (ICLR)*, 2015\.
 
 [image1]: <data:image/png;base64,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>
 

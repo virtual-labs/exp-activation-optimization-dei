@@ -2,38 +2,174 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "Which activation function is zero-centred with output range (-1, 1)?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Sigmoid",
+        "b": "Tanh",
+        "c": "ReLU",
+        "d": "Linear"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect because Sigmoid outputs (0,1).",
+        "b": "Correct because Tanh outputs values from -1 to 1 and is zero-centred.",
+        "c": "Incorrect because ReLU outputs zero or positive.",
+        "d": "Incorrect because linear has no bounds."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "What is a potential drawback of using ReLU activation?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "It saturates for large positive inputs",
+        "b": "It causes vanishing gradients for all inputs",
+        "c": "Dying ReLU problem where neurons stop learning",
+        "d": "It outputs values between 0 and 1 only"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect because ReLU is linear for positive inputs.",
+        "b": "Incorrect because vanishing gradients mostly occur in Sigmoid/Tanh.",
+        "c": "Correct because neurons output zero for all inputs and stop updating.",
+        "d": "Incorrect because ReLU outputs zero or any positive value."
       },
       "correctAnswer": "c",
-      "difficulty": "beginner"
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What is the update rule of parameters in Stochastic Gradient Descent?",
+      "answers": {
+        "a": "θ(t+1) = θ_t + η ∇θ L(θ_t)",
+        "b": "θ(t+1) = θ_t - η ∇θ L(θ_t)",
+        "c": "θ(t+1) = η ∇θ L(θ_t)",
+        "d": "θ(t+1) = θ_t / η"
+      },
+      "explanations": {
+        "a": "Incorrect because update subtracts gradient to minimize loss.",
+        "b": "Correct because parameters are updated opposite to the gradient, which points toward the steepest increase in loss. Subtracting it reduces the loss. The learning rate controls the update size.",
+        "c": "Incorrect because parameters are not replaced by gradient.",
+        "d": "Incorrect because parameters are not divided by learning rate."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "What does the term 'moment' refer to in Adam optimizer?",
+      "answers": {
+        "a": "The number of epochs",
+        "b": "Running averages of past gradients and squared gradients",
+        "c": "The time taken per update",
+        "d": "The size of the training batch"
+      },
+      "explanations": {
+        "a": "Incorrect because moments are related to gradients, not epochs.",
+        "b": "Correct because Adam uses the first moment, which is the average of past gradients to capture update direction, and the second moment, which is the average of squared gradients to adjust step size based on gradient variability, enabling adaptive and efficient optimization.",
+        "c": "Incorrect as moment is not related to time.",
+        "d": "Incorrect as batch size is independent."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "What is a drawback of the 'dying ReLU' problem?",
+      "answers": {
+        "a": "Neurons output zero and stop learning",
+        "b": "Neurons output large positive values",
+        "c": "Training is faster",
+        "d": "Model becomes more complex"
+      },
+      "explanations": {
+        "a": "Correct because neurons that output zero for all inputs receive no gradient updates, causing them to stop learning and reducing the model’s capacity.",
+        "b": "Incorrect because dying ReLU neurons output zero, not positive values.",
+        "c": "Incorrect because dying ReLU slows or halts learning, negatively affecting training.",
+        "d": "Incorrect because dying ReLU reduces effective model capacity by disabling neurons."
+      },
+      "correctAnswer": "a",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which optimizer combines momentum and adaptive learning rates?",
+      "answers": {
+        "a": "SGD",
+        "b": "Adam",
+        "c": "RMSProp",
+        "d": "AdaGrad"
+      },
+      "explanations": {
+        "a": "Incorrect because SGD does not adapt learning rates.",
+        "b": "Correct because Adam uses both momentum and adaptive rates.",
+        "c": "Incorrect because it does not use momentum in the same way.",
+        "d": "Incorrect as it only adapts learning rate without momentum."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which activation function is non-differentiable at zero?",
+      "answers": {
+        "a": "Sigmoid",
+        "b": "ReLU",
+        "c": "Tanh",
+        "d": "Softmax"
+      },
+      "explanations": {
+        "a": "Incorrect because sigmoid is differentiable everywhere.",
+        "b": "Correct because ReLU has a sharp corner at zero.",
+        "c": "Incorrect as tanh is differentiable everywhere.",
+        "d": "Incorrect as softmax is differentiable."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Why can Sigmoid activation slow down training?",
+      "answers": {
+        "a": "Because it causes neurons to die",
+        "b": "Because it is not differentiable",
+        "c": "Because it saturates and causes vanishing gradients",
+        "d": "Because it outputs values only in negative range"
+      },
+      "explanations": {
+        "a": "Incorrect because dying neurons are mostly related to ReLU.",
+        "b": "Incorrect because Sigmoid is differentiable.",
+        "c": "Correct because large inputs push gradients close to zero.",
+        "d": "Incorrect because Sigmoid outputs between 0 and 1."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "How does the Adam optimizer differ from standard SGD?",
+      "answers": {
+        "a": "Adam uses fixed learning rate for all parameters",
+        "b": "Adam maintains moving averages of past gradients and squared gradients",
+        "c": "Adam ignores gradient information during updates",
+        "d": "Adam always requires manual tuning of momentum separately"
+      },
+      "explanations": {
+        "a": "Incorrect because Adam adapts learning rates individually.",
+        "b": "Correct because this enables adaptive moment estimation.",
+        "c": "Incorrect because Adam heavily relies on gradients.",
+        "d": "Incorrect because momentum is part of Adam’s built-in mechanism."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What is the main advantage of using adaptive optimizers like Adam?",
+      "answers": {
+        "a": "They adjust learning rates individually for each parameter",
+        "b": "They require no hyperparameter tuning at all",
+        "c": "They eliminate the need for backpropagation",
+        "d": "They always prevent overfitting"
+      },
+      "explanations": {
+        "a": "Correct because this allows faster and more stable convergence.",
+        "b": "Incorrect because learning rate and other params still need tuning.",
+        "c": "Incorrect because backpropagation is essential for gradient calculation.",
+        "d": "Incorrect because overfitting depends on model complexity and data."
+      },
+      "correctAnswer": "a",
+      "difficulty": "intermediate"
     }
   ]
 }

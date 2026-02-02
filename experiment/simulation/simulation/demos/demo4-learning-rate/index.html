@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 4: Learning Rate Scheduler</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="../demo3-optimizer-paths/index.html" class="nav-link">← Previous: Optimizer Paths</a>
+            <a href="../../index.html" class="nav-link">Home</a>
+            <a href="../demo5-full-training/index.html" class="nav-link">Next: Full Training →</a>
+        </div>
+
+        <header class="header">
+            <h1>Learning Rate Scheduler</h1>
+            <p>Understand why learning rate should change during training</p>
+        </header>
+
+        <div class="demo-container">
+            <!-- Controls Panel -->
+            <div class="demo-panel controls-panel">
+                <h3>Controls</h3>
+
+                <div class="control-group">
+                    <label for="scheduler-select">Scheduler</label>
+                    <select id="scheduler-select">
+                        <option value="none">None (Constant)</option>
+                        <option value="step" selected>Step Decay</option>
+                        <option value="cosine">Cosine Annealing</option>
+                        <option value="exponential">Exponential Decay</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="initial-lr">Initial Learning Rate: <span id="initial-lr-value">0.1</span></label>
+                    <input type="range" id="initial-lr" min="0.01" max="0.5" value="0.1" step="0.01">
+                </div>
+
+                <div class="control-group">
+                    <label for="epochs">Training Epochs: <span id="epochs-value">100</span></label>
+                    <input type="range" id="epochs" min="50" max="200" value="100" step="10">
+                </div>
+
+                <button id="simulate-btn" class="btn btn-primary btn-full">Simulate Training</button>
+                <button id="compare-btn" class="btn btn-secondary btn-full">Compare All Schedulers</button>
+                <button id="reset-btn" class="btn btn-secondary btn-full">Reset</button>
+            </div>
+
+            <!-- Visualization Panel (Middle) -->
+            <div class="demo-panel visualization-panel">
+                <div class="canvas-container">
+                    <div class="canvas-label">Learning Rate vs Epoch</div>
+                    <canvas id="lr-canvas" width="800" height="200"></canvas>
+                </div>
+
+                <div class="canvas-container">
+                    <div class="canvas-label">Training Loss vs Epoch</div>
+                    <canvas id="loss-canvas" width="800" height="250"></canvas>
+                </div>
+
+                <div class="canvas-container">
+                    <div class="canvas-label">Validation Accuracy vs Epoch</div>
+                    <canvas id="accuracy-canvas" width="800" height="250"></canvas>
+                </div>
+            </div>
+
+            <!-- Intuition Panel (Right) -->
+            <div class="demo-panel intuition-panel">
+                <h3>Understanding Learning Rate Scheduling</h3>
+                <div id="intuition-content" class="intuition-content">
+                    <h3>Try This</h3>
+                    <p>Compare the curves to see how scheduled learning rates lead to:</p>
+                    <ul>
+                        <li>Faster initial convergence</li>
+                        <li>Better final accuracy</li>
+                        <li>Smoother loss curves in later epochs</li>
+                    </ul>
+
+                    <p style="margin-top: 2rem; border-top: 1px solid #e0e0e0; padding-top: 1rem;">The learning rate
+                        controls how big a step the optimizer takes in parameter space. Choosing the
+                        right schedule can dramatically improve training.</p>
+
+                    <h3>Why Schedule the Learning Rate?</h3>
+                    <p>Early in training, you want to explore the parameter space quickly with large steps. Later, you
+                        need smaller steps to fine-tune and converge to a good minimum.</p>
+
+                    <div class="intuition-highlight">
+                        <strong>Key Principle:</strong> Start fast, end slow. Large learning rates early for
+                        exploration, small learning rates later for refinement.
+                    </div>
+
+                    <h3>Scheduler Types</h3>
+
+                    <h4>None (Constant)</h4>
+                    <p>Learning rate stays the same throughout training. Simple but often suboptimal. May overshoot the
+                        minimum or converge slowly.</p>
+
+                    <h4>Step Decay</h4>
+                    <p>Reduces learning rate by a factor (e.g., 0.1) at specific epochs. Common schedule: reduce at 50%
+                        and 75% of training.</p>
+                    <ul>
+                        <li>Simple and effective</li>
+                        <li>Sudden drops can cause training instability</li>
+                        <li>Widely used in computer vision</li>
+                    </ul>
+
+                    <h4>Cosine Annealing</h4>
+                    <p>Smoothly decreases learning rate following a cosine curve. Provides gradual reduction without
+                        sudden jumps.</p>
+                    <ul>
+                        <li>Smooth transitions</li>
+                        <li>Popular in modern architectures</li>
+                        <li>Can be combined with warm restarts</li>
+                    </ul>
+
+                    <h4>Exponential Decay</h4>
+                    <p>Multiplies learning rate by a constant factor each epoch. Provides continuous, smooth decay.</p>
+                    <ul>
+                        <li>Gradual reduction</li>
+                        <li>May decay too quickly or slowly depending on factor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/math.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="demo.js"></script>
+</body>
+
+</html>
