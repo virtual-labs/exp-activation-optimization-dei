@@ -1,3 +1,5 @@
+### Procedure
+
 The objective of this experiment is to study and compare the effect of different activation functions and optimization algorithms on the training dynamics of a neural network. A simple Multilayer Perceptron (MLP) is trained on the Fashion-MNIST dataset, and the impact of Sigmoid, Tanh, and ReLU activation functions in combination with SGD and Adam optimizers is analysed. The experiment focuses on understanding convergence speed, gradient flow behaviour, training stability, and classification performance using loss and accuracy curves.
 
 1. **Import Libraries:**  
