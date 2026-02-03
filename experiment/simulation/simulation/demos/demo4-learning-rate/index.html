@@ -187,21 +187,43 @@
 
             document.getElementById('zoom-fit-btn').addEventListener('click', () => {
                 const containerWidth = scrollContainer.clientWidth - 20;
-                const containerHeight = scrollContainer.clientHeight - 20;
+                // const containerHeight = scrollContainer.clientHeight - 20; // Height isn't the constraint anymore
 
                 // Dynamically get content size
                 const contentWidth = contentWrapper.scrollWidth || 840;
-                const contentHeight = contentWrapper.scrollHeight || 900;
+                // const contentHeight = contentWrapper.scrollHeight || 900; 
 
                 const widthRatio = containerWidth / contentWidth;
-                const heightRatio = containerHeight / contentHeight;
 
-                let newZoom = Math.min(widthRatio, heightRatio);
-                if (newZoom > 1) newZoom = 1;
+                // User requested "width of the inner canvas is max to fit the outter section"
+                // So we prioritize widthRatio. 
+                // We also allow zooming in (> 1) if the container is wider than the content.
+                let newZoom = widthRatio;
+
+                // Optional: set a reasonable limits
                 if (newZoom < 0.1) newZoom = 0.1;
 
                 currentZoom = newZoom;
                 updateZoom();
+            });
+
+            // Auto-fit when options change
+            const controls = ['scheduler-select', 'initial-lr', 'epochs'];
+            controls.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    // Use 'change' for all inputs to avoid excessive reflows during sliding
+                    el.addEventListener('change', () => {
+                        // Small delay to allow any other updates to propagate
+                        setTimeout(() => document.getElementById('zoom-fit-btn').click(), 50);
+                    });
+                    // specific for range inputs if they want "input" event
+                    if (el.tagName === 'INPUT' && el.type === 'RANGE') {
+                        el.addEventListener('input', () => {
+                            setTimeout(() => document.getElementById('zoom-fit-btn').click(), 50);
+                        });
+                    }
+                }
             });
 
             // Initial fit using a small delay to ensure layout is computed

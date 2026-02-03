@@ -10,5 +10,5 @@
 | 1 | Shobha Rawat | shobhar9457@gmail.com | Dayalbagh Educational Institute | 1 |
 | 2 | Shabd Sahni | shabdsahni2005@gmail.com | Dayalbagh Educational Institute | 2 |
 | 3 | Kumkum Singh | kumkumsingh17122005@gmail.com | Dayalbagh Educational Institute | 3 |
-| 4 | Adbhut | adbhut.rei.2233@gmail.com | Dayalbagh Educational Institute | 4 |
+| 4 | Adbhut Satsangi | adbhut.rei.2233@gmail.com | Dayalbagh Educational Institute | 4 |
 

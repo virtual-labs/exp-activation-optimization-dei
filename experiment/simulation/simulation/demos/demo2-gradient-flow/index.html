@@ -157,24 +157,39 @@
 
                 document.getElementById('zoom-fit-btn').addEventListener('click', () => {
                     const containerWidth = scrollContainer.clientWidth - 20;
-                    const containerHeight = scrollContainer.clientHeight - 20;
+                    // const containerHeight = scrollContainer.clientHeight - 20;
 
                     // Dynamically get content size
                     const contentWidth = contentWrapper.scrollWidth || 840;
-                    const contentHeight = contentWrapper.scrollHeight || 880;
+                    // const contentHeight = contentWrapper.scrollHeight || 880;
 
                     const widthRatio = containerWidth / contentWidth;
-                    const heightRatio = containerHeight / contentHeight;
+                    // const heightRatio = containerHeight / contentHeight;
 
-                    let newZoom = Math.min(widthRatio, heightRatio);
+                    // Prioritize Width Fit and allow scaling up
+                    let newZoom = widthRatio;
 
-                    // Clamp max zoom to 1
-                    if (newZoom > 1) newZoom = 1;
                     // Clamp min zoom to prevent tiny view
                     if (newZoom < 0.1) newZoom = 0.1;
 
                     currentZoom = newZoom;
                     updateZoom();
+                });
+
+                // Auto-fit listeners
+                const controls = ['activation-select', 'layer-count', 'input-value'];
+                controls.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.addEventListener('change', () => {
+                            setTimeout(() => document.getElementById('zoom-fit-btn').click(), 50);
+                        });
+                        if (el.tagName === 'INPUT' && el.type === 'RANGE') {
+                            el.addEventListener('input', () => {
+                                setTimeout(() => document.getElementById('zoom-fit-btn').click(), 50);
+                            });
+                        }
+                    }
                 });
 
                 // Initial fit
