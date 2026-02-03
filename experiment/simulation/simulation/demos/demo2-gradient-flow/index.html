@@ -52,12 +52,29 @@
             </div>
 
             <!-- Visualization Panel (Middle) -->
-            <div class="demo-panel visualization-panel">
-                <canvas id="network-canvas" width="800" height="600"></canvas>
-
-                <div style="margin-top: 1rem;">
-                    <h3>Gradient Magnitudes by Layer</h3>
-                    <canvas id="gradient-chart" width="800" height="200"></canvas>
+            <!-- Visualization Panel (Middle) -->
+            <div class="demo-panel visualization-panel"
+                style="display: flex; flex-direction: column; height: 100%; min-height: 600px; padding: 0;">
+                <div class="zoom-controls"
+                    style="padding: 10px; border-bottom: 1px solid #eee; display: flex; gap: 10px; align-items: center; justify-content: flex-end; background: #fff;">
+                    <button id="zoom-out-btn" class="btn btn-secondary" style="padding: 2px 8px;">-</button>
+                    <span id="zoom-level" style="font-size: 0.9rem; min-width: 45px; text-align: center;">100%</span>
+                    <button id="zoom-in-btn" class="btn btn-secondary" style="padding: 2px 8px;">+</button>
+                    <button id="zoom-fit-btn" class="btn btn-secondary"
+                        style="padding: 2px 8px; font-size: 0.8rem;">Fit</button>
+                </div>
+                <div id="scroll-container" style="overflow: auto; flex: 1; background: #fafafa; padding: 10px;">
+                    <div id="scale-container">
+                        <div id="content-wrapper" style="transform-origin: 0 0;">
+                            <canvas id="network-canvas" width="800" height="600"
+                                style="background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"></canvas>
+                            <div
+                                style="margin-top: 1rem; background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <h3 style="margin-top: 0;">Gradient Magnitudes by Layer</h3>
+                                <canvas id="gradient-chart" width="800" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -98,6 +115,72 @@
             </div>
         </div>
 
+        <script>
+            // Zoom Logic
+            document.addEventListener('DOMContentLoaded', () => {
+                const scrollContainer = document.getElementById('scroll-container');
+                const scaleContainer = document.getElementById('scale-container');
+                const contentWrapper = document.getElementById('content-wrapper');
+                const zoomLevelDisplay = document.getElementById('zoom-level');
+                let currentZoom = 1;
+
+                function updateZoom() {
+                    // Apply scale
+                    contentWrapper.style.transform = `scale(${currentZoom})`;
+
+                    // Update scale container size to allow scrolling
+                    // Dynamically calculate content size
+                    const contentWidth = contentWrapper.scrollWidth;
+                    const contentHeight = contentWrapper.scrollHeight;
+
+                    scaleContainer.style.width = `${contentWidth * currentZoom}px`;
+                    scaleContainer.style.height = `${contentHeight * currentZoom}px`;
+
+                    zoomLevelDisplay.textContent = `${Math.round(currentZoom * 100)}%`;
+                }
+
+                // Listen for content resize events from demo.js
+                window.addEventListener('resize-content', () => {
+                    // Small delay to allow DOM to update
+                    setTimeout(updateZoom, 50);
+                });
+
+                document.getElementById('zoom-in-btn').addEventListener('click', () => {
+                    currentZoom += 0.1;
+                    updateZoom();
+                });
+
+                document.getElementById('zoom-out-btn').addEventListener('click', () => {
+                    currentZoom = Math.max(0.1, currentZoom - 0.1);
+                    updateZoom();
+                });
+
+                document.getElementById('zoom-fit-btn').addEventListener('click', () => {
+                    const containerWidth = scrollContainer.clientWidth - 20;
+                    const containerHeight = scrollContainer.clientHeight - 20;
+
+                    // Dynamically get content size
+                    const contentWidth = contentWrapper.scrollWidth || 840;
+                    const contentHeight = contentWrapper.scrollHeight || 880;
+
+                    const widthRatio = containerWidth / contentWidth;
+                    const heightRatio = containerHeight / contentHeight;
+
+                    let newZoom = Math.min(widthRatio, heightRatio);
+
+                    // Clamp max zoom to 1
+                    if (newZoom > 1) newZoom = 1;
+                    // Clamp min zoom to prevent tiny view
+                    if (newZoom < 0.1) newZoom = 0.1;
+
+                    currentZoom = newZoom;
+                    updateZoom();
+                });
+
+                // Initial fit
+                setTimeout(() => { document.getElementById('zoom-fit-btn').click(); }, 100);
+            });
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
         <script src="../../js/math.js"></script>
         <script src="../../js/utils.js"></script>

@@ -55,8 +55,20 @@ function init() {
 
 // Resize canvases
 function resizeCanvases() {
-    const width = networkCanvas.clientWidth;
+    const scrollContainer = document.getElementById('scroll-container');
+    const width = scrollContainer ? (scrollContainer.clientWidth - 40) : networkCanvas.clientWidth;
+
+    // Calculate required height based on layer count
+    // Base height 600 or enough to fit all layers with spacing
+    // Also include padding
+    const minHeight = 600;
+    const requiredHeight = (state.layerCount * LAYER_SPACING) + 200; // 200 for padding/margins
+    const height = Math.max(minHeight, requiredHeight);
+
     networkCanvas.width = width;
+    networkCanvas.height = height; // Set explicit height attribute
+    networkCanvas.style.height = `${height}px`; // Update CSS height
+
     gradientChartCanvas.width = width;
 }
 
@@ -64,8 +76,12 @@ function resizeCanvases() {
 function reset() {
     state.layerValues = [];
     state.layerGradients = [];
+    resizeCanvases(); // Update canvas size based on new layer count
     drawNetwork();
     drawGradientChart();
+
+    // Trigger zoom update in parent window if available
+    window.dispatchEvent(new CustomEvent('resize-content'));
 }
 
 // Run forward pass

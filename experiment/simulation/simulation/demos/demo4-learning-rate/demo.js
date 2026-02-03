@@ -56,8 +56,11 @@ function init() {
 }
 
 // Resize canvases
+// Resize canvases
 function resizeCanvases() {
-    const width = lrCanvas.clientWidth;
+    const scrollContainer = document.getElementById('scroll-container');
+    const width = scrollContainer ? (scrollContainer.clientWidth - 40) : lrCanvas.clientWidth;
+
     lrCanvas.width = width;
     lossCanvas.width = width;
     accuracyCanvas.width = width;
