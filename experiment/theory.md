@@ -12,15 +12,15 @@ The choice of activation function significantly influences training dynamics, in
 
 Let the net input to a neuron be:
 
-$$z = \sum (w_i x_i) + b$$
+$$z = \sum_{i=1}^{n} (w_i x_i) + b$$
 
-where $w_i$ represents weights, $x_i$ represents input features, and $b$ is the bias term. The output of the neuron is obtained by applying an activation function $a = \sigma(z)$.
+where $w_i$ represents weights, $x_i$ represents input features, and $b$ is the bias term. The output of the neuron is obtained by applying an activation function $a = f(z)$.
 
 **1. Sigmoid Activation Function**
 
 The sigmoid activation function is defined as:
 
-$$\sigma(z) = \frac{1}{1 + e^{-z}}$$
+$$f(z) = \frac{1}{1 + e^{-z}}$$
 
 The output of the sigmoid function lies in the range $(0, 1)$. It was commonly used in early neural networks due to its smooth and differentiable nature. However, for large positive or negative input values, the function saturates, resulting in very small gradients and slow convergence during training. The Figure 1 given below shows the behaviour of the Sigmoid activation function.
 
@@ -62,12 +62,12 @@ The output range of tanh is $(-1, 1)$, making it zero-centred. Compared to sigmo
 
 The Rectified Linear Unit activation function is defined as:
 
-$$f(z) = \max(0, z)$$
+$$ReLU(z) = \max(0, z)$$
 
 It can also be expressed in piecewise form as:
 
 $$
-f(z) = \begin{cases} 
+ReLU(z) = \begin{cases} 
 0 & \text{if } z < 0 \\
 z & \text{if } z \ge 0 
 \end{cases}
@@ -93,9 +93,9 @@ ReLU outputs zero for negative input values and a linear output for positive val
 
 | Activation Function | Mathematical Expression | Output Range | Merits | Demerits |
 | :--- | :--- | :--- | :--- | :--- |
-| **Sigmoid** | $\sigma(z) = \frac{1}{1 + e^{-z}}$ | $(0, 1)$ | Smooth and differentiable; suitable for probability-based outputs | Suffers from vanishing gradient and slow convergence |
+| **Sigmoid** | $f(z) = \frac{1}{1 + e^{-z}}$ | $(0, 1)$ | Smooth and differentiable; suitable for probability-based outputs | Suffers from vanishing gradient and slow convergence |
 | **Tanh** | $\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$ | $(-1, 1)$ | Zero-centred output; better gradient flow than sigmoid | Vanishing gradient for large input values |
-| **ReLU** | $f(z) = \max(0, z)$ | $[0, \infty)$ | Fast convergence; reduces vanishing gradient problem | Dying ReLU problem; non-differentiable at zero |
+| **ReLU** | $ReLU(z) = \max(0, z)$ | $[0, \infty)$ | Fast convergence; reduces vanishing gradient problem | Dying ReLU problem; non-differentiable at zero |
 
 **2.2 Optimization Algorithms**
 
@@ -131,22 +131,13 @@ SGD is simple and memory-efficient, and the randomness in updates can help escap
 
 Adaptive Moment Estimation (Adam) was proposed by Diederik P. Kingma and Jimmy Lei Ba (2015). It is an advanced optimization algorithm that combines the benefits of momentum-based methods and adaptive learning rate techniques. Adam adapts the learning rate for each parameter individually by maintaining exponentially decaying averages of past gradients and squared gradients.
 
-The update rule for Adam involves computing the first and second moments of the gradients:
-
-$$m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t$$
-$$v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2$$
-
-Bias-correction is applied:
-
-$$\hat{m}_t = \frac{m_t}{1 - \beta_1^t}$$
-$$\hat{v}_t = \frac{v_t}{1 - \beta_2^t}$$
-
-And the parameter update is:
+The update rule for Adam is:
 
 $$\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t$$
 
-Where:
+Where,
 *   $\theta_t$ is the model parameter at iteration $t$
+*   $\theta_{t+1}$ is the updated parameter
 *   $\eta$ is the learning rate
 *   $\hat{m}_t$ is the bias-corrected first moment estimate (mean of gradients)
 *   $\hat{v}_t$ is the bias-corrected second moment estimate (mean of squared gradients)

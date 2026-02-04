@@ -363,7 +363,7 @@ function createCellElement(cell, stepNum) {
     header.className = 'cell-header';
     header.innerHTML = `
         <span class="cell-label">${title}</span>
-        <button class="run-btn" onclick="runCell(${stepNum})">
+        <button class="run-btn" onclick="runCell(${stepNum})" ${stepNum > 1 ? 'disabled' : ''}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M8 5v14l11-7z" />
             </svg>
@@ -483,7 +483,7 @@ function runCell(step) {
 
             // Show Output Immediately
             const output = cell.querySelector('.cell-output');
-            if (output) {
+            if (output && output.innerHTML.trim() !== '') {
                 output.classList.remove('hidden');
 
                 // Scroll to output immediately
@@ -498,10 +498,22 @@ function runCell(step) {
                     resolve(true);
                 }, 3000);
             } else {
+                if (currentVariant && completedSteps.size === currentVariant.totalSteps) {
+                    showCompletionMessage();
+                }
                 resolve(true);
             }
-
         }, 1000);
+    }).then(success => {
+        if (success) {
+            // Enable next button
+            const nextStep = step + 1;
+            const nextBtn = document.querySelector(`.notebook-cell[data-step="${nextStep}"] .run-btn`);
+            if (nextBtn) {
+                nextBtn.removeAttribute('disabled');
+            }
+        }
+        return success;
     });
 }
 
@@ -513,11 +525,24 @@ function scrollToCell(step) {
 
 function resetExperiment() {
     completedSteps.clear();
-    document.querySelectorAll('.notebook-cell').forEach(c => {
+    const cells = document.querySelectorAll('.notebook-cell');
+    cells.forEach(c => {
         c.classList.remove('running', 'completed');
         const out = c.querySelector('.cell-output');
         if (out) out.classList.add('hidden');
+
+        // Reset buttons
+        const btn = c.querySelector('.run-btn');
+        if (btn) {
+            const step = parseInt(c.dataset.step);
+            if (step === 1) {
+                btn.removeAttribute('disabled');
+            } else {
+                btn.setAttribute('disabled', 'true');
+            }
+        }
     });
+
     document.querySelectorAll('.step-item').forEach(s => {
         s.classList.remove('running', 'completed', 'active');
     });

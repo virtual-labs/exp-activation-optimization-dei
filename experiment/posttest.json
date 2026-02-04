@@ -45,7 +45,7 @@
       },
       "explanations": {
         "a": "Incorrect because update subtracts gradient to minimize loss.",
-        "b": "Correct because parameters are updated opposite to the gradient, which points toward the steepest increase in loss. Subtracting it reduces the loss. The learning rate controls the update size.",
+        "b": "Correct because parameters are updated opposite to the gradient, which points toward the steepest increase in loss. Subtracting it reduces the loss. The learning rate η controls the update size.",
         "c": "Incorrect because parameters are not replaced by gradient.",
         "d": "Incorrect because parameters are not divided by learning rate."
       },
