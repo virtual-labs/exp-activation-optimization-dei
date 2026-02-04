@@ -14,17 +14,18 @@ Let the net input to a neuron be:
 
 $$z = \sum_{i=1}^{n} (w_i x_i) + b$$
 
-where $w_i$ represents weights, $x_i$ represents input features, and $b$ is the bias term. The output of the neuron is obtained by applying an activation function $a = f(z)$.
+where $w_i$ represents weights, $x_i$ represents input features, and $b$ is the bias term. The output of the neuron is obtained by applying an activation function $f(z)$.
 
 **1. Sigmoid Activation Function**
 
 The sigmoid activation function is defined as:
 
-$$f(z) = \frac{1}{1 + e^{-z}}$$
+$$f\sigma(z) = \frac{1}{1 + e^{-z}}$$
 
 The output of the sigmoid function lies in the range $(0, 1)$. It was commonly used in early neural networks due to its smooth and differentiable nature. However, for large positive or negative input values, the function saturates, resulting in very small gradients and slow convergence during training. The Figure 1 given below shows the behaviour of the Sigmoid activation function.
 
 ![Sigmoid Activation Function](images/image20.png)
+
 *Figure 1: Sigmoid Activation Function*
 
 **Merits of Sigmoid Activation Function**
@@ -46,6 +47,7 @@ $$\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$$
 The output range of tanh is $(-1, 1)$, making it zero-centred. Compared to sigmoid, tanh provides better gradient flow near zero and generally results in faster convergence. However, it still suffers from gradient saturation for large input values. The Figure 2 given below illustrates the behaviour of the Tanh activation function.
 
 ![Tanh Activation Function](images/image22.png)
+
 *Figure 2: Tanh Activation Function*
 
 **Merits of Hyperbolic Tangent (Tanh) Activation Function**
@@ -76,6 +78,7 @@ $$
 ReLU outputs zero for negative input values and a linear output for positive values. This behaviour significantly reduces the vanishing gradient problem and improves training efficiency. Due to its simplicity and effectiveness, ReLU is widely used in modern deep learning models. The Figure 3 given below represents the ReLU activation function curve.
 
 ![ReLU Activation Function](images/image21.png)
+
 *Figure 3: ReLU Activation Function*
 
 **Merits of ReLU Activation Function**
@@ -93,7 +96,7 @@ ReLU outputs zero for negative input values and a linear output for positive val
 
 | Activation Function | Mathematical Expression | Output Range | Merits | Demerits |
 | :--- | :--- | :--- | :--- | :--- |
-| **Sigmoid** | $f(z) = \frac{1}{1 + e^{-z}}$ | $(0, 1)$ | Smooth and differentiable; suitable for probability-based outputs | Suffers from vanishing gradient and slow convergence |
+| **Sigmoid** | $\sigma(z) = \frac{1}{1 + e^{-z}}$ | $(0, 1)$ | Smooth and differentiable; suitable for probability-based outputs | Suffers from vanishing gradient and slow convergence |
 | **Tanh** | $\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$ | $(-1, 1)$ | Zero-centred output; better gradient flow than sigmoid | Vanishing gradient for large input values |
 | **ReLU** | $ReLU(z) = \max(0, z)$ | $[0, \infty)$ | Fast convergence; reduces vanishing gradient problem | Dying ReLU problem; non-differentiable at zero |
 

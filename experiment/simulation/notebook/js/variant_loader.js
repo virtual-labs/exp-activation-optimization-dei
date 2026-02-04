@@ -490,13 +490,12 @@ function runCell(step) {
                 // Using center block for output visibility
                 output.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-                // Wait 3 seconds at output before resolving
-                setTimeout(() => {
-                    if (currentVariant && completedSteps.size === currentVariant.totalSteps) {
-                        showCompletionMessage();
-                    }
-                    resolve(true);
-                }, 3000);
+                // Wait 3 seconds at output before resolving - REMOVED per user request
+                // Enable immediately
+                if (currentVariant && completedSteps.size === currentVariant.totalSteps) {
+                    showCompletionMessage();
+                }
+                resolve(true);
             } else {
                 if (currentVariant && completedSteps.size === currentVariant.totalSteps) {
                     showCompletionMessage();

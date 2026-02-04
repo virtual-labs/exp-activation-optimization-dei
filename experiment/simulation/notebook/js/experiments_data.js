@@ -20,11 +20,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_adam_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_adam_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -322,11 +318,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_adam_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_adam_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -624,11 +616,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_adam_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_adam_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -926,11 +914,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_sgd_momentum_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_sgd_momentum_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -1228,11 +1212,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_sgd_momentum_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_sgd_momentum_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -1530,11 +1510,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_sgd_momentum_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_sgd_momentum_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -1832,11 +1808,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_rmsprop_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_rmsprop_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -2134,11 +2106,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_rmsprop_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_rmsprop_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -2436,11 +2404,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_rmsprop_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"relu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"relu_rmsprop_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -2738,11 +2702,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_adam_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_adam_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -3035,11 +2995,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_adam_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_adam_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -3332,11 +3288,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_adam_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_adam_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -3629,11 +3581,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_sgd_momentum_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_sgd_momentum_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -3926,11 +3874,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_sgd_momentum_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_sgd_momentum_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -4223,11 +4167,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_sgd_momentum_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_sgd_momentum_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -4520,11 +4460,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_rmsprop_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_rmsprop_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -4817,11 +4753,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_rmsprop_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_rmsprop_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -5114,11 +5046,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_rmsprop_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"gelu\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"gelu_rmsprop_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -5411,11 +5339,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_adam_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_adam_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -5708,11 +5632,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_adam_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_adam_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -6005,11 +5925,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_adam_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_adam_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -6302,11 +6218,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_sgd_momentum_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_sgd_momentum_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -6599,11 +6511,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_sgd_momentum_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_sgd_momentum_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -6896,11 +6804,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_sgd_momentum_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_sgd_momentum_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -7193,11 +7097,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_rmsprop_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_rmsprop_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -7490,11 +7390,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_rmsprop_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_rmsprop_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -7787,11 +7683,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_rmsprop_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"tanh\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"tanh_rmsprop_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -8084,11 +7976,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_adam_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_adam_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -8381,11 +8269,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_adam_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_adam_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -8678,11 +8562,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_adam_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"adam\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_adam_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -8975,11 +8855,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_sgd_momentum_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_sgd_momentum_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -9272,11 +9148,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_sgd_momentum_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_sgd_momentum_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -9569,11 +9441,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_sgd_momentum_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"sgd_momentum\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_sgd_momentum_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -9866,11 +9734,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_rmsprop_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.01\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_rmsprop_0e01\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -10163,11 +10027,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_rmsprop_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_rmsprop_0e001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
@@ -10460,11 +10320,7 @@ const EXPERIMENTS_DATA = [
         "outputs": []
       },
       {
-        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_rmsprop_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n",
-        "outputs": []
-      },
-      {
-        "source": "print(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
+        "source": "# Parameters\nACTIVATION = \"sigmoid\"\nOPTIMIZER = \"rmsprop\"\nLEARNING_RATE = 0.0001\nSCHEDULER = \"none\"\nEXPERIMENT_ID = \"sigmoid_rmsprop_0e0001\"\nEPOCHS = 30\nBATCH_SIZE = 128\nSEED = 42\n\n\nprint(f\"\\nExperiment Configuration:\")\nprint(f\"  ID: {EXPERIMENT_ID}\")\nprint(f\"  Activation: {ACTIVATION}\")\nprint(f\"  Optimizer: {OPTIMIZER}\")\nprint(f\"  Scheduler: {SCHEDULER}\")\nprint(f\"  Learning Rate: {LEARNING_RATE}\")\nprint(f\"  Epochs: {EPOCHS}\")\nprint(f\"  Batch Size: {BATCH_SIZE}\")\nprint(f\"  Seed: {SEED}\")",
         "outputs": [
           {
             "type": "text",
