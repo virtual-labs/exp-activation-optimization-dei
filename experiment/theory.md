@@ -20,7 +20,7 @@ where $w_i$ represents weights, $x_i$ represents input features, and $b$ is the 
 
 The sigmoid activation function is defined as:
 
-$$f\sigma(z) = \frac{1}{1 + e^{-z}}$$
+$$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 
 The output of the sigmoid function lies in the range $(0, 1)$. It was commonly used in early neural networks due to its smooth and differentiable nature. However, for large positive or negative input values, the function saturates, resulting in very small gradients and slow convergence during training. The Figure 1 given below shows the behaviour of the Sigmoid activation function.
 
