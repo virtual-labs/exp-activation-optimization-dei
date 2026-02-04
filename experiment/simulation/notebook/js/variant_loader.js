@@ -275,7 +275,7 @@ function renderSidebar(experiment) {
 
         allCells.push(cell);
 
-        if (cell.type === 'code') {
+        if (cell.type === 'code' || !cell.type) {
             stepCount++;
             const currentStep = stepCount;
             const title = inferCellTitle(cell, currentStep);
@@ -325,7 +325,7 @@ function renderCells(experiment) {
     let codeStepCounter = 0;
 
     currentVariant.allCells.forEach((cell) => {
-        if (cell.type === 'code') {
+        if (cell.type === 'code' || !cell.type) {
             codeStepCounter++;
             const cellDiv = createCellElement(cell, codeStepCounter);
             container.appendChild(cellDiv);
@@ -334,6 +334,9 @@ function renderCells(experiment) {
             container.appendChild(cellDiv);
         }
     });
+    if (window.MathJax) {
+        MathJax.typesetPromise();
+    }
 }
 
 function createCellElement(cell, stepNum) {
