@@ -481,6 +481,19 @@ function runCell(step) {
             }
             completedSteps.add(step);
 
+            // Update Run Button
+            const btn = cell.querySelector('.run-btn');
+            if (btn) {
+                btn.innerHTML = `
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                    Done
+                `;
+                btn.disabled = true;
+                btn.classList.add('disabled');
+            }
+
             // Show Output Immediately
             const output = cell.querySelector('.cell-output');
             if (output && output.innerHTML.trim() !== '') {
@@ -533,6 +546,15 @@ function resetExperiment() {
         // Reset buttons
         const btn = c.querySelector('.run-btn');
         if (btn) {
+            // Reset text and icon
+            btn.innerHTML = `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                Run
+            `;
+            btn.classList.remove('disabled');
+
             const step = parseInt(c.dataset.step);
             if (step === 1) {
                 btn.removeAttribute('disabled');

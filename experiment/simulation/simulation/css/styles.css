@@ -502,3 +502,27 @@ input[type="range"]::-moz-range-thumb {
     margin-bottom: 1rem;
   }
 }
+/* Back Link Styles for Playground */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    transition: color 0.2s ease;
+    align-self: flex-start; /* Ensure it stays left */
+    position: absolute;
+    left: var(--spacing-lg);
+    top: var(--spacing-lg);
+}
+
+.back-link:hover {
+    color: var(--color-primary);
+}
+
+.header {
+    position: relative;
+    padding-top: var(--spacing-xl); /* Add space for the button */
+}
