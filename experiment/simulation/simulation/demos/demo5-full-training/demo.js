@@ -95,28 +95,55 @@ function resizeCanvases() {
 }
 
 // Load data (Synthetic for demo stability)
+// Load data (Synthetic for demo stability)
 async function loadData() {
     // Generate synthetic data for robust demo experience without external dependencies
-    // In a production environment, you would use tf.data.csv/web
+    // We create clusters of data points for each class so the model has something to learn
 
     tf.tidy(() => {
-        // 1000 training examples, 784 features (28x28)
-        const trainXs = tf.randomNormal([1000, 784]);
-        const trainYs = tf.oneHot(tf.randomUniform([1000], 0, 10, 'int32'), 10);
+        const numClasses = 10;
+        const numFeatures = 784;
+        const trainSamples = 1000;
+        const testSamples = 200;
 
-        // 200 test examples
-        const testXs = tf.randomNormal([200, 784]);
-        const testYs = tf.oneHot(tf.randomUniform([200], 0, 10, 'int32'), 10);
+        // Generate random centroids for each class
+        const centroids = tf.randomNormal([numClasses, numFeatures]);
+
+        function generateData(numSamples) {
+            const xData = [];
+            const yData = [];
+
+            for (let i = 0; i < numSamples; i++) {
+                // Random class
+                const label = Math.floor(Math.random() * numClasses);
+                yData.push(label);
+
+                // Get centroid and add noise
+                const centroid = centroids.slice([label, 0], [1, numFeatures]);
+                const noise = tf.randomNormal([1, numFeatures], 0, 1.5); // 1.5 std dev
+                const sample = centroid.add(noise);
+
+                xData.push(sample);
+            }
+
+            const xs = tf.concat(xData);
+            const ys = tf.oneHot(tf.tensor1d(yData, 'int32'), numClasses);
+
+            return { xs, ys };
+        }
+
+        const train = generateData(trainSamples);
+        const test = generateData(testSamples);
 
         // Store globally, keeping them in memory (not disposed by tidy)
         trainData = {
-            xs: tf.keep(trainXs),
-            ys: tf.keep(trainYs)
+            xs: tf.keep(train.xs),
+            ys: tf.keep(train.ys)
         };
 
         testData = {
-            xs: tf.keep(testXs),
-            ys: tf.keep(testYs)
+            xs: tf.keep(test.xs),
+            ys: tf.keep(test.ys)
         };
     });
 }
