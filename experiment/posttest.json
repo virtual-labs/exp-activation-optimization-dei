@@ -2,7 +2,7 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "Which activation function is zero-centred with output range (-1, 1)?",
+      "question": "1. Which activation function is zero-centred with output range (-1, 1)?",
       "answers": {
         "a": "Sigmoid",
         "b": "Tanh",
@@ -19,7 +19,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "What is a potential drawback of using ReLU activation?",
+      "question": "2. What is a potential drawback of using ReLU activation?",
       "answers": {
         "a": "It saturates for large positive inputs",
         "b": "It causes vanishing gradients for all inputs",
@@ -36,16 +36,16 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "What is the update rule of parameters in Stochastic Gradient Descent?",
+      "question": "3. What is the update rule of parameters in Stochastic Gradient Descent?",
       "answers": {
-        "a": "θ(t+1) = θ_t + η ∇θ L(θ_t)",
-        "b": "θ(t+1) = θ_t - η ∇θ L(θ_t)",
-        "c": "θ(t+1) = η ∇θ L(θ_t)",
-        "d": "θ(t+1) = θ_t / η"
+        "a": "\u03b8(t+1) = \u03b8_t + \u03b7 \u2207\u03b8 L(\u03b8_t)",
+        "b": "\u03b8(t+1) = \u03b8_t - \u03b7 \u2207\u03b8 L(\u03b8_t)",
+        "c": "\u03b8(t+1) = \u03b7 \u2207\u03b8 L(\u03b8_t)",
+        "d": "\u03b8(t+1) = \u03b8_t / \u03b7"
       },
       "explanations": {
         "a": "Incorrect because update subtracts gradient to minimize loss.",
-        "b": "Correct because parameters are updated opposite to the gradient, which points toward the steepest increase in loss. Subtracting it reduces the loss. The learning rate η controls the update size.",
+        "b": "Correct because parameters are updated opposite to the gradient, which points toward the steepest increase in loss. Subtracting it reduces the loss. The learning rate \u03b7 controls the update size.",
         "c": "Incorrect because parameters are not replaced by gradient.",
         "d": "Incorrect because parameters are not divided by learning rate."
       },
@@ -53,7 +53,7 @@
       "difficulty": "advanced"
     },
     {
-      "question": "What does the term 'moment' refer to in Adam optimizer?",
+      "question": "4. What does the term 'moment' refer to in Adam optimizer?",
       "answers": {
         "a": "The number of epochs",
         "b": "Running averages of past gradients and squared gradients",
@@ -70,7 +70,7 @@
       "difficulty": "advanced"
     },
     {
-      "question": "What is a drawback of the 'dying ReLU' problem?",
+      "question": "5. What is a drawback of the 'dying ReLU' problem?",
       "answers": {
         "a": "Neurons output zero and stop learning",
         "b": "Neurons output large positive values",
@@ -78,7 +78,7 @@
         "d": "Model becomes more complex"
       },
       "explanations": {
-        "a": "Correct because neurons that output zero for all inputs receive no gradient updates, causing them to stop learning and reducing the model’s capacity.",
+        "a": "Correct because neurons that output zero for all inputs receive no gradient updates, causing them to stop learning and reducing the model\u2019s capacity.",
         "b": "Incorrect because dying ReLU neurons output zero, not positive values.",
         "c": "Incorrect because dying ReLU slows or halts learning, negatively affecting training.",
         "d": "Incorrect because dying ReLU reduces effective model capacity by disabling neurons."
@@ -87,7 +87,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "Which optimizer combines momentum and adaptive learning rates?",
+      "question": "6. Which optimizer combines momentum and adaptive learning rates?",
       "answers": {
         "a": "SGD",
         "b": "Adam",
@@ -104,7 +104,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "Which activation function is non-differentiable at zero?",
+      "question": "7. Which activation function is non-differentiable at zero?",
       "answers": {
         "a": "Sigmoid",
         "b": "ReLU",
@@ -121,7 +121,7 @@
       "difficulty": "advanced"
     },
     {
-      "question": "Why can Sigmoid activation slow down training?",
+      "question": "8. Why can Sigmoid activation slow down training?",
       "answers": {
         "a": "Because it causes neurons to die",
         "b": "Because it is not differentiable",
@@ -138,7 +138,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "How does the Adam optimizer differ from standard SGD?",
+      "question": "9. How does the Adam optimizer differ from standard SGD?",
       "answers": {
         "a": "Adam uses fixed learning rate for all parameters",
         "b": "Adam maintains moving averages of past gradients and squared gradients",
@@ -149,13 +149,13 @@
         "a": "Incorrect because Adam adapts learning rates individually.",
         "b": "Correct because this enables adaptive moment estimation.",
         "c": "Incorrect because Adam heavily relies on gradients.",
-        "d": "Incorrect because momentum is part of Adam’s built-in mechanism."
+        "d": "Incorrect because momentum is part of Adam\u2019s built-in mechanism."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
     },
     {
-      "question": "What is the main advantage of using adaptive optimizers like Adam?",
+      "question": "10. What is the main advantage of using adaptive optimizers like Adam?",
       "answers": {
         "a": "They adjust learning rates individually for each parameter",
         "b": "They require no hyperparameter tuning at all",

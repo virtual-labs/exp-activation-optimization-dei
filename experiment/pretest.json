@@ -2,7 +2,7 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "What is the primary role of activation functions in neural networks?",
+      "question": "1. What is the primary role of activation functions in neural networks?",
       "answers": {
         "a": "To linearly transform input data",
         "b": "To introduce non-linearity into the model",
@@ -19,7 +19,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "Which activation function outputs values between 0 and 1?",
+      "question": "2. Which activation function outputs values between 0 and 1?",
       "answers": {
         "a": "ReLU",
         "b": "Tanh",
@@ -36,7 +36,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "Which optimizer adjusts the learning rate individually for each parameter?",
+      "question": "3. Which optimizer adjusts the learning rate individually for each parameter?",
       "answers": {
         "a": "SGD",
         "b": "Adam",
@@ -53,7 +53,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "What problem is commonly associated with Sigmoid and Tanh activation functions?",
+      "question": "4. What problem is commonly associated with Sigmoid and Tanh activation functions?",
       "answers": {
         "a": "Dying neurons",
         "b": "Vanishing gradients",
@@ -70,7 +70,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "What does SGD stand for?",
+      "question": "5. What does SGD stand for?",
       "answers": {
         "a": "Stochastic Gradient Descent",
         "b": "Standard Gradient Descent",
@@ -87,7 +87,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "Which activation function outputs zero for negative inputs?",
+      "question": "6. Which activation function outputs zero for negative inputs?",
       "answers": {
         "a": "Sigmoid",
         "b": "Tanh",
@@ -104,7 +104,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "What is the learning rate in optimization algorithms?",
+      "question": "7. What is the learning rate in optimization algorithms?",
       "answers": {
         "a": "Speed of updating parameters",
         "b": "Number of layers in the network",
@@ -114,14 +114,14 @@
       "explanations": {
         "a": "Correct because learning rate controls step size in parameter updates.",
         "b": "Incorrect as this is architectural.",
-        "c": "Incorrect as data size doesn’t control learning rate.",
+        "c": "Incorrect as data size doesn\u2019t control learning rate.",
         "d": "Incorrect, network size is unrelated."
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
     {
-      "question": "Which activation function is zero-centred?",
+      "question": "8. Which activation function is zero-centred?",
       "answers": {
         "a": "Sigmoid",
         "b": "Tanh",
@@ -131,14 +131,14 @@
       "explanations": {
         "a": "Incorrect because sigmoid outputs in (0,1).",
         "b": "Correct because tanh outputs in (-1,1), centred at zero.",
-        "c": "Incorrect since output is always ≥ 0.",
+        "c": "Incorrect since output is always \u2265 0.",
         "d": "Incorrect as linear just outputs the input."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
     },
     {
-      "question": "Which optimizer uses momentum and adaptive learning rates?",
+      "question": "9. Which optimizer uses momentum and adaptive learning rates?",
       "answers": {
         "a": "SGD",
         "b": "Adam",
@@ -155,7 +155,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "Which activation function helps reduce the vanishing gradient problem?",
+      "question": "10. Which activation function helps reduce the vanishing gradient problem?",
       "answers": {
         "a": "Sigmoid",
         "b": "Tanh",
