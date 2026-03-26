@@ -80,6 +80,14 @@ function reset() {
     drawNetwork();
     drawGradientChart();
 
+    // Hide math step panels
+    const fwdEl  = document.getElementById('math-forward-steps');
+    const bwdEl  = document.getElementById('math-backward-steps');
+    const lossEl = document.getElementById('math-loss-box');
+    if (fwdEl)  { fwdEl.style.display  = 'none'; fwdEl.innerHTML  = ''; }
+    if (bwdEl)  { bwdEl.style.display  = 'none'; bwdEl.innerHTML  = ''; }
+    if (lossEl) { lossEl.style.display = 'none'; }
+
     // Trigger zoom update in parent window if available
     window.dispatchEvent(new CustomEvent('resize-content'));
 }
@@ -103,6 +111,7 @@ function runForwardPass() {
     // Animate forward pass
     animateForwardPass(() => {
         state.isAnimating = false;
+        showForwardMath();
     });
 }
 
@@ -116,9 +125,10 @@ function runBackwardPass() {
 
     state.isAnimating = true;
 
-    // Compute gradients
+    // Compute gradients — seed from dL/da_out where L = 0.5*(a_out - 1)^2
     state.layerGradients = new Array(state.layerCount + 1).fill(0);
-    state.layerGradients[state.layerCount] = 1.0; // Start with gradient of 1 at output
+    const aOut = state.layerValues[state.layerCount];
+    state.layerGradients[state.layerCount] = aOut - 1.0; // dL/da_out
 
     const derivativeFn = getActivationDerivative(state.activation);
 
@@ -133,6 +143,7 @@ function runBackwardPass() {
     animateBackwardPass(() => {
         state.isAnimating = false;
         drawGradientChart();
+        showBackwardMath();
     });
 }
 
@@ -381,6 +392,114 @@ function drawGradientChart() {
     gradientChartCtx.font = '12px Inter';
     gradientChartCtx.textAlign = 'right';
     gradientChartCtx.fillText('Gradient Magnitude', padding - 5, padding - 10);
+}
+
+// ── Math display helpers ──────────────────────────────────────────────────────
+
+// Format a number for display
+function fmt(v) {
+    const abs = Math.abs(v);
+    if (abs === 0) return '0.0000';
+    if (abs < 0.0001 || abs >= 10000) return v.toExponential(4);
+    return v.toFixed(4);
+}
+
+// Return expanded derivative HTML for a given activation and pre-activation z
+function derivHtml(name, z) {
+    const v = getActivationDerivative(name)(z);
+    switch (name) {
+        case 'sigmoid': {
+            const s = 1 / (1 + Math.exp(-z));
+            return `f&prime;(z) = &sigma;(${fmt(z)}) &middot; (1&minus;&sigma;(${fmt(z)})) = ${fmt(s)} &middot; ${fmt(1 - s)} = <b>${fmt(v)}</b>`;
+        }
+        case 'tanh': {
+            const t = Math.tanh(z);
+            return `f&prime;(z) = 1 &minus; tanh&sup2;(${fmt(z)}) = 1 &minus; ${fmt(t * t)} = <b>${fmt(v)}</b>`;
+        }
+        case 'relu':
+            return v === 1
+                ? `f&prime;(z) = <b>1</b> &nbsp;(z = ${fmt(z)} &gt; 0)`
+                : `f&prime;(z) = <b>0</b> &nbsp;(z = ${fmt(z)} &le; 0)`;
+        case 'leakyrelu':
+            return v === 1
+                ? `f&prime;(z) = <b>1</b> &nbsp;(z = ${fmt(z)} &gt; 0)`
+                : `f&prime;(z) = <b>0.01</b> &nbsp;(z = ${fmt(z)} &le; 0)`;
+        default:
+            return `f&prime;(z) = <b>${fmt(v)}</b>`;
+    }
+}
+
+// Show step-by-step forward pass math
+function showForwardMath() {
+    const el = document.getElementById('math-forward-steps');
+    if (!el) return;
+
+    const n = state.layerValues.length - 1; // number of layers computed
+    let html = '<div class="math-steps-block">'
+             + '<div class="math-steps-header fwd">Forward Pass — Step by Step</div>';
+
+    for (let i = 1; i <= n; i++) {
+        const aIn  = state.layerValues[i - 1];
+        const z    = aIn * 0.8;
+        const aOut = state.layerValues[i];
+        const layerLabel = i === n ? 'Output' : `Layer ${i}`;
+
+        html += `<div class="math-step fwd">`;
+        html += `<div class="math-step-label">${layerLabel} (i=${i})</div>`;
+        html += `z[${i}] = a[${i-1}] &times; 0.8 = ${fmt(aIn)} &times; 0.8 = ${fmt(z)}<br>`;
+        html += `a[${i}] = f(${fmt(z)}) = ${fmt(aOut)}`;
+        html += `</div>`;
+    }
+    html += '</div>';
+
+    el.innerHTML = html;
+    el.style.display = 'block';
+}
+
+// Show step-by-step backward pass math
+function showBackwardMath() {
+    const elFwd = document.getElementById('math-forward-steps');
+    const el    = document.getElementById('math-backward-steps');
+    const lossEl = document.getElementById('math-loss-box');
+    if (!el) return;
+
+    const n = state.layerCount;
+
+    // Compute loss and seed gradient from loss
+    const aOut = state.layerValues[n];
+    const loss = 0.5 * Math.pow(aOut - 1, 2);
+    const dLoss = aOut - 1; // dL/d_aOut
+
+    let html = '<div class="math-steps-block">'
+             + '<div class="math-steps-header bwd">Backward Pass — Chain Rule</div>';
+
+    html += `<div class="math-step bwd">`;
+    html += `<div class="math-step-label">Loss at output (target = 1.0)</div>`;
+    html += `L = &frac12;(${fmt(aOut)} &minus; 1)&sup2; = ${fmt(loss)}<br>`;
+    html += `&part;L/&part;a[${n}] = ${fmt(aOut)} &minus; 1 = <b>${fmt(dLoss)}</b>`;
+    html += `</div>`;
+
+    for (let i = n; i >= 1; i--) {
+        const aIn   = state.layerValues[i - 1];
+        const z     = aIn * 0.8;
+        const gradOut = state.layerGradients[i];
+        const gradIn  = state.layerGradients[i - 1];
+
+        html += `<div class="math-step bwd">`;
+        html += `<div class="math-step-label">Layer ${i} &rarr; Layer ${i-1}</div>`;
+        html += `${derivHtml(state.activation, z)}<br>`;
+        html += `&part;L/&part;a[${i-1}] = &part;L/&part;a[${i}] &times; f&prime; &times; w<br>`;
+        html += `= ${fmt(gradOut)} &times; f&prime;(${fmt(z)}) &times; 0.8 = <b>${fmt(gradIn)}</b>`;
+        html += `</div>`;
+    }
+
+    html += '<div class="math-note">w = 0.8 (fixed weight used in this illustration)</div>';
+    html += '</div>';
+
+    el.innerHTML = html;
+    el.style.display = 'block';
+    if (lossEl) lossEl.style.display = 'block';
+    if (elFwd) elFwd.style.display = 'block';
 }
 
 // Initialize on load

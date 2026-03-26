@@ -12,11 +12,11 @@ The choice of activation function significantly influences training dynamics, in
 
 Let the net input to a neuron be:
 
-$$z = \sum_{i=1}^{n} (w_i x_i) + b$$
+$$z = \sum_{i=1}^{n} w_i x_i + b$$
 
 where $w_i$ represents weights, $x_i$ represents input features, and $b$ is the bias term. The output of the neuron is obtained by applying an activation function $f(z)$.
 
-**1. Sigmoid Activation Function**
+**I. Sigmoid Activation Function: -**
 
 The sigmoid activation function is defined as:
 
@@ -38,7 +38,7 @@ The output of the sigmoid function lies in the range $(0, 1)$. It was commonly u
 *   **Non-zero-centred output:** The output is not zero-centred, which can cause inefficient weight updates and slower convergence during training.
 *   **Saturation at extreme values:** The function saturates at both ends of its output range, reducing its effectiveness in deep neural networks.
 
-**2. Hyperbolic Tangent (Tanh) Activation Function**
+**II. Hyperbolic Tangent (Tanh) Activation Function: -**
 
 The hyperbolic tangent activation function is given by:
 
@@ -60,7 +60,7 @@ The output range of tanh is $(-1, 1)$, making it zero-centred. Compared to sigmo
 *   **Saturation at extreme values:** The function saturates at high positive and negative values, leading to reduced learning speed.
 *   **Higher computational cost:** The use of exponential functions makes tanh computationally more expensive than ReLU.
 
-**3. Rectified Linear Unit (ReLU)**
+**III. Rectified Linear Unit (ReLU): -**
 
 The Rectified Linear Unit activation function is defined as:
 
@@ -69,9 +69,9 @@ $$ReLU(z) = \max(0, z)$$
 It can also be expressed in piecewise form as:
 
 $$
-ReLU(z) = \begin{cases} 
-0 & \text{if } z < 0 \\
-z & \text{if } z \ge 0 
+ReLU(z) = \begin{cases}
+0, & \text{if } z < 0 \\
+z, & \text{if } z \ge 0
 \end{cases}
 $$
 
@@ -102,11 +102,9 @@ ReLU outputs zero for negative input values and a linear output for positive val
 
 **2.2 Optimization Algorithms**
 
-Optimization algorithms are used to minimize the loss function of a neural network by iteratively adjusting its parameters (weights and biases). During training, the optimizer determines the direction and magnitude of parameter updates based on the gradients of the loss function with respect to the model parameters. An efficient optimization algorithm ensures faster convergence, numerical stability, and improved generalization performance.
+Optimization algorithms are used to minimize the loss function of a neural network by iteratively adjusting its parameters (weights and biases). During training, the optimizer determines the direction and magnitude of parameter updates based on the gradients of the loss function with respect to the model parameters. An efficient optimization algorithm ensures faster convergence, numerical stability, and improved generalization performance. In this experiment, Stochastic Gradient Descent (SGD) and Adaptive Moment Estimation (Adam) optimizers are studied and compared while training a Multilayer Perceptron (MLP) on the Fashion-MNIST dataset.
 
-In this experiment, Stochastic Gradient Descent (SGD) and Adaptive Moment Estimation (Adam) optimizers are studied and compared while training a Multilayer Perceptron (MLP) on the Fashion-MNIST dataset.
-
-**1. Stochastic Gradient Descent (SGD)**
+**I. Stochastic Gradient Descent (SGD): -**
 
 Stochastic Gradient Descent is a fundamental optimization algorithm based on the theory of stochastic approximation, introduced by Herbert Robbins and Sutton Monro (1951). Unlike batch gradient descent, SGD updates model parameters using a single training example or a small mini-batch, which reduces computational cost.
 
@@ -130,15 +128,15 @@ SGD is simple and memory-efficient, and the randomness in updates can help escap
 *   **No adaptive learning rate:** A fixed learning rate is used for all parameters, which may limit performance if not carefully tuned.
 *   **Oscillations during training:** SGD can exhibit oscillatory behaviour near minima due to noisy gradient updates.
 
-**2. Adaptive Moment Estimation (Adam)**
+**II. Adaptive Moment Estimation (Adam): -**
 
 Adaptive Moment Estimation (Adam) was proposed by Diederik P. Kingma and Jimmy Lei Ba (2015). It is an advanced optimization algorithm that combines the benefits of momentum-based methods and adaptive learning rate techniques. Adam adapts the learning rate for each parameter individually by maintaining exponentially decaying averages of past gradients and squared gradients.
 
 The update rule for Adam is:
 
-$$\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t$$
+$$\theta_{t+1} = \theta_t - \eta \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$$
 
-Where,
+Where:
 *   $\theta_t$ is the model parameter at iteration $t$
 *   $\theta_{t+1}$ is the updated parameter
 *   $\eta$ is the learning rate

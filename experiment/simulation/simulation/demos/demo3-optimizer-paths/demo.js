@@ -17,9 +17,16 @@ let state = {
 
 // Default parameters
 const defaults = {
-    sgd: { lr: 0.002, beta: 0.0 }, // SGD needs a much smaller LR on Rosenbrock
-    momentum: { lr: 0.001, beta: 0.9 }, // Momentum also needs care
-    adam: { lr: 0.1, beta: 0.9 } // Adam is robust
+    sgd:      { lr: 0.002, beta: 0.0 },
+    momentum: { lr: 0.001, beta: 0.9 },
+    adam:     { lr: 0.1,   beta: 0.9 }
+};
+
+// Per-optimizer animation config
+const optimizerConfig = {
+    sgd:      { maxIter: 5000, stepsPerFrame: 20, delay: 30 },
+    momentum: { maxIter: 1500, stepsPerFrame:  3, delay: 30 },
+    adam:     { maxIter:  500, stepsPerFrame:  1, delay: 50 }
 };
 
 // Canvas
@@ -170,38 +177,41 @@ function singleStep() {
 function runOptimization() {
     if (!state.isRunning) return;
 
-    optimizationStep();
+    const cfg = optimizerConfig[state.optimizer] || { maxIter: 500, stepsPerFrame: 1, delay: 50 };
+    let stoppedEarly = false;
+
+    for (let k = 0; k < cfg.stepsPerFrame && state.iteration < cfg.maxIter; k++) {
+        optimizationStep();
+
+        const loss = rosenbrock(state.position.x, state.position.y);
+
+        if (loss < 1e-4) {
+            state.isRunning = false;
+            document.getElementById('start-btn').textContent = 'Converged ✓';
+            updateStatus(`Converged at step ${state.iteration} (Loss < 1e-4)`, '#10b981');
+            stoppedEarly = true;
+            break;
+        }
+
+        if (!isFinite(loss) || Math.abs(state.position.x) > 6 || Math.abs(state.position.y) > 6) {
+            state.isRunning = false;
+            document.getElementById('start-btn').textContent = 'Start Optimization';
+            updateStatus('Diverged — try a smaller learning rate', '#ef4444');
+            stoppedEarly = true;
+            break;
+        }
+    }
+
     drawVisualization();
 
-    // Early topping check: stuck or done?
-    const currentLoss = rosenbrock(state.position.x, state.position.y);
-    // Also check if step size is very small (convergence)
-    const lastPos = state.path[state.path.length - 2];
-    const dist = lastPos ? Math.sqrt(Math.pow(state.position.x - lastPos.x, 2) + Math.pow(state.position.y - lastPos.y, 2)) : 1;
-
-    if (currentLoss < 1e-4) {
-        state.isRunning = false;
-        document.getElementById('start-btn').textContent = 'Converged';
-        updateStatus(`Early Stopping: Converged (Loss < 1e-4)`, '#10b981');
-        return;
-    }
-
-    if (state.iteration > 10 && dist < 1e-5) {
-        state.isRunning = false;
-        document.getElementById('start-btn').textContent = 'Converged';
-        updateStatus(`Early Stopping: Step size too small (stuck)`, '#f59e0b');
-        return;
-    }
-
-    // Continue if not converged and still running
-    if (state.iteration < 500 && state.isRunning) {
-        state.animationId = setTimeout(() => runOptimization(), 50); // Faster updates
-    } else {
-        if (state.iteration >= 500) {
+    if (!stoppedEarly) {
+        if (state.iteration >= cfg.maxIter) {
+            state.isRunning = false;
+            document.getElementById('start-btn').textContent = 'Start Optimization';
             updateStatus('Max iterations reached', '#666');
+        } else if (state.isRunning) {
+            state.animationId = setTimeout(() => runOptimization(), cfg.delay);
         }
-        state.isRunning = false;
-        document.getElementById('start-btn').textContent = 'Start Optimization';
     }
 }
 
@@ -255,17 +265,18 @@ function momentumStep(grad) {
 
 // Adam step
 function adamStep(grad) {
+    const clipped = clipGradient(grad); // prevent exploding gradients on steep surfaces
     const beta1 = 0.9;
     const beta2 = 0.999;
     const epsilon = 1e-8;
 
     // Update biased first moment estimate
-    state.m.x = beta1 * state.m.x + (1 - beta1) * grad.x;
-    state.m.y = beta1 * state.m.y + (1 - beta1) * grad.y;
+    state.m.x = beta1 * state.m.x + (1 - beta1) * clipped.x;
+    state.m.y = beta1 * state.m.y + (1 - beta1) * clipped.y;
 
     // Update biased second moment estimate
-    state.v.x = beta2 * state.v.x + (1 - beta2) * grad.x * grad.x;
-    state.v.y = beta2 * state.v.y + (1 - beta2) * grad.y * grad.y;
+    state.v.x = beta2 * state.v.x + (1 - beta2) * clipped.x * clipped.x;
+    state.v.y = beta2 * state.v.y + (1 - beta2) * clipped.y * clipped.y;
 
     // Bias correction
     const mHatX = state.m.x / (1 - Math.pow(beta1, state.iteration + 1));

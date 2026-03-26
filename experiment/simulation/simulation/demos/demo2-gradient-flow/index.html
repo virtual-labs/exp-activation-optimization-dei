@@ -107,9 +107,20 @@
                         the activation function.</p>
 
                     <div class="intuition-highlight">
-                        <strong>Key Insight:</strong> If activation derivatives are small (< 1), gradients shrink as
+                        <strong>Key Insight:</strong> If activation derivatives are small (&lt; 1), gradients shrink as
                             they flow backward. In deep networks, this multiplication happens many times, potentially
-                            causing gradients to vanish. </div>
+                            causing gradients to vanish.
+                    </div>
+
+                    <div id="math-loss-box" style="display:none;" class="loss-box">
+                        <strong>Loss Function</strong><br>
+                        We use a simple squared-error loss:<br>
+                        <code>L = &frac12; &middot; (a<sub>out</sub> &minus; 1)<sup>2</sup></code><br>
+                        Target = 1.0, so the network is trained to drive its output toward 1.
+                    </div>
+
+                    <div id="math-forward-steps" style="display:none;"></div>
+                    <div id="math-backward-steps" style="display:none;"></div>
                     </div>
                 </div>
             </div>
