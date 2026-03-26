@@ -55,19 +55,15 @@ function init() {
 
 // Resize canvases
 function resizeCanvases() {
-    const scrollContainer = document.getElementById('scroll-container');
-    const width = scrollContainer ? (scrollContainer.clientWidth - 40) : networkCanvas.clientWidth;
-
-    // Calculate required height based on layer count
-    // Base height 600 or enough to fit all layers with spacing
-    // Also include padding
+    // Canvas column is fixed-width (480px); height grows with layer count
+    const width = 480;
     const minHeight = 600;
-    const requiredHeight = (state.layerCount * LAYER_SPACING) + 200; // 200 for padding/margins
+    const requiredHeight = (state.layerCount * LAYER_SPACING) + 200;
     const height = Math.max(minHeight, requiredHeight);
 
     networkCanvas.width = width;
-    networkCanvas.height = height; // Set explicit height attribute
-    networkCanvas.style.height = `${height}px`; // Update CSS height
+    networkCanvas.height = height;
+    networkCanvas.style.height = `${height}px`;
 
     gradientChartCanvas.width = width;
 }
@@ -80,13 +76,19 @@ function reset() {
     drawNetwork();
     drawGradientChart();
 
-    // Hide math step panels
-    const fwdEl  = document.getElementById('math-forward-steps');
-    const bwdEl  = document.getElementById('math-backward-steps');
-    const lossEl = document.getElementById('math-loss-box');
-    if (fwdEl)  { fwdEl.style.display  = 'none'; fwdEl.innerHTML  = ''; }
-    if (bwdEl)  { bwdEl.style.display  = 'none'; bwdEl.innerHTML  = ''; }
-    if (lossEl) { lossEl.style.display = 'none'; }
+    // Hide math panels
+    const fwdEl    = document.getElementById('math-forward-steps');
+    const bwdEl    = document.getElementById('math-backward-steps');
+    const lossEl   = document.getElementById('math-loss-box');
+    const mathPanel = document.getElementById('math-panel');
+    const fwdSumEl  = document.getElementById('fwd-summary-line');
+    const bwdSumEl  = document.getElementById('bwd-summary-line');
+    if (fwdEl)     { fwdEl.style.display  = 'none'; fwdEl.innerHTML  = ''; }
+    if (bwdEl)     { bwdEl.style.display  = 'none'; bwdEl.innerHTML  = ''; }
+    if (lossEl)    { lossEl.style.display = 'none'; }
+    if (mathPanel) { mathPanel.style.display = 'none'; }
+    if (fwdSumEl)  { fwdSumEl.style.display = 'none'; fwdSumEl.innerHTML = ''; }
+    if (bwdSumEl)  { bwdSumEl.style.display = 'none'; bwdSumEl.innerHTML = ''; }
 
     // Trigger zoom update in parent window if available
     window.dispatchEvent(new CustomEvent('resize-content'));
@@ -434,7 +436,7 @@ function showForwardMath() {
     const el = document.getElementById('math-forward-steps');
     if (!el) return;
 
-    const n = state.layerValues.length - 1; // number of layers computed
+    const n = state.layerValues.length - 1;
     let html = '<div class="math-steps-block">'
              + '<div class="math-steps-header fwd">Forward Pass — Step by Step</div>';
 
@@ -454,21 +456,38 @@ function showForwardMath() {
 
     el.innerHTML = html;
     el.style.display = 'block';
+
+    // Show math panel in main visualization area
+    const mathPanel = document.getElementById('math-panel');
+    if (mathPanel) mathPanel.style.display = 'block';
+
+    // 1-2 line summary in right panel
+    const aOut = state.layerValues[n];
+    const fwdSumEl = document.getElementById('fwd-summary-line');
+    if (fwdSumEl) {
+        fwdSumEl.innerHTML =
+            `Input <b>${fmt(state.layerValues[0])}</b> &rarr; ${n} layers &rarr; `
+            + `Output <b>${fmt(aOut)}</b><br>`
+            + `Each layer: z = a&times;0.8, a = f(z)`;
+        fwdSumEl.style.display = 'block';
+        // Scroll right panel to this summary
+        fwdSumEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Trigger zoom update
+    window.dispatchEvent(new CustomEvent('resize-content'));
 }
 
 // Show step-by-step backward pass math
 function showBackwardMath() {
-    const elFwd = document.getElementById('math-forward-steps');
-    const el    = document.getElementById('math-backward-steps');
+    const el     = document.getElementById('math-backward-steps');
     const lossEl = document.getElementById('math-loss-box');
     if (!el) return;
 
     const n = state.layerCount;
-
-    // Compute loss and seed gradient from loss
-    const aOut = state.layerValues[n];
-    const loss = 0.5 * Math.pow(aOut - 1, 2);
-    const dLoss = aOut - 1; // dL/d_aOut
+    const aOut  = state.layerValues[n];
+    const loss  = 0.5 * Math.pow(aOut - 1, 2);
+    const dLoss = aOut - 1;
 
     let html = '<div class="math-steps-block">'
              + '<div class="math-steps-header bwd">Backward Pass — Chain Rule</div>';
@@ -480,8 +499,8 @@ function showBackwardMath() {
     html += `</div>`;
 
     for (let i = n; i >= 1; i--) {
-        const aIn   = state.layerValues[i - 1];
-        const z     = aIn * 0.8;
+        const aIn    = state.layerValues[i - 1];
+        const z      = aIn * 0.8;
         const gradOut = state.layerGradients[i];
         const gradIn  = state.layerGradients[i - 1];
 
@@ -499,7 +518,26 @@ function showBackwardMath() {
     el.innerHTML = html;
     el.style.display = 'block';
     if (lossEl) lossEl.style.display = 'block';
-    if (elFwd) elFwd.style.display = 'block';
+
+    // Show math panel
+    const mathPanel = document.getElementById('math-panel');
+    if (mathPanel) mathPanel.style.display = 'block';
+
+    // 1-2 line summary in right panel
+    const inputGrad = state.layerGradients[0];
+    const bwdSumEl = document.getElementById('bwd-summary-line');
+    if (bwdSumEl) {
+        const magnitude = Math.abs(inputGrad);
+        const status = magnitude >= 0.1 ? 'healthy' : magnitude >= 0.01 ? 'weakening' : 'vanishing';
+        bwdSumEl.innerHTML =
+            `Seed &part;L/&part;a[out] = <b>${fmt(dLoss)}</b><br>`
+            + `Input gradient = <b>${fmt(inputGrad)}</b> &mdash; ${status}`;
+        bwdSumEl.style.display = 'block';
+        // Scroll right panel to backward summary
+        bwdSumEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    window.dispatchEvent(new CustomEvent('resize-content'));
 }
 
 // Initialize on load

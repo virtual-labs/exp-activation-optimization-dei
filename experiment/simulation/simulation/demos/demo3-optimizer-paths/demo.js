@@ -302,6 +302,68 @@ function updateDisplay() {
     document.getElementById('pos-y-display').textContent = state.position.y.toFixed(3);
 }
 
+// Draw minimum marker at the true minimum (1, 1)
+function drawMinimumMarker() {
+    const width = canvas.width;
+    const height = canvas.height;
+    const xRange = [-2, 2];
+    const yRange = [-1, 3];
+
+    const px = (1 - xRange[0]) / (xRange[1] - xRange[0]) * width;
+    const py = height - (1 - yRange[0]) / (yRange[1] - yRange[0]) * height;
+
+    // Outer glow ring
+    ctx.strokeStyle = 'rgba(251,191,36,0.35)';
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.arc(px, py, 16, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    // Gold circle
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(px, py, 9, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    // Gold crosshair lines
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 1.5;
+    const arm = 15;
+    ctx.beginPath();
+    ctx.moveTo(px - arm, py); ctx.lineTo(px + arm, py);
+    ctx.moveTo(px, py - arm); ctx.lineTo(px, py + arm);
+    ctx.stroke();
+
+    // Star dot at centre
+    ctx.fillStyle = '#fbbf24';
+    ctx.beginPath();
+    ctx.arc(px, py, 3, 0, 2 * Math.PI);
+    ctx.fill();
+
+    // Label background + text
+    const labelX = px + 14;
+    const labelY = py - 10;
+    ctx.font = 'bold 11px Inter';
+    ctx.textAlign = 'left';
+    const line1 = 'Global minimum';
+    const line2 = 'f(1, 1) = 0';
+    const w1 = ctx.measureText(line1).width;
+    const w2 = ctx.measureText(line2).width;
+    const boxW = Math.max(w1, w2) + 8;
+
+    ctx.fillStyle = 'rgba(0,0,0,0.55)';
+    ctx.beginPath();
+    ctx.roundRect(labelX - 2, labelY - 13, boxW, 30, 4);
+    ctx.fill();
+
+    ctx.fillStyle = '#fbbf24';
+    ctx.fillText(line1, labelX + 2, labelY);
+    ctx.fillStyle = 'rgba(255,255,255,0.85)';
+    ctx.font = '10px Inter';
+    ctx.fillText(line2, labelX + 2, labelY + 13);
+}
+
 // Draw visualization
 function drawVisualization() {
     const width = canvas.width;
@@ -311,6 +373,9 @@ function drawVisualization() {
 
     // Draw contour plot
     drawContours();
+
+    // Mark the global minimum before drawing path/position
+    drawMinimumMarker();
 
     // Draw path
     drawPath();
@@ -346,29 +411,41 @@ function drawContours() {
         }
     }
 
-    // Use log scale for better visualization
-    const logMin = Math.log(minLoss + 1);
-    const logMax = Math.log(Math.min(maxLoss, 1000) + 1); // Cap max for better colors
+    // Log scale capped at 500 for color contrast
+    const logMin = 0; // rosenbrock minimum is exactly 0, so log(0+1)=0
+    const logMax = Math.log(500 + 1);
 
-    // Draw pixels
+    // Draw pixels with gamma-corrected colormap so the minimum is visually distinct
     for (let px = 0; px < width; px++) {
         for (let py = 0; py < height; py++) {
             const x = xRange[0] + (xRange[1] - xRange[0]) * px / width;
             const y = yRange[0] + (yRange[1] - yRange[0]) * (height - py) / height;
             const loss = rosenbrock(x, y);
-            const logLoss = Math.log(loss + 1);
+            const logLoss = Math.log(Math.min(loss, 500) + 1);
 
-            // Normalize to 0-1
+            // Normalize 0→1, then apply gamma=0.35 to stretch the low end
+            // This makes loss≈0 clearly black while the valley floor gets lighter
             const normalized = (logLoss - logMin) / (logMax - logMin);
-            const clamped = Math.max(0, Math.min(1, normalized));
+            const t = Math.pow(Math.max(0, Math.min(1, normalized)), 0.35);
 
-            // Color: blue (low) to red (high)
+            // Colormap: black(0) → deep-blue → cyan → yellow → red(1)
+            let r, g, b;
+            if (t < 0.25) {
+                const s = t / 0.25;
+                r = 0; g = Math.floor(s * 80); b = Math.floor(40 + s * 215);
+            } else if (t < 0.5) {
+                const s = (t - 0.25) / 0.25;
+                r = 0; g = Math.floor(80 + s * 175); b = Math.floor(255 - s * 255);
+            } else if (t < 0.75) {
+                const s = (t - 0.5) / 0.25;
+                r = Math.floor(s * 255); g = 255; b = 0;
+            } else {
+                const s = (t - 0.75) / 0.25;
+                r = 255; g = Math.floor(255 - s * 255); b = 0;
+            }
+
             const idx = (py * width + px) * 4;
-            const r = Math.floor(clamped * 255);
-            const g = Math.floor((1 - clamped) * 100);
-            const b = Math.floor((1 - clamped) * 255);
-
-            imageData.data[idx] = r;
+            imageData.data[idx]     = r;
             imageData.data[idx + 1] = g;
             imageData.data[idx + 2] = b;
             imageData.data[idx + 3] = 255;
@@ -381,40 +458,61 @@ function drawContours() {
     drawContourLines(xRange, yRange);
 }
 
-// Draw contour lines
+// Draw contour lines with labels
 function drawContourLines(xRange, yRange) {
     const width = canvas.width;
     const height = canvas.height;
-    const levels = [1, 5, 10, 50, 100, 200, 500];
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-    ctx.lineWidth = 1;
+    // Fine levels near the minimum + coarser levels further out
+    const levels = [
+        { v: 0.1,  tol: 0.015, label: '0.1' },
+        { v: 0.5,  tol: 0.06,  label: '0.5' },
+        { v: 1,    tol: 0.1,   label: '1' },
+        { v: 5,    tol: 0.5,   label: '5' },
+        { v: 10,   tol: 1,     label: '10' },
+        { v: 50,   tol: 5,     label: '50' },
+        { v: 100,  tol: 10,    label: '100' },
+        { v: 300,  tol: 30,    label: '300' },
+    ];
 
-    for (const level of levels) {
-        ctx.beginPath();
-        let started = false;
+    for (const { v, tol, label } of levels) {
+        // Brighter lines for fine contours near the minimum
+        const alpha = v <= 1 ? 0.7 : 0.35;
+        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+        ctx.lineWidth = v <= 1 ? 1.5 : 1;
 
-        for (let i = 0; i <= 100; i++) {
-            for (let j = 0; j <= 100; j++) {
-                const x = xRange[0] + (xRange[1] - xRange[0]) * i / 100;
-                const y = yRange[0] + (yRange[1] - yRange[0]) * j / 100;
+        const points = [];
+        for (let i = 0; i <= 150; i++) {
+            for (let j = 0; j <= 150; j++) {
+                const x = xRange[0] + (xRange[1] - xRange[0]) * i / 150;
+                const y = yRange[0] + (yRange[1] - yRange[0]) * j / 150;
                 const loss = rosenbrock(x, y);
-
-                if (Math.abs(loss - level) < level * 0.1) {
-                    const px = (x - xRange[0]) / (xRange[1] - xRange[0]) * width;
-                    const py = height - (y - yRange[0]) / (yRange[1] - yRange[0]) * height;
-
-                    if (!started) {
-                        ctx.moveTo(px, py);
-                        started = true;
-                    } else {
-                        ctx.lineTo(px, py);
-                    }
+                if (Math.abs(loss - v) < tol) {
+                    points.push({
+                        px: (x - xRange[0]) / (xRange[1] - xRange[0]) * width,
+                        py: height - (y - yRange[0]) / (yRange[1] - yRange[0]) * height
+                    });
                 }
             }
         }
 
-        ctx.stroke();
+        if (points.length === 0) continue;
+
+        // Draw as dots (marching-squares lite) — reliable for any shape
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        for (const { px, py } of points) {
+            ctx.fillRect(px, py, 1.5, 1.5);
+        }
+
+        // Label: place near a point that is in the upper-right area of the canvas
+        const labelPt = points.find(p => p.px > width * 0.55 && p.py < height * 0.45)
+                      || points[Math.floor(points.length * 0.75)];
+        if (labelPt) {
+            ctx.fillStyle = `rgba(255,255,255,${Math.min(1, alpha + 0.2)})`;
+            ctx.font = `${v <= 1 ? '11px' : '10px'} Inter`;
+            ctx.textAlign = 'left';
+            ctx.fillText(label, labelPt.px + 3, labelPt.py - 3);
+        }
     }
 }
 

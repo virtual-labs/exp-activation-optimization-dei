@@ -52,7 +52,6 @@
             </div>
 
             <!-- Visualization Panel (Middle) -->
-            <!-- Visualization Panel (Middle) -->
             <div class="demo-panel visualization-panel"
                 style="display: flex; flex-direction: column; height: 100%; min-height: 600px; padding: 0;">
                 <div class="zoom-controls"
@@ -66,13 +65,35 @@
                 <div id="scroll-container" style="overflow: auto; flex: 1; background: #fafafa; padding: 10px;">
                     <div id="scale-container">
                         <div id="content-wrapper" style="transform-origin: 0 0;">
-                            <canvas id="network-canvas" width="800" height="600"
-                                style="background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"></canvas>
-                            <div
-                                style="margin-top: 1rem; background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <h3 style="margin-top: 0;">Gradient Magnitudes by Layer</h3>
-                                <canvas id="gradient-chart" width="800" height="200"></canvas>
-                            </div>
+
+                            <!-- Network canvas + gradient chart (left column) and math panel (right column) -->
+                            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+
+                                <!-- Left: canvas column -->
+                                <div style="flex-shrink: 0;">
+                                    <canvas id="network-canvas" width="480" height="600"
+                                        style="background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: block;"></canvas>
+                                    <div
+                                        style="margin-top: 1rem; background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                        <h3 style="margin-top: 0;">Gradient Magnitudes by Layer</h3>
+                                        <canvas id="gradient-chart" width="480" height="200"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- Right: math steps column (shown after passes run) -->
+                                <div id="math-panel" style="display: none; min-width: 300px; max-width: 420px; flex-shrink: 0;">
+                                    <div id="math-loss-box" style="display:none;" class="loss-box">
+                                        <strong>Loss Function</strong><br>
+                                        We use a simple squared-error loss:<br>
+                                        <code>L = &frac12; &middot; (a<sub>out</sub> &minus; 1)<sup>2</sup></code><br>
+                                        Target&nbsp;=&nbsp;1.0 &mdash; the network is trained to drive its output toward&nbsp;1.
+                                    </div>
+                                    <div id="math-forward-steps"></div>
+                                    <div id="math-backward-steps"></div>
+                                </div>
+
+                            </div><!-- end flex row -->
+
                         </div>
                     </div>
                 </div>
@@ -99,28 +120,25 @@
                     </p>
 
                     <h3>Forward Pass</h3>
-                    <p>Data flows from bottom to top. Each layer applies a linear transformation followed by the
-                        activation function. Watch how the values change as they pass through each layer.</p>
+                    <p>Data flows bottom to top. Each layer applies a linear transformation followed by the
+                        activation function.</p>
+                    <div id="fwd-summary-line" style="display:none; padding:0.5rem 0.7rem;
+                        background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px;
+                        font-size:0.8rem; line-height:1.6; color:#1e40af; font-family:'Courier New',monospace;">
+                    </div>
 
                     <h3>Backward Pass (Backpropagation)</h3>
-                    <p>Gradients flow from top to bottom. The gradient at each layer is multiplied by the derivative of
+                    <p>Gradients flow top to bottom. The gradient at each layer is multiplied by the derivative of
                         the activation function.</p>
+                    <div id="bwd-summary-line" style="display:none; padding:0.5rem 0.7rem;
+                        background:#fef2f2; border:1px solid #fecaca; border-radius:6px;
+                        font-size:0.8rem; line-height:1.6; color:#991b1b; font-family:'Courier New',monospace;">
+                    </div>
 
                     <div class="intuition-highlight">
-                        <strong>Key Insight:</strong> If activation derivatives are small (&lt; 1), gradients shrink as
-                            they flow backward. In deep networks, this multiplication happens many times, potentially
-                            causing gradients to vanish.
-                    </div>
-
-                    <div id="math-loss-box" style="display:none;" class="loss-box">
-                        <strong>Loss Function</strong><br>
-                        We use a simple squared-error loss:<br>
-                        <code>L = &frac12; &middot; (a<sub>out</sub> &minus; 1)<sup>2</sup></code><br>
-                        Target = 1.0, so the network is trained to drive its output toward 1.
-                    </div>
-
-                    <div id="math-forward-steps" style="display:none;"></div>
-                    <div id="math-backward-steps" style="display:none;"></div>
+                        <strong>Key Insight:</strong> If activation derivatives are small (&lt;&nbsp;1), gradients
+                        shrink as they flow backward. In deep networks this multiplication happens many times,
+                        potentially causing gradients to vanish.
                     </div>
                 </div>
             </div>
@@ -136,58 +154,31 @@
                 let currentZoom = 1;
 
                 function updateZoom() {
-                    // Apply scale
                     contentWrapper.style.transform = `scale(${currentZoom})`;
-
-                    // Update scale container size to allow scrolling
-                    // Dynamically calculate content size
                     const contentWidth = contentWrapper.scrollWidth;
                     const contentHeight = contentWrapper.scrollHeight;
-
                     scaleContainer.style.width = `${contentWidth * currentZoom}px`;
                     scaleContainer.style.height = `${contentHeight * currentZoom}px`;
-
                     zoomLevelDisplay.textContent = `${Math.round(currentZoom * 100)}%`;
                 }
 
-                // Listen for content resize events from demo.js
-                window.addEventListener('resize-content', () => {
-                    // Small delay to allow DOM to update
-                    setTimeout(updateZoom, 50);
-                });
+                window.addEventListener('resize-content', () => { setTimeout(updateZoom, 50); });
 
                 document.getElementById('zoom-in-btn').addEventListener('click', () => {
-                    currentZoom += 0.1;
-                    updateZoom();
+                    currentZoom += 0.1; updateZoom();
                 });
-
                 document.getElementById('zoom-out-btn').addEventListener('click', () => {
-                    currentZoom = Math.max(0.1, currentZoom - 0.1);
-                    updateZoom();
+                    currentZoom = Math.max(0.1, currentZoom - 0.1); updateZoom();
                 });
-
                 document.getElementById('zoom-fit-btn').addEventListener('click', () => {
                     const containerWidth = scrollContainer.clientWidth - 20;
-                    // const containerHeight = scrollContainer.clientHeight - 20;
-
-                    // Dynamically get content size
                     const contentWidth = contentWrapper.scrollWidth || 840;
-                    // const contentHeight = contentWrapper.scrollHeight || 880;
-
-                    const widthRatio = containerWidth / contentWidth;
-                    // const heightRatio = containerHeight / contentHeight;
-
-                    // Prioritize Width Fit and allow scaling up
-                    let newZoom = widthRatio;
-
-                    // Clamp min zoom to prevent tiny view
+                    let newZoom = containerWidth / contentWidth;
                     if (newZoom < 0.1) newZoom = 0.1;
-
                     currentZoom = newZoom;
                     updateZoom();
                 });
 
-                // Auto-fit listeners
                 const controls = ['activation-select', 'layer-count', 'input-value'];
                 controls.forEach(id => {
                     const el = document.getElementById(id);
@@ -203,7 +194,6 @@
                     }
                 });
 
-                // Initial fit
                 setTimeout(() => { document.getElementById('zoom-fit-btn').click(); }, 100);
             });
         </script>
