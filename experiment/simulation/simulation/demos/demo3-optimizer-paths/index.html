@@ -80,9 +80,27 @@
                     <p style="margin-top: 1.5rem; border-top: 1px solid #e0e0e0; padding-top: 1rem;">Optimizers
                         determine how parameters move through the loss landscape to find the minimum.</p>
 
+                    <h3>The Rosenbrock Loss Function</h3>
+                    <p>The contour plot visualizes the <strong>Rosenbrock function</strong>, a classic benchmark for
+                        optimization algorithms:</p>
+                    <div style="background:#f8f9fa; border-left:3px solid #2563eb; border-radius:6px;
+                        padding:0.5rem 0.75rem; margin:0.5rem 0; font-family:'Courier New',monospace; font-size:0.82rem; line-height:1.7;">
+                        f(x, y) = (1&minus;x)&sup2; + 100&middot;(y&minus;x&sup2;)&sup2;
+                    </div>
+                    <p>Its <strong>global minimum is at (1, 1)</strong> where f&nbsp;=&nbsp;0, marked with a gold
+                        crosshair on the plot.</p>
+                    <p>The function has two key terms:</p>
+                    <ul>
+                        <li><strong>(1&minus;x)²</strong> — pulls x toward 1; relatively easy to minimize</li>
+                        <li><strong>100(y&minus;x²)²</strong> — pulls y toward x²; creates a curved banana-shaped valley</li>
+                    </ul>
+                    <p>The narrow, curved valley makes this a <em>hard</em> problem: the gradient points mostly
+                        across the valley rather than down its length, causing SGD to oscillate. This is why adaptive
+                        optimizers like Adam converge much more efficiently here.</p>
+
                     <h3>The Loss Surface</h3>
-                    <p>The contour plot shows a 2D loss surface (Rosenbrock function). Darker blue = lower loss. The
-                        goal is to reach the center (minimum).</p>
+                    <p>Darker regions = lower loss. The banana-shaped contour curves show the narrow valley
+                        leading to the minimum at (1,&nbsp;1).</p>
 
                     <h3>SGD (Stochastic Gradient Descent)</h3>
                     <ul>
