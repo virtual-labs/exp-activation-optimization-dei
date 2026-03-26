@@ -36,41 +36,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "3. What does SGD stand for?",
-      "answers": {
-        "a": "Stochastic Gradient Descent",
-        "b": "Standard Gradient Descent",
-        "c": "Simple Gradient Descent",
-        "d": "Steady Gradient Descent"
-      },
-      "explanations": {
-        "a": "Correct because SGD updates weights using small batches or single samples, making training faster and more flexible.",
-        "b": "Incorrect; usually called Batch Gradient Descent.",
-        "c": "Incorrect; not a standard term.",
-        "d": "Incorrect; not a recognized term."
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "4. What is the learning rate in optimization algorithms?",
-      "answers": {
-        "a": "Speed of updating parameters",
-        "b": "Number of layers in the network",
-        "c": "Size of input data",
-        "d": "Number of neurons"
-      },
-      "explanations": {
-        "a": "Correct because learning rate controls step size in parameter updates.",
-        "b": "Incorrect as this is architectural.",
-        "c": "Incorrect as data size doesn't control learning rate.",
-        "d": "Incorrect, network size is unrelated."
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "5. Which optimizer adjusts the learning rate individually for each parameter?",
+      "question": "3. Which optimizer adjusts the learning rate individually for each parameter?",
       "answers": {
         "a": "SGD",
         "b": "Adam",
@@ -87,7 +53,7 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "6. What problem is commonly associated with Sigmoid and Tanh activation functions?",
+      "question": "4. What problem is commonly associated with Sigmoid and Tanh activation functions?",
       "answers": {
         "a": "Dying neurons",
         "b": "Vanishing gradients",
@@ -104,7 +70,24 @@
       "difficulty": "intermediate"
     },
     {
-      "question": "7. Which activation function outputs zero for negative inputs?",
+      "question": "5. What does SGD stand for?",
+      "answers": {
+        "a": "Stochastic Gradient Descent",
+        "b": "Standard Gradient Descent",
+        "c": "Simple Gradient Descent",
+        "d": "Steady Gradient Descent"
+      },
+      "explanations": {
+        "a": "Correct because SGD updates weights using small batches or single samples, making training faster and more flexible.",
+        "b": "Incorrect; usually called Batch Gradient Descent.",
+        "c": "Incorrect; not a standard term.",
+        "d": "Incorrect; not a recognized term."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "6. Which activation function outputs zero for negative inputs?",
       "answers": {
         "a": "Sigmoid",
         "b": "Tanh",
@@ -121,6 +104,23 @@
       "difficulty": "intermediate"
     },
     {
+      "question": "7. What is the learning rate in optimization algorithms?",
+      "answers": {
+        "a": "Speed of updating parameters",
+        "b": "Number of layers in the network",
+        "c": "Size of input data",
+        "d": "Number of neurons"
+      },
+      "explanations": {
+        "a": "Correct because learning rate controls step size in parameter updates.",
+        "b": "Incorrect as this is architectural.",
+        "c": "Incorrect as data size doesn\u2019t control learning rate.",
+        "d": "Incorrect, network size is unrelated."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
       "question": "8. Which activation function is zero-centred?",
       "answers": {
         "a": "Sigmoid",
@@ -131,7 +131,7 @@
       "explanations": {
         "a": "Incorrect because sigmoid outputs in (0,1).",
         "b": "Correct because tanh outputs in (-1,1), centred at zero.",
-        "c": "Incorrect since output is always ≥ 0.",
+        "c": "Incorrect since output is always \u2265 0.",
         "d": "Incorrect as linear just outputs the input."
       },
       "correctAnswer": "b",
