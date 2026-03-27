@@ -178,7 +178,12 @@
                 }
                 scrollContainer.addEventListener('scroll', pinCanvasColumn);
 
-                window.addEventListener('resize-content', () => { setTimeout(updateZoom, 50); });
+                let autoFitTimer;
+                window.addEventListener('resize-content', () => {
+                    setTimeout(updateZoom, 50);
+                    clearTimeout(autoFitTimer);
+                    autoFitTimer = setTimeout(() => document.getElementById('zoom-fit-btn').click(), 400);
+                });
 
                 document.getElementById('zoom-in-btn').addEventListener('click', () => {
                     currentZoom += 0.1; updateZoom();
