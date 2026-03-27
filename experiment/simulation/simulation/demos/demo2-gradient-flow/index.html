@@ -64,7 +64,7 @@
                 </div>
                 <div id="scroll-container" style="overflow: auto; flex: 1; background: #fafafa; padding: 10px;">
                     <div id="scale-container">
-                        <div id="content-wrapper" style="transform-origin: 0 0; width: max-content;">
+                        <div id="content-wrapper" style="transform-origin: 0 0; width: max-content; min-width: 800px;">
 
                             <!-- Network canvas (left, sticky) and backward-pass math panel (right) -->
                             <div style="display: flex; gap: 1rem; align-items: flex-start;">
@@ -200,11 +200,7 @@
                     const naturalW = contentWrapper.scrollWidth;
                     const naturalH = contentWrapper.scrollHeight;
                     const containerW = scrollContainer.clientWidth - 20;
-                    const containerH = scrollContainer.clientHeight - 20;
-                    // Fit both width and height so everything is visible without scrolling
-                    const zoomByW = naturalW > 0 ? containerW / naturalW : 1;
-                    const zoomByH = naturalH > 0 ? containerH / naturalH : 1;
-                    let newZoom = Math.min(zoomByW, zoomByH);
+                    let newZoom = naturalW > 0 ? containerW / naturalW : 1;
                     // Clamp: never shrink below 0.2 or magnify beyond 1
                     newZoom = Math.min(1, Math.max(0.2, newZoom));
                     currentZoom = newZoom;

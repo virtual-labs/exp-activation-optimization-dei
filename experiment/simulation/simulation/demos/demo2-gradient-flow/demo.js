@@ -115,6 +115,11 @@ function initForwardMathPanel() {
     const el = document.getElementById('math-forward-steps');
     if (!el) return;
     if (mathPanel) mathPanel.style.display = 'block';
+    // Hide backward pass content — show only forward
+    const bwdEl  = document.getElementById('math-backward-steps');
+    const lossEl = document.getElementById('math-loss-box');
+    if (bwdEl)  { bwdEl.style.display  = 'none'; bwdEl.innerHTML  = ''; }
+    if (lossEl)   lossEl.style.display  = 'none';
     el.innerHTML =
         `<div class="math-steps-block" id="fwd-steps-inner">
             <div class="math-steps-header fwd">Forward Pass — Step by Step</div>
@@ -207,7 +212,10 @@ function initBackwardMathPanel() {
     const el        = document.getElementById('math-backward-steps');
     if (!el) return;
     if (mathPanel) mathPanel.style.display = 'block';
-    if (lossEl)    lossEl.style.display = 'block';
+    // Hide forward pass content — show only backward
+    const fwdEl = document.getElementById('math-forward-steps');
+    if (fwdEl) { fwdEl.style.display = 'none'; fwdEl.innerHTML = ''; }
+    if (lossEl) lossEl.style.display = 'block';
 
     const n     = state.layerCount;
     const aOut  = state.layerValues[n];
