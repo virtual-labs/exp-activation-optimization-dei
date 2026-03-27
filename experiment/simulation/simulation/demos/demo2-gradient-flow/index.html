@@ -66,21 +66,16 @@
                     <div id="scale-container">
                         <div id="content-wrapper" style="transform-origin: 0 0;">
 
-                            <!-- Network canvas + gradient chart (left column) and math panel (right column) -->
+                            <!-- Network canvas (left, sticky) and backward-pass math panel (right) -->
                             <div style="display: flex; gap: 1rem; align-items: flex-start;">
 
-                                <!-- Left: canvas column -->
-                                <div style="flex-shrink: 0;">
+                                <!-- Left: canvas column (pinned via JS scroll so neurons stay visible while scrolling equations) -->
+                                <div id="canvas-column" style="flex-shrink: 0; align-self: flex-start;">
                                     <canvas id="network-canvas" width="480" height="600"
                                         style="background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: block;"></canvas>
-                                    <div
-                                        style="margin-top: 1rem; background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                        <h3 style="margin-top: 0;">Gradient Magnitudes by Layer</h3>
-                                        <canvas id="gradient-chart" width="480" height="200"></canvas>
-                                    </div>
                                 </div>
 
-                                <!-- Right: math steps column (shown after passes run) -->
+                                <!-- Right: backward pass equations (appear next to neurons) -->
                                 <div id="math-panel" style="display: none; min-width: 300px; max-width: 420px; flex-shrink: 0;">
                                     <div id="math-loss-box" style="display:none;" class="loss-box">
                                         <strong>Loss Function</strong><br>
@@ -88,11 +83,22 @@
                                         <code>L = &frac12; &middot; (a<sub>out</sub> &minus; 1)<sup>2</sup></code><br>
                                         Target&nbsp;=&nbsp;1.0 &mdash; the network is trained to drive its output toward&nbsp;1.
                                     </div>
-                                    <div id="math-forward-steps"></div>
                                     <div id="math-backward-steps"></div>
                                 </div>
 
                             </div><!-- end flex row -->
+
+                            <!-- Gradient chart (below canvas) -->
+                            <div
+                                style="margin-top: 1rem; background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <h3 style="margin-top: 0;">Gradient Magnitudes by Layer</h3>
+                                <canvas id="gradient-chart" width="480" height="200"></canvas>
+                            </div>
+
+                            <!-- Forward pass explanation (below network, appears after forward pass) -->
+                            <div id="forward-pass-panel" style="display: none; margin-top: 1rem;">
+                                <div id="math-forward-steps"></div>
+                            </div>
 
                         </div>
                     </div>
@@ -161,6 +167,20 @@
                     scaleContainer.style.height = `${contentHeight * currentZoom}px`;
                     zoomLevelDisplay.textContent = `${Math.round(currentZoom * 100)}%`;
                 }
+
+                // Pin canvas column when scrolling (sticky doesn't work inside CSS-transformed elements)
+                const canvasColumn = document.getElementById('canvas-column');
+                function pinCanvasColumn() {
+                    if (!canvasColumn) return;
+                    const scrollTop = scrollContainer.scrollTop;
+                    const scaled = scrollTop / currentZoom;
+                    const flexRow = canvasColumn.parentElement;
+                    const rowHeight = flexRow ? flexRow.offsetHeight : 0;
+                    const colHeight = canvasColumn.offsetHeight;
+                    const maxMargin = Math.max(0, rowHeight - colHeight);
+                    canvasColumn.style.marginTop = Math.min(scaled, maxMargin) + 'px';
+                }
+                scrollContainer.addEventListener('scroll', pinCanvasColumn);
 
                 window.addEventListener('resize-content', () => { setTimeout(updateZoom, 50); });
 
