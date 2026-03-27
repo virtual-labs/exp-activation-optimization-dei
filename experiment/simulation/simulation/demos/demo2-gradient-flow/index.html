@@ -75,8 +75,9 @@
                                         style="background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: block;"></canvas>
                                 </div>
 
-                                <!-- Right: backward pass equations (appear next to neurons) -->
+                                <!-- Right: equations panel (forward pass steps, then backward pass steps) -->
                                 <div id="math-panel" style="display: none; min-width: 300px; max-width: 420px; flex-shrink: 0;">
+                                    <div id="math-forward-steps"></div>
                                     <div id="math-loss-box" style="display:none;" class="loss-box">
                                         <strong>Loss Function</strong><br>
                                         We use a simple squared-error loss:<br>
@@ -93,11 +94,6 @@
                                 style="margin-top: 1rem; background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                                 <h3 style="margin-top: 0;">Gradient Magnitudes by Layer</h3>
                                 <canvas id="gradient-chart" width="480" height="200"></canvas>
-                            </div>
-
-                            <!-- Forward pass explanation (below network, appears after forward pass) -->
-                            <div id="forward-pass-panel" style="display: none; margin-top: 1rem;">
-                                <div id="math-forward-steps"></div>
                             </div>
 
                         </div>

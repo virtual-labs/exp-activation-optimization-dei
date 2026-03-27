@@ -78,12 +78,10 @@ function reset() {
     });
     const lossEl = document.getElementById('math-loss-box');
     const mathPanel = document.getElementById('math-panel');
-    const fwdPanel = document.getElementById('forward-pass-panel');
     const fwdSum = document.getElementById('fwd-summary-line');
     const bwdSum = document.getElementById('bwd-summary-line');
     if (lossEl)    lossEl.style.display = 'none';
     if (mathPanel) mathPanel.style.display = 'none';
-    if (fwdPanel)  fwdPanel.style.display = 'none';
     if (fwdSum)  { fwdSum.style.display = 'none'; fwdSum.innerHTML = ''; }
     if (bwdSum)  { bwdSum.style.display = 'none'; bwdSum.innerHTML = ''; }
 
@@ -113,10 +111,10 @@ function runForwardPass() {
 }
 
 function initForwardMathPanel() {
-    const fwdPanel = document.getElementById('forward-pass-panel');
+    const mathPanel = document.getElementById('math-panel');
     const el = document.getElementById('math-forward-steps');
     if (!el) return;
-    if (fwdPanel) fwdPanel.style.display = 'block';
+    if (mathPanel) mathPanel.style.display = 'block';
     el.innerHTML =
         `<div class="math-steps-block" id="fwd-steps-inner">
             <div class="math-steps-header fwd">Forward Pass — Step by Step</div>
