@@ -81,7 +81,7 @@
         "a": "Incorrect because standard SGD uses a fixed learning rate for all parameters and lacks a built-in mechanism for per-parameter adaptation.",
         "b": "Correct because Adam combines the benefits of adaptive learning rates and momentum by maintaining moving averages of both the gradients and their squares.",
         "c": "Incorrect because it utilizes a single constant learning rate for the entire model and does not adapt to the curvature of the loss surface for individual parameters.",
-        "d": "Incorrect because, while RMSProp provides adaptive learning rates, it does not incorporate the firstmoment momentum term that characterizes the Adam optimizer."
+        "d": "Incorrect because, while RMSProp provides adaptive learning rates, it does not incorporate the first moment momentum term that characterizes the Adam optimizer."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
