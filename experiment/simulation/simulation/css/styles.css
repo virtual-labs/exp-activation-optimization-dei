@@ -501,6 +501,77 @@ input[type="range"]::-moz-range-thumb {
   .nav-links {
     position: static;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  /* Cap visualization panel height on tablet/mobile so it doesn't dominate */
+  .visualization-panel {
+    min-height: 380px !important;
+    max-height: 70vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: var(--spacing-xs);
+  }
+
+  .header {
+    padding-top: 2.5rem;
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .header h1 {
+    font-size: 1.2rem;
+  }
+
+  .header p {
+    font-size: 0.85rem;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  h3 {
+    font-size: 0.9rem;
+  }
+
+  .demo-panel {
+    padding: var(--spacing-xs);
+  }
+
+  .nav-link {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.35rem;
+  }
+
+  .visualization-panel {
+    min-height: 280px !important;
+    max-height: 60vh;
+  }
+
+  .btn {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .back-link {
+    font-size: 0.8rem;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+  }
+
+  /* Zoom controls compact on small screens */
+  .zoom-controls {
+    padding: 6px !important;
+    gap: 6px !important;
   }
 }
 

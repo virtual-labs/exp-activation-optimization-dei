@@ -188,6 +188,13 @@
                     autoFitTimer = setTimeout(() => document.getElementById('zoom-fit-btn').click(), 400);
                 });
 
+                // Re-fit on window resize (orientation change, window resize)
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => document.getElementById('zoom-fit-btn').click(), 200);
+                });
+
                 document.getElementById('zoom-in-btn').addEventListener('click', () => {
                     currentZoom += 0.1; updateZoom();
                 });

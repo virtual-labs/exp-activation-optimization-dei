@@ -706,3 +706,108 @@ body {
 .notebook-header {
     position: relative;
 }
+/* ================================
+   RESPONSIVE / MOBILE BREAKPOINTS
+   ================================ */
+
+/* Tablet: collapse sidebar to top bar */
+@media (max-width: 900px) {
+    .simulation-container {
+        flex-direction: column;
+    }
+
+    .step-sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .step-list {
+        /* Horizontal scrollable step list on tablet */
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: var(--spacing-sm);
+        gap: var(--spacing-sm);
+    }
+
+    .step-item {
+        flex-shrink: 0;
+        min-width: 160px;
+        margin-bottom: 0;
+    }
+
+    .step-item-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 140px;
+    }
+
+    .sidebar-footer {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: var(--spacing-sm);
+        gap: var(--spacing-sm);
+        border-top: 1px solid var(--border-color);
+    }
+
+    .notebook-area {
+        margin-left: 0;
+        max-width: 100%;
+        padding: var(--spacing-lg);
+    }
+
+    .back-link {
+        position: static;
+        display: inline-flex;
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* Mobile: further compact */
+@media (max-width: 600px) {
+    .notebook-area {
+        padding: var(--spacing-md);
+    }
+
+    .notebook-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .step-sidebar-header {
+        padding: var(--spacing-md);
+    }
+
+    .step-sidebar-header h3 {
+        font-size: 0.9rem;
+    }
+
+    .step-item {
+        min-width: 140px;
+        padding: var(--spacing-sm);
+    }
+
+    .cell-code pre {
+        font-size: 0.78rem;
+    }
+
+    .cell-code {
+        padding: var(--spacing-md);
+    }
+
+    .cell-output {
+        padding: var(--spacing-md);
+    }
+
+    /* Charts / canvases: ensure they don't overflow */
+    canvas {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}
