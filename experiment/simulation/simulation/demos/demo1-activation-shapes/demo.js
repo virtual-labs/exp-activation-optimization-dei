@@ -215,6 +215,16 @@ function init() {
   // Initial render
   updateVisualization();
   updateIntuition();
+
+  // ResizeObserver: redraw when container changes size (orientation change, panel resize)
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(() => {
+      resizeCanvases();
+      updateVisualization();
+    });
+    const vizPanel = document.querySelector('.visualization-panel');
+    if (vizPanel) ro.observe(vizPanel);
+  }
 }
 
 // Toggle alpha slider

@@ -4,9 +4,9 @@ Neural network learning is governed by the interaction between activation functi
 
 **2.1 Activation Functions**
 
-Activation functions are a fundamental component of artificial neural networks, as they introduce non-linearity into the model and enable learning of complex input–output relationships. In a Multilayer Perceptron (MLP), the activation function determines the output of a neuron based on the weighted sum of its inputs and bias. Without activation functions, even deep neural networks would behave like linear models and fail to capture complex patterns.
+In a Multilayer Perceptron (MLP), the activation function determines the output of a neuron based on the weighted sum of its inputs and bias. Activation functions transform the output of neurons before passing information to subsequent layers, thereby influencing the representational capability of the network. 
 
-The choice of activation function significantly influences training dynamics, including gradient propagation, convergence speed, and stability during optimization. In this experiment, commonly used activation functions: Sigmoid, Hyperbolic Tangent (Tanh), and Rectified Linear Unit (ReLU) are employed in a Multilayer Perceptron (MLP) to analyse their effect on learning behaviour when trained on the Fashion-MNIST dataset.
+In this experiment, three widely used activation functions, namely Sigmoid, Hyperbolic Tangent (Tanh), and Rectified Linear Unit (ReLU), are studied to compare their mathematical properties and practical behaviour during training on the Fashion-MNIST dataset. 
 
 **Mathematical Formulation**
 
@@ -22,7 +22,7 @@ The sigmoid activation function is defined as:
 
 $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 
-The output of the sigmoid function lies in the range $(0, 1)$. It was commonly used in early neural networks due to its smooth and differentiable nature. However, for large positive or negative input values, the function saturates, resulting in very small gradients and slow convergence during training. The Figure 1 given below shows the behaviour of the Sigmoid activation function.
+The output of the sigmoid function lies in the range $(0, 1)$. It was commonly used in early neural networks due to its smooth and differentiable nature. However, for large positive or negative input values, the function saturates, resulting in very small gradients and slow convergence during training. Figure 1 shows the behaviour of the Sigmoid activation function. 
 
 ![Sigmoid Activation Function](images/image20.png)
 
@@ -44,7 +44,7 @@ The hyperbolic tangent activation function is given by:
 
 $$\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$$
 
-The output range of tanh is $(-1, 1)$, making it zero-centred. Compared to sigmoid, tanh provides better gradient flow near zero and generally results in faster convergence. However, it still suffers from gradient saturation for large input values. The Figure 2 given below illustrates the behaviour of the Tanh activation function.
+The output range of tanh is $(-1, 1)$, making it zero-centred. Compared to sigmoid, tanh provides better gradient flow near zero and generally results in faster convergence. However, it still suffers from gradient saturation for large input values. Figure 2 illustrates the behaviour of the Tanh activation function.
 
 ![Tanh Activation Function](images/image22.png)
 
@@ -75,16 +75,16 @@ z, & \text{if } z \ge 0
 \end{cases}
 $$
 
-ReLU outputs zero for negative input values and a linear output for positive values. This behaviour significantly reduces the vanishing gradient problem and improves training efficiency. Due to its simplicity and effectiveness, ReLU is widely used in modern deep learning models. The Figure 3 given below represents the ReLU activation function curve.
+ReLU outputs zero for negative input values and a linear output for positive values. This behaviour significantly reduces the vanishing gradient problem and improves training efficiency. Due to its simplicity and effectiveness, ReLU is widely used in modern deep learning models. Figure 3 shows the ReLU activation function curve.  
 
 ![ReLU Activation Function](images/image21.png)
 
 *Figure 3: ReLU Activation Function*
 
 **Merits of ReLU Activation Function**
-*   **Introduces non-linearity:** ReLU enables neural networks to learn complex and non-linear relationships from data.
+*   **Introduces piecewise linearity:** The composition of ReLU activations across multiple layers enables neural networks to model complex and non-linear decision boundaries. 
 *   **Efficient training:** Reduces vanishing gradient issues and accelerates convergence.
-*   **Sparsity in activations:** ReLU activates only a subset of neurons, improving computational efficiency and reducing overfitting.
+*   **Sparsity in activations:** ReLU activates only a subset of neurons, improving computational efficiency and potentially providing a mild regularizing effect.
 *   **Simple and fast computation:** The function involves only a threshold operation, making it computationally efficient.
 
 **Demerits of ReLU Activation Function**
@@ -106,7 +106,7 @@ Optimization algorithms are used to minimize the loss function of a neural netwo
 
 **I. Stochastic Gradient Descent (SGD): -**
 
-Stochastic Gradient Descent is a fundamental optimization algorithm based on the theory of stochastic approximation, introduced by Herbert Robbins and Sutton Monro (1951). Unlike batch gradient descent, SGD updates model parameters using a single training example or a small mini-batch, which reduces computational cost.
+Stochastic Gradient Descent is a fundamental optimization algorithm based on the theory of stochastic approximation, introduced by Herbert Robbins and Sutton Monro (1951). Unlike batch gradient descent, Stochastic Gradient Descent (SGD) updates model parameters using one training example at a time, which reduces computational cost and introduces stochasticity into the optimization process.  
 
 The parameter update rule is:
 
@@ -120,7 +120,7 @@ SGD is simple and memory-efficient, and the randomness in updates can help escap
 *   **Simple and easy to implement:** Stochastic Gradient Descent has a straightforward update rule, making it easy to understand and implement.
 *   **Memory efficient:** SGD requires very little additional memory, as it does not store past gradients or extra parameters.
 *   **Ability to escape shallow local minima:** The stochastic nature of parameter updates introduces noise, which can help the algorithm escape shallow local minima.
-*   **Suitable for large datasets:** SGD processes data in small batches, making it efficient for large-scale learning problems.
+*   **Suitable for large datasets:** SGD processes one sample at a time, making it efficient for large-scale learning problems.  
 
 **Demerits of Stochastic Gradient Descent (SGD)**
 *   **Sensitivity to learning rate:** Choosing an inappropriate learning rate can result in slow convergence or unstable training.
@@ -162,5 +162,5 @@ Adam provides faster convergence, stable training, and performs well with noisy 
 
 | Optimization Algorithm | Learning Rate Type | Key Characteristics | Merits | Demerits |
 | :--- | :--- | :--- | :--- | :--- |
-| **Stochastic Gradient Descent (SGD)** | Fixed | Updates parameters using mini-batches | Simple, memory-efficient, good generalization | Sensitive to learning rate; slow convergence |
+| **Stochastic Gradient Descent (SGD)** | Fixed | Updates parameters using stochastic gradient updates | Simple, memory-efficient, good generalization | Sensitive to learning rate; slow convergence |
 | **Adaptive Moment Estimation (Adam)** | Adaptive | Uses first and second moment estimates | Fast convergence; robust to noisy gradients | Higher computation and memory cost |

@@ -648,4 +648,19 @@ window.addEventListener('load', init);
 window.addEventListener('resize', () => {
     resizeCanvas();
     drawVisualization();
+    // Re-fit zoom after canvas resize
+    const fitBtn = document.getElementById('zoom-fit-btn');
+    if (fitBtn) setTimeout(() => fitBtn.click(), 50);
 });
+
+// ResizeObserver: trigger zoom-fit when the scroll-container changes size
+if (window.ResizeObserver) {
+    const ro = new ResizeObserver(() => {
+        const fitBtn = document.getElementById('zoom-fit-btn');
+        if (fitBtn) fitBtn.click();
+    });
+    window.addEventListener('load', () => {
+        const sc = document.getElementById('scroll-container');
+        if (sc) ro.observe(sc);
+    });
+}

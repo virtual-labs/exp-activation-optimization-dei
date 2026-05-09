@@ -67,6 +67,16 @@ async function init() {
     // Initial chart draw
     drawCharts();
 
+    // ResizeObserver: redraw when container changes size
+    if (window.ResizeObserver) {
+        const ro = new ResizeObserver(() => {
+            resizeCanvases();
+            drawCharts();
+        });
+        const vizPanel = document.querySelector('.visualization-panel');
+        if (vizPanel) ro.observe(vizPanel);
+    }
+
     // Load dataset
     updateStatus('Loading dataset...');
     const trainBtn = document.getElementById('train-btn');

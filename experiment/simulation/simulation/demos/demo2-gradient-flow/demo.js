@@ -47,20 +47,35 @@ function init() {
     document.getElementById('reset-btn').addEventListener('click', reset);
 
     reset();
+
+    // ResizeObserver: redraw when visualization panel changes size
+    if (window.ResizeObserver) {
+        const ro = new ResizeObserver(() => {
+            resizeCanvases();
+            drawNetwork();
+            drawGradientChart();
+        });
+        const vizPanel = document.getElementById('viz-panel');
+        if (vizPanel) ro.observe(vizPanel);
+    }
 }
 
-// Resize canvases — canvas column is fixed at 480px
+// Resize canvases — responsive: read from DOM containers
 function resizeCanvases() {
-    const width = 480;
-    const minHeight = 600;
+    const col = document.getElementById('canvas-column');
+    const netWidth = col ? Math.max(160, col.clientWidth) : 300;
+
+    const minHeight = 380;
     const requiredHeight = (state.layerCount * LAYER_SPACING) + 200;
     const height = Math.max(minHeight, requiredHeight);
 
-    networkCanvas.width = width;
+    networkCanvas.width = netWidth;
     networkCanvas.height = height;
-    networkCanvas.style.height = `${height}px`;
 
-    gradientChartCanvas.width = width;
+    // Gradient chart fills its own section width
+    const gradSection = document.getElementById('gradient-section');
+    const chartWidth = gradSection ? Math.max(160, gradSection.clientWidth - 20) : netWidth;
+    gradientChartCanvas.width = chartWidth;
 }
 
 // Reset visualization

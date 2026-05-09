@@ -53,6 +53,16 @@ function init() {
 
     // Initial render
     reset();
+
+    // ResizeObserver: redraw when container changes size
+    if (window.ResizeObserver) {
+        const ro = new ResizeObserver(() => {
+            resizeCanvases();
+            drawAllCharts();
+        });
+        const vizPanel = document.querySelector('.visualization-panel');
+        if (vizPanel) ro.observe(vizPanel);
+    }
 }
 
 // Resize canvases

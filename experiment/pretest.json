@@ -44,7 +44,7 @@
         "d": "Steady Gradient Descent"
       },
       "explanations": {
-        "a": "Correct because SGD updates weights using small batches or single samples, making training faster and more flexible.",
+        "a": "Correct because SGD updates model parameters using one training sample at a time, making training faster and more flexible.",
         "b": "Incorrect; usually called Batch Gradient Descent.",
         "c": "Incorrect; not a standard term.",
         "d": "Incorrect; not a recognized term."
@@ -70,7 +70,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "5. Which optimizer adjusts the learning rate individually for each parameter?",
+      "question": "5. Which optimizer adjusts the learning rate individually for each parameter and incorporates momentum?",
       "answers": {
         "a": "SGD",
         "b": "Adam",
@@ -78,10 +78,10 @@
         "d": "RMSProp"
       },
       "explanations": {
-        "a": "Incorrect because SGD uses a fixed learning rate for all parameters.",
-        "b": "Correct because Adam adapts learning rates based on past gradients per parameter.",
-        "c": "Incorrect because it uses a fixed learning rate.",
-        "d": "Incorrect because although RMSProp adapts learning rates, Adam also incorporates momentum."
+        "a": "Incorrect because standard SGD uses a fixed learning rate for all parameters and lacks a built-in mechanism for per-parameter adaptation.",
+        "b": "Correct because Adam combines the benefits of adaptive learning rates and momentum by maintaining moving averages of both the gradients and their squares.",
+        "c": "Incorrect because it utilizes a single constant learning rate for the entire model and does not adapt to the curvature of the loss surface for individual parameters.",
+        "d": "Incorrect because, while RMSProp provides adaptive learning rates, it does not incorporate the firstmoment momentum term that characterizes the Adam optimizer."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
@@ -160,13 +160,13 @@
         "a": "Sigmoid",
         "b": "Tanh",
         "c": "ReLU",
-        "d": "Linear"
+        "d": "Softmax"
       },
       "explanations": {
         "a": "Incorrect because sigmoid saturates causing vanishing gradients.",
         "b": "Incorrect for similar reasons.",
         "c": "Correct because ReLU outputs zero or positive linear values, mitigating vanishing gradients.",
-        "d": "Incorrect because linear activation does not add non-linearity."
+        "d": "Incorrect because Softmax is primarily used in the output layer for probability distribution and does not specifically address vanishing gradients."
       },
       "correctAnswer": "c",
       "difficulty": "intermediate"
