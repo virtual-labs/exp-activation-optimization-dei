@@ -4,9 +4,9 @@ Neural network learning is governed by the interaction between activation functi
 
 **2.1 Activation Functions**
 
-In a Multilayer Perceptron (MLP), the activation function determines the output of a neuron based on the weighted sum of its inputs and bias. Activation functions transform the output of neurons before passing information to subsequent layers, thereby influencing the representational capability of the network. 
+In a Multilayer Perceptron (MLP), the activation function determines the output of a neuron based on the weighted sum of its inputs and bias. Activation functions transform the output of neurons before passing information to subsequent layers, thereby influencing the network's representational capability.
 
-In this experiment, three widely used activation functions, namely Sigmoid, Hyperbolic Tangent (Tanh), and Rectified Linear Unit (ReLU), are studied to compare their mathematical properties and practical behaviour during training on the Fashion-MNIST dataset. 
+In this experiment, three widely used activation functions, namely Sigmoid, Hyperbolic Tangent (Tanh), and Rectified Linear Unit (ReLU), are studied to compare their mathematical properties and practical behavior during training on the Fashion-MNIST dataset.
 
 **Mathematical Formulation**
 
@@ -22,7 +22,7 @@ The sigmoid activation function is defined as:
 
 $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 
-The output of the sigmoid function lies in the range $(0, 1)$. It was commonly used in early neural networks due to its smooth and differentiable nature. However, for large positive or negative input values, the function saturates, resulting in very small gradients and slow convergence during training. Figure 1 shows the behaviour of the Sigmoid activation function. 
+The output of the sigmoid function lies in the range $(0, 1)$. It was commonly used in early neural networks due to its smooth and differentiable nature. However, for large positive or negative input values, the function saturates, resulting in very small gradients and slow convergence during training. Figure 1 shows the behavior of the Sigmoid activation function.
 
 ![Sigmoid Activation Function](images/image20.png)
 
@@ -44,14 +44,14 @@ The hyperbolic tangent activation function is given by:
 
 $$\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$$
 
-The output range of tanh is $(-1, 1)$, making it zero-centred. Compared to sigmoid, tanh provides better gradient flow near zero and generally results in faster convergence. However, it still suffers from gradient saturation for large input values. Figure 2 illustrates the behaviour of the Tanh activation function.
+The output range of tanh is $(-1, 1)$, making it zero-centred. Compared to sigmoid, tanh provides better gradient flow near zero and generally results in faster convergence. However, it still suffers from gradient saturation for large input values. Figure 2 illustrates the behavior of the Tanh activation function.
 
 ![Tanh Activation Function](images/image22.png)
 
 *Figure 2: Tanh Activation Function*
 
 **Merits of Hyperbolic Tangent (Tanh) Activation Function**
-*   **Zero-centred output:** Helps improve gradient flow and speeds up convergence compared to sigmoid.
+*   **Zero-centred output:** Helps improve gradient flow and speeds up convergence compared to the sigmoid.
 *   **Smooth and differentiable:** The function supports stable gradient-based optimization due to its continuous differentiability.
 *   **Stronger gradients near zero:** Compared to sigmoid, tanh provides larger gradients around zero, which enhances learning efficiency.
 
@@ -75,7 +75,7 @@ z, & \text{if } z \ge 0
 \end{cases}
 $$
 
-ReLU outputs zero for negative input values and a linear output for positive values. This behaviour significantly reduces the vanishing gradient problem and improves training efficiency. Due to its simplicity and effectiveness, ReLU is widely used in modern deep learning models. Figure 3 shows the ReLU activation function curve.  
+ReLU outputs zero for negative input values and a linear output for positive values. This behavior significantly reduces the vanishing gradient problem and improves training efficiency. Due to its simplicity and effectiveness, ReLU is widely used in modern deep learning models. Figure 3 shows the ReLU activation function curve.
 
 ![ReLU Activation Function](images/image21.png)
 
@@ -102,11 +102,11 @@ ReLU outputs zero for negative input values and a linear output for positive val
 
 **2.2 Optimization Algorithms**
 
-Optimization algorithms are used to minimize the loss function of a neural network by iteratively adjusting its parameters (weights and biases). During training, the optimizer determines the direction and magnitude of parameter updates based on the gradients of the loss function with respect to the model parameters. An efficient optimization algorithm ensures faster convergence, numerical stability, and improved generalization performance. In this experiment, Stochastic Gradient Descent (SGD) and Adaptive Moment Estimation (Adam) optimizers are studied and compared while training a Multilayer Perceptron (MLP) on the Fashion-MNIST dataset.
+Optimization algorithms are used to minimize a neural network's loss function by iteratively adjusting its parameters (weights and biases). During training, the optimizer determines the direction and magnitude of parameter updates based on the gradients of the loss function with respect to the model parameters. An efficient optimization algorithm ensures faster convergence, numerical stability, and improved generalization performance. In this experiment, Stochastic Gradient Descent (SGD) and Adaptive Moment Estimation (Adam) optimizers are studied and compared while training a Multilayer Perceptron (MLP) on the Fashion-MNIST dataset.
 
 **I. Stochastic Gradient Descent (SGD): -**
 
-Stochastic Gradient Descent is a fundamental optimization algorithm based on the theory of stochastic approximation, introduced by Herbert Robbins and Sutton Monro (1951). Unlike batch gradient descent, Stochastic Gradient Descent (SGD) updates model parameters using one training example at a time, which reduces computational cost and introduces stochasticity into the optimization process.  
+Stochastic Gradient Descent is a fundamental optimization algorithm based on the theory of stochastic approximation, introduced by Herbert Robbins and Sutton Monro (1951). Unlike batch gradient descent, Stochastic Gradient Descent (SGD) updates model parameters using a single training example at a time, reducing computational cost and introducing stochasticity into the optimization process.
 
 The parameter update rule is:
 
@@ -124,13 +124,13 @@ SGD is simple and memory-efficient, and the randomness in updates can help escap
 
 **Demerits of Stochastic Gradient Descent (SGD)**
 *   **Sensitivity to learning rate:** Choosing an inappropriate learning rate can result in slow convergence or unstable training.
-*   **Slow convergence:** SGD may require a large number of iterations to reach the optimal solution, especially for complex problems.
+*   **Slow convergence:** SGD may require many iterations to reach the optimal solution, especially for complex problems.
 *   **No adaptive learning rate:** A fixed learning rate is used for all parameters, which may limit performance if not carefully tuned.
-*   **Oscillations during training:** SGD can exhibit oscillatory behaviour near minima due to noisy gradient updates.
+*   **Oscillations during training:** SGD can exhibit oscillatory behavior near minima due to noisy gradient updates.
 
 **II. Adaptive Moment Estimation (Adam): -**
 
-Adaptive Moment Estimation (Adam) was proposed by Diederik P. Kingma and Jimmy Lei Ba (2015). It is an advanced optimization algorithm that combines the benefits of momentum-based methods and adaptive learning rate techniques. Adam adapts the learning rate for each parameter individually by maintaining exponentially decaying averages of past gradients and squared gradients.
+Adaptive Moment Estimation (Adam) was proposed by Diederik P. Kingma and Jimmy Lei Ba (2015). It is an advanced optimization algorithm that combines the benefits of momentum-based methods and adaptive learning rate techniques. Adam adapts the learning rate for each parameter by maintaining exponentially decaying averages of past gradients and squared gradients.
 
 The update rule for Adam is:
 
@@ -147,7 +147,7 @@ Where:
 Adam provides faster convergence, stable training, and performs well with noisy or sparse gradients. Due to these advantages, it is widely used in deep learning applications.
 
 **Merits of Adaptive Moment Estimation (Adam)**
-*   **Adaptive learning rates:** Adam automatically adjusts the learning rate for each parameter based on first and second moment estimates.
+*   **Adaptive learning rates:** Adam automatically adjusts the learning rate for each parameter based on first- and second-moment estimates.
 *   **Fast convergence:** The optimizer converges faster than traditional gradient-based methods, especially on deep networks.
 *   **Robust to noisy gradients:** Adam performs well even when gradients are noisy or sparse.
 *   **Minimal hyperparameter tuning:** Default parameter values often work well, reducing the need for extensive tuning.
