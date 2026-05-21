@@ -41,7 +41,7 @@
         "a": "Because it causes neurons to die",
         "b": "Because it is not differentiable",
         "c": "Because it saturates and causes vanishing gradients",
-        "d": "Because it outputs values only in negative range"
+        "d": "Because it outputs values only in the negative range"
       },
       "explanations": {
         "a": "Incorrect because dying neurons are mostly related to ReLU.",
@@ -81,7 +81,7 @@
         "a": "Incorrect because SGD does not adapt learning rates.",
         "b": "Correct because Adam uses both momentum and adaptive rates.",
         "c": "Incorrect because it does not use momentum in the same way.",
-        "d": "Incorrect as it only adapts learning rate without momentum."
+        "d": "Incorrect, as it only adapts the learning rate without momentum."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
@@ -89,7 +89,7 @@
     {
       "question": "6. How does the Adam optimizer differ from standard SGD?",
       "answers": {
-        "a": "Adam uses fixed learning rate for all parameters",
+        "a": "Adam uses a fixed learning rate for all parameters",
         "b": "Adam maintains moving averages of past gradients and squared gradients",
         "c": "Adam ignores gradient information during updates",
         "d": "Adam always requires manual tuning of momentum separately"
@@ -132,13 +132,13 @@
         "a": "Incorrect because the update subtracts the gradient to minimize the loss.",
         "b": "Correct because parameters are updated opposite to the gradient, which points toward the steepest increase in loss. Subtracting it reduces the loss. The learning rate η controls the update size.",
         "c": "Incorrect because parameters are not replaced by gradient.",
-        "d": "Incorrect because parameters are not divided by learning rate."
+        "d": "Incorrect because parameters are not divided by the learning rate."
       },
       "correctAnswer": "b",
       "difficulty": "advanced"
     },
     {
-      "question": "9. What does the term 'moment' refer to in Adam optimizer?",
+      "question": "9. What does the term 'moment' refer to in the Adam optimizer?",
       "answers": {
         "a": "The number of epochs",
         "b": "Running averages of past gradients and squared gradients",
@@ -148,7 +148,7 @@
       "explanations": {
         "a": "Incorrect because moments are related to gradients, not epochs.",
         "b": "Correct because Adam uses the first moment, which is the average of past gradients to capture update direction, and the second moment, which is the average of squared gradients to adjust step size based on gradient variability, enabling adaptive and efficient optimization.",
-        "c": "Incorrect as moment is not related to time.",
+        "c": "Incorrect, as moment is not related to time.",
         "d": "Incorrect as batch size is independent."
       },
       "correctAnswer": "b",
@@ -165,8 +165,8 @@
       "explanations": {
         "a": "Incorrect because sigmoid is differentiable everywhere.",
         "b": "Correct because ReLU has a sharp corner at zero.",
-        "c": "Incorrect as tanh is differentiable everywhere.",
-        "d": "Incorrect as softmax is differentiable."
+        "c": "Incorrect, as tanh is differentiable everywhere.",
+        "d": "Incorrect, as softmax is differentiable."
       },
       "correctAnswer": "b",
       "difficulty": "advanced"

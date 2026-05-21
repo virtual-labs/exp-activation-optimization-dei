@@ -62,8 +62,8 @@
       },
       "explanations": {
         "a": "Correct because learning rate controls step size in parameter updates.",
-        "b": "Incorrect as this is architectural.",
-        "c": "Incorrect as data size doesn't control learning rate.",
+        "b": "Incorrect, as this is architectural.",
+        "c": "Incorrect, as data size doesn't control learning rate.",
         "d": "Incorrect, network size is unrelated."
       },
       "correctAnswer": "a",
@@ -132,7 +132,7 @@
         "a": "Incorrect because sigmoid outputs in (0,1).",
         "b": "Correct because tanh outputs in (-1,1), centred at zero.",
         "c": "Incorrect since output is always ≥ 0.",
-        "d": "Incorrect as linear just outputs the input."
+        "d": "Incorrect, as linear just outputs the input."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
