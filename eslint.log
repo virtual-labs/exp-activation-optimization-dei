@@ -1,0 +1,109 @@
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/notebook/experiments_data.js
+  1:7  warning  'EXPERIMENTS_DATA' is assigned a value but never used  no-unused-vars
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/notebook/experiments_data_30eps.js
+  1:7  warning  'EXPERIMENTS_DATA' is assigned a value but never used  no-unused-vars
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/notebook/experiments_data_all.js
+  1:7  warning  'EXPERIMENTS_DATA' is assigned a value but never used  no-unused-vars
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/notebook/js/experiments_data.js
+  1:7  warning  'EXPERIMENTS_DATA' is assigned a value but never used  no-unused-vars
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/notebook/js/variant_loader.js
+   27:32  warning  'EXPERIMENTS_DATA' is not defined       no-undef
+   35:26  warning  'EXPERIMENTS_DATA' is not defined       no-undef
+   49:5   warning  'EXPERIMENTS_DATA' is not defined       no-undef
+  115:12  warning  'EXPERIMENTS_DATA' is not defined       no-undef
+  224:20  warning  Unnecessary escape character: \-        no-useless-escape
+  224:22  warning  Unnecessary escape character: \-        no-useless-escape
+  224:24  warning  Unnecessary escape character: \-        no-useless-escape
+  242:20  warning  Unnecessary escape character: \-        no-useless-escape
+  271:37  warning  'index' is defined but never used       no-unused-vars
+  316:22  warning  'experiment' is defined but never used  no-unused-vars
+  338:9   warning  'MathJax' is not defined                no-undef
+  445:10  warning  'runCell' is defined but never used     no-unused-vars
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/simulation/demos/demo1-activation-shapes/demo.js
+  249:19  warning  'linspace' is not defined                 no-undef
+  252:24  warning  'getActivation' is not defined            no-undef
+  253:24  warning  'getActivationDerivative' is not defined  no-undef
+  256:19  warning  'applyFunction' is not defined            no-undef
+  257:20  warning  'applyFunction' is not defined            no-undef
+  287:3   warning  'CanvasUtils' is not defined              no-undef
+  288:3   warning  'CanvasUtils' is not defined              no-undef
+  293:3   warning  'CanvasUtils' is not defined              no-undef
+  305:3   warning  'CanvasUtils' is not defined              no-undef
+  306:3   warning  'CanvasUtils' is not defined              no-undef
+  314:3   warning  'CanvasUtils' is not defined              no-undef
+  322:69  warning  'dyRange' is defined but never used       no-unused-vars
+  336:18  warning  'CanvasUtils' is not defined              no-undef
+  337:18  warning  'CanvasUtils' is not defined              no-undef
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/simulation/demos/demo2-gradient-flow/demo.js
+  114:26  warning  'getActivation' is not defined            no-undef
+  208:21  warning  'getActivationDerivative' is not defined  no-undef
+  335:9   warning  'gsap' is not defined                     no-undef
+  369:9   warning  'gsap' is not defined                     no-undef
+  546:15  warning  'getActivationDerivative' is not defined  no-undef
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/simulation/demos/demo3-optimizer-paths/demo.js
+  568:9  warning  'dotCount' is assigned a value but never used  no-unused-vars
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/simulation/demos/demo4-learning-rate/demo.js
+  159:13  warning  Unexpected lexical declaration in case block  no-case-declarations
+  164:13  warning  Unexpected lexical declaration in case block  no-case-declarations
+  242:5   warning  'CanvasUtils' is not defined                  no-undef
+  253:9   warning  'CanvasUtils' is not defined                  no-undef
+  280:5   warning  'CanvasUtils' is not defined                  no-undef
+  291:9   warning  'CanvasUtils' is not defined                  no-undef
+  316:5   warning  'CanvasUtils' is not defined                  no-undef
+  327:9   warning  'CanvasUtils' is not defined                  no-undef
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/simulation/demos/demo5-full-training/demo.js
+   88:15  warning  'tf' is not defined           no-undef
+  113:5   warning  'tf' is not defined           no-undef
+  120:27  warning  'tf' is not defined           no-undef
+  133:31  warning  'tf' is not defined           no-undef
+  139:24  warning  'tf' is not defined           no-undef
+  140:24  warning  'tf' is not defined           no-undef
+  140:34  warning  'tf' is not defined           no-undef
+  150:17  warning  'tf' is not defined           no-undef
+  151:17  warning  'tf' is not defined           no-undef
+  155:17  warning  'tf' is not defined           no-undef
+  156:17  warning  'tf' is not defined           no-undef
+  163:19  warning  'tf' is not defined           no-undef
+  166:15  warning  'tf' is not defined           no-undef
+  173:15  warning  'tf' is not defined           no-undef
+  179:15  warning  'tf' is not defined           no-undef
+  188:25  warning  'tf' is not defined           no-undef
+  191:25  warning  'tf' is not defined           no-undef
+  194:25  warning  'tf' is not defined           no-undef
+  197:25  warning  'tf' is not defined           no-undef
+  268:27  warning  'tf' is not defined           no-undef
+  334:5   warning  'CanvasUtils' is not defined  no-undef
+  346:9   warning  'CanvasUtils' is not defined  no-undef
+  371:5   warning  'CanvasUtils' is not defined  no-undef
+  383:9   warning  'CanvasUtils' is not defined  no-undef
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/simulation/experiments_data.js
+  1:7  warning  'EXPERIMENTS_DATA' is assigned a value but never used  no-unused-vars
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/simulation/js/math.js
+   6:22  warning  'x' is defined but never used                        no-unused-vars
+  55:10  warning  'getActivation' is defined but never used            no-unused-vars
+  71:10  warning  'getActivationDerivative' is defined but never used  no-unused-vars
+  82:22  warning  'x' is defined but never used                        no-unused-vars
+  87:10  warning  'linspace' is defined but never used                 no-unused-vars
+  93:10  warning  'applyFunction' is defined but never used            no-unused-vars
+
+/home/runner/work/exp-activation-optimization-dei/exp-activation-optimization-dei/experiment/simulation/simulation/js/utils.js
+    4:7  warning  'CanvasUtils' is assigned a value but never used     no-unused-vars
+  222:7  warning  'ColorUtils' is assigned a value but never used      no-unused-vars
+  272:7  warning  'AnimationUtils' is assigned a value but never used  no-unused-vars
+  296:7  warning  'DataUtils' is assigned a value but never used       no-unused-vars
+  327:7  warning  'FormatUtils' is assigned a value but never used     no-unused-vars
+
+✖ 80 problems (0 errors, 80 warnings)
+

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 1: Activation Function Shape Explorer</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="../../../notebook/index.html" class="nav-link">← Back to Notebook</a>
+            <a href="../demo2-gradient-flow/index.html" class="nav-link">Next: Gradient Flow →</a>
+        </div>
+
+        <header class="header">
+            <h1>Activation Function Shape Explorer</h1>
+            <p>Understand the mathematical foundations of activation functions</p>
+        </header>
+
+        <div class="demo-container">
+            <!-- Controls Panel -->
+            <div class="demo-panel controls-panel">
+                <h3>Controls</h3>
+
+                <div class="control-group">
+                    <label for="activation-select">Activation Function</label>
+                    <select id="activation-select">
+                        <option value="linear">Linear</option>
+                        <option value="sigmoid">Sigmoid</option>
+                        <option value="tanh">Tanh</option>
+                        <option value="relu" selected>ReLU</option>
+                        <option value="leakyrelu">Leaky ReLU</option>
+                        <option value="gelu">GELU</option>
+                        <option value="swish">Swish</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="x-range">Input Range: <span id="x-range-value">-6 to 6</span></label>
+                    <input type="range" id="x-range" min="2" max="10" value="6" step="0.5">
+                </div>
+
+                <div class="control-group" id="alpha-control-group" style="display: none;">
+                    <label for="alpha-slider">Leaky ReLU α: <span id="alpha-value">0.01</span></label>
+                    <input type="range" id="alpha-slider" min="0" max="0.5" value="0.01" step="0.01">
+                </div>
+
+                <button id="reset-btn" class="btn btn-secondary btn-full">Reset View</button>
+            </div>
+
+            <!-- Visualization Panel (Middle) -->
+            <div class="demo-panel visualization-panel"
+                style="display: flex; flex-direction: column; height: 100%; min-height: 600px; padding: 0;">
+                <div class="zoom-controls"
+                    style="padding: 10px; border-bottom: 1px solid #eee; display: flex; gap: 10px; align-items: center; justify-content: flex-end; background: #fff;">
+                    <button id="zoom-out-btn" class="btn btn-secondary" style="padding: 2px 8px;">-</button>
+                    <span id="zoom-level" style="font-size: 0.9rem; min-width: 45px; text-align: center;">100%</span>
+                    <button id="zoom-in-btn" class="btn btn-secondary" style="padding: 2px 8px;">+</button>
+                    <button id="zoom-fit-btn" class="btn btn-secondary"
+                        style="padding: 2px 8px; font-size: 0.8rem;">Fit</button>
+                </div>
+                <div id="scroll-container" style="overflow: auto; flex: 1; background: #fafafa; padding: 10px;">
+                    <div id="scale-container">
+                        <div id="content-wrapper" style="transform-origin: 0 0;">
+                            <div class="canvas-container"
+                                style="background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                                <div class="canvas-label" style="margin-bottom: 5px; font-weight: 500;">Function Output:
+                                    f(x)</div>
+                                <canvas id="function-canvas" width="800" height="300"></canvas>
+                            </div>
+
+                            <div class="canvas-container"
+                                style="background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div class="canvas-label" style="margin-bottom: 5px; font-weight: 500;">Derivative:
+                                    f'(x)</div>
+                                <canvas id="derivative-canvas" width="800" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intuition Panel (Right) -->
+            <div class="demo-panel intuition-panel">
+                <h3>Understanding Activation Functions</h3>
+                <div id="intuition-content" class="intuition-content">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Zoom Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollContainer = document.getElementById('scroll-container');
+            const scaleContainer = document.getElementById('scale-container');
+            const contentWrapper = document.getElementById('content-wrapper');
+            const zoomLevelDisplay = document.getElementById('zoom-level');
+            let currentZoom = 1;
+
+            function updateZoom() {
+                // Apply scale
+                contentWrapper.style.transform = `scale(${currentZoom})`;
+
+                // Update scale container size to allow scrolling
+                const contentWidth = contentWrapper.scrollWidth;
+                const contentHeight = contentWrapper.scrollHeight;
+
+                scaleContainer.style.width = `${contentWidth * currentZoom}px`;
+                scaleContainer.style.height = `${contentHeight * currentZoom}px`;
+
+                zoomLevelDisplay.textContent = `${Math.round(currentZoom * 100)}%`;
+            }
+
+            document.getElementById('zoom-in-btn').addEventListener('click', () => {
+                currentZoom += 0.1;
+                updateZoom();
+            });
+
+            document.getElementById('zoom-out-btn').addEventListener('click', () => {
+                currentZoom = Math.max(0.1, currentZoom - 0.1);
+                updateZoom();
+            });
+
+            document.getElementById('zoom-fit-btn').addEventListener('click', () => {
+                const containerWidth = scrollContainer.clientWidth - 20;
+                const contentWidth = contentWrapper.scrollWidth || 840;
+                const widthRatio = containerWidth / contentWidth;
+
+                let newZoom = widthRatio;
+                if (newZoom < 0.1) newZoom = 0.1;
+
+                currentZoom = newZoom;
+                updateZoom();
+            });
+
+            // Auto-fit when options change
+            const controls = ['activation-select', 'x-range', 'alpha-slider'];
+            controls.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('change', () => {
+                        setTimeout(() => document.getElementById('zoom-fit-btn').click(), 50);
+                    });
+                    if (el.tagName === 'INPUT' && el.type === 'RANGE') {
+                        el.addEventListener('input', () => {
+                            setTimeout(() => document.getElementById('zoom-fit-btn').click(), 50);
+                        });
+                    }
+                }
+            });
+
+            // Re-fit on window resize (orientation change, window resize)
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => document.getElementById('zoom-fit-btn').click(), 200);
+            });
+
+            // Initial fit
+            setTimeout(() => { document.getElementById('zoom-fit-btn').click(); }, 100);
+        });
+    </script>
+    <script src="../../js/math.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="demo.js"></script>
+</body>
+
+</html>

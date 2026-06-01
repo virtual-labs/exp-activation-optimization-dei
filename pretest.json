@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. What is the primary role of activation functions in neural networks?",
+      "answers": {
+        "a": "To linearly transform input data",
+        "b": "To introduce non-linearity into the model",
+        "c": "To reduce the dataset size",
+        "d": "To initialize weights"
+      },
+      "explanations": {
+        "a": "Incorrect because linear transformation alone cannot model complex relationships.",
+        "b": "Correct because activation functions enable learning complex patterns.",
+        "c": "Incorrect because activation functions do not affect dataset size.",
+        "d": "Incorrect because weight initialization is a separate step."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "2. Which activation function outputs values between 0 and 1?",
+      "answers": {
+        "a": "ReLU",
+        "b": "Tanh",
+        "c": "Sigmoid",
+        "d": "Linear"
+      },
+      "explanations": {
+        "a": "Incorrect because ReLU outputs zero or positive values with no upper bound.",
+        "b": "Incorrect because Tanh outputs values between -1 and 1.",
+        "c": "Correct because Sigmoid outputs values in the range (0, 1).",
+        "d": "Incorrect because linear activation outputs any real number."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. What does SGD stand for?",
+      "answers": {
+        "a": "Stochastic Gradient Descent",
+        "b": "Standard Gradient Descent",
+        "c": "Simple Gradient Descent",
+        "d": "Steady Gradient Descent"
+      },
+      "explanations": {
+        "a": "Correct because SGD updates model parameters using one training sample at a time, making training faster and more flexible.",
+        "b": "Incorrect; usually called Batch Gradient Descent.",
+        "c": "Incorrect; not a standard term.",
+        "d": "Incorrect; not a recognized term."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. What is the learning rate in optimization algorithms?",
+      "answers": {
+        "a": "Speed of updating parameters",
+        "b": "Number of layers in the network",
+        "c": "Size of input data",
+        "d": "Number of neurons"
+      },
+      "explanations": {
+        "a": "Correct because learning rate controls step size in parameter updates.",
+        "b": "Incorrect, as this is architectural.",
+        "c": "Incorrect, as data size doesn't control learning rate.",
+        "d": "Incorrect, network size is unrelated."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "5. Which optimizer adjusts the learning rate individually for each parameter and incorporates momentum?",
+      "answers": {
+        "a": "SGD",
+        "b": "Adam",
+        "c": "Batch Gradient Descent",
+        "d": "RMSProp"
+      },
+      "explanations": {
+        "a": "Incorrect because standard SGD uses a fixed learning rate for all parameters and lacks a built-in mechanism for per-parameter adaptation.",
+        "b": "Correct because Adam combines the benefits of adaptive learning rates and momentum by maintaining moving averages of both the gradients and their squares.",
+        "c": "Incorrect because it utilizes a single constant learning rate for the entire model and does not adapt to the curvature of the loss surface for individual parameters.",
+        "d": "Incorrect because, while RMSProp provides adaptive learning rates, it does not incorporate the first-moment momentum term that characterizes the Adam optimizer."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "6. What problem is commonly associated with Sigmoid and Tanh activation functions?",
+      "answers": {
+        "a": "Dying neurons",
+        "b": "Vanishing gradients",
+        "c": "Overfitting",
+        "d": "Data normalization"
+      },
+      "explanations": {
+        "a": "Incorrect because dying neurons are mostly associated with ReLU.",
+        "b": "Correct because sigmoid and tanh saturate for large inputs causing gradients to vanish.",
+        "c": "Incorrect because overfitting relates to model complexity, not activation function.",
+        "d": "Incorrect because normalization is a preprocessing step."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "7. Which activation function outputs zero for negative inputs?",
+      "answers": {
+        "a": "Sigmoid",
+        "b": "Tanh",
+        "c": "ReLU",
+        "d": "Linear"
+      },
+      "explanations": {
+        "a": "Incorrect because Sigmoid outputs values between 0 and 1.",
+        "b": "Incorrect because Tanh outputs negative values for negative inputs.",
+        "c": "Correct because ReLU outputs zero for negative inputs and positive linear values otherwise.",
+        "d": "Incorrect because Linear outputs the input as is."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "8. Which activation function is zero-centred?",
+      "answers": {
+        "a": "Sigmoid",
+        "b": "Tanh",
+        "c": "ReLU",
+        "d": "Linear"
+      },
+      "explanations": {
+        "a": "Incorrect because sigmoid outputs in (0,1).",
+        "b": "Correct because tanh outputs in (-1,1), centred at zero.",
+        "c": "Incorrect since output is always ≥ 0.",
+        "d": "Incorrect, as linear just outputs the input."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "9. Which optimizer uses momentum and adaptive learning rates?",
+      "answers": {
+        "a": "SGD",
+        "b": "Adam",
+        "c": "Batch Gradient Descent",
+        "d": "RMSProp"
+      },
+      "explanations": {
+        "a": "Incorrect because SGD does not use adaptive learning rates or momentum by default.",
+        "b": "Correct because Adam combines momentum and adaptive learning rates.",
+        "c": "Incorrect, similar to SGD.",
+        "d": "Incorrect because although RMSProp uses adaptive learning rates, Adam also uses momentum."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "10. Which activation function helps reduce the vanishing gradient problem?",
+      "answers": {
+        "a": "Sigmoid",
+        "b": "Tanh",
+        "c": "ReLU",
+        "d": "Softmax"
+      },
+      "explanations": {
+        "a": "Incorrect because sigmoid saturates causing vanishing gradients.",
+        "b": "Incorrect for similar reasons.",
+        "c": "Correct because ReLU outputs zero or positive linear values, mitigating vanishing gradients.",
+        "d": "Incorrect because Softmax is primarily used in the output layer for probability distribution and does not specifically address vanishing gradients."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    }
+  ]
+}

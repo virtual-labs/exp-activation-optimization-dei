@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Data Debug</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Data Debug Page</h1>
+    <div id="output">Loading...</div>
+    <script src="./js/experiments_data.js"></script>
+    <script>
+        const out = document.getElementById('output');
+        if (typeof EXPERIMENTS_DATA === 'undefined') {
+            out.innerHTML = "<span style='color:red'>EXPERIMENTS_DATA is undefined!</span>";
+        } else {
+            out.innerHTML = `
+                <div style='color:green'>EXPERIMENTS_DATA loaded!</div>
+                <div>Count: ${EXPERIMENTS_DATA.length}</div>
+                <div>First Experiment Config: <pre>${JSON.stringify(EXPERIMENTS_DATA[0].config, null, 2)}</pre></div>
+                <div>First Experiment Cells: ${EXPERIMENTS_DATA[0].cells.length}</div>
+            `;
+        }
+    </script>
+</body>
+
+</html>

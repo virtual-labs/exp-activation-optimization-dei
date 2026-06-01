@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Lab: Activation Functions & Optimization</title>
+  <meta name="description"
+    content="Interactive demonstrations for understanding activation functions, gradient flow, optimizers, and training dynamics in deep learning.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <a href="../index.html" class="back-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        Back to Overview
+      </a>
+      <h1>Virtual Lab: Activation Functions & Optimization</h1>
+      <p>Interactive demonstrations for understanding deep learning fundamentals</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Learning Path</h2>
+        <p>These demonstrations are designed to build intuition progressively. Start with Demo 1 and work your way
+          through to understand how activation functions and optimizers affect neural network training.</p>
+      </section>
+
+      <div class="cards-grid">
+        <a href="demos/demo1-activation-shapes/index.html" class="card">
+          <div class="card-number">1</div>
+          <h3>Activation Function Shape Explorer</h3>
+          <p>Explore the mathematical properties of different activation functions. Visualize f(x) and f'(x) to
+            understand how derivatives enable learning and where saturation occurs.</p>
+          <p><strong>Key Concept:</strong> Neural networks are piecewise mathematical functions, and learning depends on
+            derivatives.</p>
+        </a>
+
+        <a href="demos/demo2-gradient-flow/index.html" class="card">
+          <div class="card-number">2</div>
+          <h3>Gradient Flow Visualizer</h3>
+          <p>See how gradients flow backward through a multi-layer network. Understand vanishing and exploding
+            gradients, and why activation choice matters for deep networks.</p>
+          <p><strong>Key Concept:</strong> Information can die during backpropagation if gradients vanish.</p>
+        </a>
+
+        <a href="demos/demo3-optimizer-paths/index.html" class="card">
+          <div class="card-number">3</div>
+          <h3>Optimizer Step Visualizer</h3>
+          <p>Watch how different optimizers navigate the loss landscape. Compare SGD, Momentum, and Adam to see how they
+            affect convergence speed and stability.</p>
+          <p><strong>Key Concept:</strong> Gradients give direction; optimizers decide how to move through parameter
+            space.</p>
+        </a>
+
+        <a href="demos/demo4-learning-rate/index.html" class="card">
+          <div class="card-number">4</div>
+          <h3>Learning Rate Scheduler</h3>
+          <p>Discover why learning rate should change during training. Compare different scheduling strategies and their
+            effect on convergence.</p>
+          <p><strong>Key Concept:</strong> Learning needs to be fast early and careful later.</p>
+        </a>
+
+        <a href="demos/demo5-full-training/index.html" class="card">
+          <div class="card-number">5</div>
+          <h3>Full Training Overlay</h3>
+          <p>Train real neural networks on Fashion-MNIST with different activation functions and optimizers. Compare
+            training curves to see everything come together.</p>
+          <p><strong>Key Concept:</strong> Modern defaults converge faster, and bad activations can't be completely
+            saved by good optimizers.</p>
+        </a>
+      </div>
+
+      <section style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+        <h2>About This Lab</h2>
+        <p>This virtual lab is designed for undergraduate computer science students learning deep learning. Each
+          demonstration builds on the previous one to create a comprehensive understanding of how activation functions
+          and optimization algorithms work together to train neural networks.</p>
+
+        <h3 style="margin-top: 1.5rem;">Learning Objectives</h3>
+        <ul style="margin-left: 2rem; color: var(--color-text-secondary);">
+          <li>Understand the mathematical properties of activation functions</li>
+          <li>Visualize how gradients flow through neural networks</li>
+          <li>Compare different optimization algorithms and their behaviors</li>
+          <li>Learn why learning rate scheduling improves training</li>
+          <li>Synthesize concepts by training real models</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>
