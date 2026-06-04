@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Dynamics: Activation Functions</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <!-- Chart.js for visualizations if needed, though most plots here are images -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="simulation-container">
+        <!-- Step Indicator Sidebar -->
+        <aside class="step-sidebar">
+            <div class="step-sidebar-header">
+                <h3>Experiment Steps</h3>
+            </div>
+
+            <div class="step-list" id="stepList">
+                <!-- Steps will be dynamically generated -->
+            </div>
+
+            <!-- Control Buttons at Bottom -->
+            <div class="sidebar-footer">
+                <button class="reset-btn" id="resetBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
+                    </svg>
+                    Reset
+                </button>
+                <a href="activation_optimization_experiment.pdf" class="download-pdf-btn" id="downloadPdfBtn"
+                    download="activation_optimization_experiment.pdf">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                    </svg>
+                    Download Experiment (PDF)
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Notebook Area -->
+        <main class="notebook-area">
+            <div class="notebook-header">
+                <h1>Training Dynamics: Activation Functions</h1>
+                <p style="color: var(--text-secondary); margin-top: 8px;">Investigate how activation functions,
+                    optimizers, and learning rates affect training.</p>
+            </div>
+
+            <!-- Variant Selector -->
+            <div class="variant-selector" id="variantSelector">
+                <div class="selector-label">Configuration:</div>
+                <div class="selector-controls">
+                    <!-- Dropdowns will be populated by JS based on available data -->
+                    <div class="param-group">
+                        <label for="activationSelect">Activation:</label>
+                        <select id="activationSelect" class="param-dropdown">
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                    <div class="param-group">
+                        <label for="optimizerSelect">Optimizer:</label>
+                        <select id="optimizerSelect" class="param-dropdown">
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                    <div class="param-group">
+                        <label for="lrSelect">Learning Rate:</label>
+                        <select id="lrSelect" class="param-dropdown">
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cells Container -->
+            <div id="cellsContainer">
+                <div class="loading-message">Loading cells...</div>
+            </div>
+
+            <!-- Completion message -->
+            <div class="completion-message hidden" id="completionMessage">
+                <div class="completion-icon">✓</div>
+                <div class="completion-text">
+                    <h3>Experiment Completed!</h3>
+                    <p>You have successfully explored this configuration. Try comparing it with others using the
+                        selectors above!</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./js/experiments_data.js"></script>
+    <script src="./js/variant_loader.js"></script>
+</body>
+
+</html>

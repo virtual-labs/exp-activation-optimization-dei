@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 4: Learning Rate Scheduler</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="../demo3-optimizer-paths/index.html" class="nav-link">← Previous: Optimizer Paths</a>
+            <a href="../../../notebook/index.html" class="nav-link">Back to Notebook</a>
+            <a href="../demo5-full-training/index.html" class="nav-link">Next: Full Training →</a>
+        </div>
+
+        <header class="header">
+            <h1>Learning Rate Scheduler</h1>
+            <p>Understand why learning rate should change during training</p>
+        </header>
+
+        <div class="demo-container">
+            <!-- Controls Panel -->
+            <div class="demo-panel controls-panel">
+                <h3>Controls</h3>
+
+                <div class="control-group">
+                    <label for="scheduler-select">Scheduler</label>
+                    <select id="scheduler-select">
+                        <option value="none">None (Constant)</option>
+                        <option value="step" selected>Step Decay</option>
+                        <option value="cosine">Cosine Annealing</option>
+                        <option value="exponential">Exponential Decay</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="initial-lr">Initial Learning Rate: <span id="initial-lr-value">0.1</span></label>
+                    <input type="range" id="initial-lr" min="0.01" max="0.5" value="0.1" step="0.01">
+                </div>
+
+                <div class="control-group">
+                    <label for="epochs">Training Epochs: <span id="epochs-value">100</span></label>
+                    <input type="range" id="epochs" min="50" max="200" value="100" step="10">
+                </div>
+
+                <button id="simulate-btn" class="btn btn-primary btn-full">Simulate Training</button>
+                <button id="compare-btn" class="btn btn-secondary btn-full">Compare All Schedulers</button>
+                <button id="reset-btn" class="btn btn-secondary btn-full">Reset</button>
+            </div>
+
+            <!-- Visualization Panel (Middle) -->
+            <!-- Visualization Panel (Middle) -->
+            <div class="demo-panel visualization-panel"
+                style="display: flex; flex-direction: column; height: 100%; min-height: 600px; padding: 0;">
+                <div class="zoom-controls"
+                    style="padding: 10px; border-bottom: 1px solid #eee; display: flex; gap: 10px; align-items: center; justify-content: flex-end; background: #fff;">
+                    <button id="zoom-out-btn" class="btn btn-secondary" style="padding: 2px 8px;">-</button>
+                    <span id="zoom-level" style="font-size: 0.9rem; min-width: 45px; text-align: center;">100%</span>
+                    <button id="zoom-in-btn" class="btn btn-secondary" style="padding: 2px 8px;">+</button>
+                    <button id="zoom-fit-btn" class="btn btn-secondary"
+                        style="padding: 2px 8px; font-size: 0.8rem;">Fit</button>
+                </div>
+                <div id="scroll-container" style="overflow: auto; flex: 1; background: #fafafa; padding: 10px;">
+                    <div id="scale-container">
+                        <div id="content-wrapper" style="transform-origin: 0 0; padding-bottom: 50px;">
+                            <div class="canvas-container"
+                                style="background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                                <div class="canvas-label" style="margin-bottom: 5px; font-weight: 500;">Learning Rate vs
+                                    Epoch</div>
+                                <canvas id="lr-canvas" width="800" height="200"></canvas>
+                            </div>
+
+                            <div class="canvas-container"
+                                style="background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                                <div class="canvas-label" style="margin-bottom: 5px; font-weight: 500;">Training Loss vs
+                                    Epoch</div>
+                                <canvas id="loss-canvas" width="800" height="250"></canvas>
+                            </div>
+
+                            <div class="canvas-container"
+                                style="background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div class="canvas-label" style="margin-bottom: 5px; font-weight: 500;">Validation
+                                    Accuracy vs Epoch</div>
+                                <canvas id="accuracy-canvas" width="800" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intuition Panel (Right) -->
+            <div class="demo-panel intuition-panel">
+                <h3>Understanding Learning Rate Scheduling</h3>
+                <div id="intuition-content" class="intuition-content">
+                    <h3>Try This</h3>
+                    <p>Compare the curves to see how scheduled learning rates lead to:</p>
+                    <ul>
+                        <li>Faster initial convergence</li>
+                        <li>Better final accuracy</li>
+                        <li>Smoother loss curves in later epochs</li>
+                    </ul>
+
+                    <p style="margin-top: 2rem; border-top: 1px solid #e0e0e0; padding-top: 1rem;">The learning rate
+                        controls how big a step the optimizer takes in parameter space. Choosing the
+                        right schedule can dramatically improve training.</p>
+
+                    <h3>Why Schedule the Learning Rate?</h3>
+                    <p>Early in training, you want to explore the parameter space quickly with large steps. Later, you
+                        need smaller steps to fine-tune and converge to a good minimum.</p>
+
+                    <div class="intuition-highlight">
+                        <strong>Key Principle:</strong> Start fast, end slow. Large learning rates early for
+                        exploration, small learning rates later for refinement.
+                    </div>
+
+                    <h3>Scheduler Types</h3>
+
+                    <h4>None (Constant)</h4>
+                    <p>Learning rate stays the same throughout training. Simple but often suboptimal. May overshoot the
+                        minimum or converge slowly.</p>
+
+                    <h4>Step Decay</h4>
+                    <p>Reduces learning rate by a factor (e.g., 0.1) at specific epochs. Common schedule: reduce at 50%
+                        and 75% of training.</p>
+                    <ul>
+                        <li>Simple and effective</li>
+                        <li>Sudden drops can cause training instability</li>
+                        <li>Widely used in computer vision</li>
+                    </ul>
+
+                    <h4>Cosine Annealing</h4>
+                    <p>Smoothly decreases learning rate following a cosine curve. Provides gradual reduction without
+                        sudden jumps.</p>
+                    <ul>
+                        <li>Smooth transitions</li>
+                        <li>Popular in modern architectures</li>
+                        <li>Can be combined with warm restarts</li>
+                    </ul>
+
+                    <h4>Exponential Decay</h4>
+                    <p>Multiplies learning rate by a constant factor each epoch. Provides continuous, smooth decay.</p>
+                    <ul>
+                        <li>Gradual reduction</li>
+                        <li>May decay too quickly or slowly depending on factor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Zoom Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollContainer = document.getElementById('scroll-container');
+            const scaleContainer = document.getElementById('scale-container');
+            const contentWrapper = document.getElementById('content-wrapper');
+            const zoomLevelDisplay = document.getElementById('zoom-level');
+            let currentZoom = 1;
+
+            function updateZoom() {
+                // Apply scale
+                contentWrapper.style.transform = `scale(${currentZoom})`;
+
+                // Update scale container size to allow scrolling
+                // Dynamically calculate content size
+                const contentWidth = contentWrapper.scrollWidth;
+                const contentHeight = contentWrapper.scrollHeight;
+
+                scaleContainer.style.width = `${contentWidth * currentZoom}px`;
+                scaleContainer.style.height = `${contentHeight * currentZoom}px`;
+
+                zoomLevelDisplay.textContent = `${Math.round(currentZoom * 100)}%`;
+            }
+
+            document.getElementById('zoom-in-btn').addEventListener('click', () => {
+                currentZoom += 0.1;
+                updateZoom();
+            });
+
+            document.getElementById('zoom-out-btn').addEventListener('click', () => {
+                currentZoom = Math.max(0.1, currentZoom - 0.1);
+                updateZoom();
+            });
+
+            document.getElementById('zoom-fit-btn').addEventListener('click', () => {
+                const containerWidth = scrollContainer.clientWidth - 20;
+                // const containerHeight = scrollContainer.clientHeight - 20; // Height isn't the constraint anymore
+
+                // Dynamically get content size
+                const contentWidth = contentWrapper.scrollWidth || 840;
+                // const contentHeight = contentWrapper.scrollHeight || 900; 
+
+                const widthRatio = containerWidth / contentWidth;
+
+                // User requested "width of the inner canvas is max to fit the outter section"
+                // So we prioritize widthRatio. 
+                // We also allow zooming in (> 1) if the container is wider than the content.
+                let newZoom = widthRatio;
+
+                // Optional: set a reasonable limits
+                if (newZoom < 0.1) newZoom = 0.1;
+
+                currentZoom = newZoom;
+                updateZoom();
+            });
+
+            // Auto-fit when options change
+            const controls = ['scheduler-select', 'initial-lr', 'epochs'];
+            controls.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    // Use 'change' for all inputs to avoid excessive reflows during sliding
+                    el.addEventListener('change', () => {
+                        // Small delay to allow any other updates to propagate
+                        setTimeout(() => document.getElementById('zoom-fit-btn').click(), 50);
+                    });
+                    // specific for range inputs if they want "input" event
+                    if (el.tagName === 'INPUT' && el.type === 'RANGE') {
+                        el.addEventListener('input', () => {
+                            setTimeout(() => document.getElementById('zoom-fit-btn').click(), 50);
+                        });
+                    }
+                }
+            });
+
+            // Re-fit on window resize (orientation change, window resize)
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => document.getElementById('zoom-fit-btn').click(), 200);
+            });
+
+            // Initial fit using a small delay to ensure layout is computed
+            setTimeout(() => { document.getElementById('zoom-fit-btn').click(); }, 100);
+        });
+    </script>
+    <script src="../../js/math.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="demo.js"></script>
+</body>
+
+</html>

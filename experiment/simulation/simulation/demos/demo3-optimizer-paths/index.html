@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 3: Optimizer Step Visualizer</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="../demo2-gradient-flow/index.html" class="nav-link">← Previous: Gradient Flow</a>
+            <a href="../../../notebook/index.html" class="nav-link">Back to Notebook</a>
+            <a href="../demo4-learning-rate/index.html" class="nav-link">Next: Learning Rate →</a>
+        </div>
+
+        <header class="header">
+            <h1>Optimizer Step Visualizer</h1>
+            <p>See how optimizers navigate the loss landscape</p>
+        </header>
+
+        <div class="demo-container">
+            <!-- Controls Panel -->
+            <div class="demo-panel controls-panel">
+                <h3>Controls</h3>
+
+                <div class="control-group">
+                    <label for="optimizer-select">Optimizer</label>
+                    <select id="optimizer-select">
+                        <option value="sgd">SGD</option>
+                        <option value="momentum">SGD + Momentum</option>
+                        <option value="adam" selected>Adam</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="learning-rate">Learning Rate: <span id="lr-value">0.1</span></label>
+                    <input type="range" id="learning-rate" min="0.0001" max="0.5" value="0.1" step="0.0001">
+                </div>
+
+                <div class="control-group" id="momentum-control-group" style="display: none;">
+                    <label for="momentum-beta">Momentum β: <span id="momentum-value">0.9</span></label>
+                    <input type="range" id="momentum-beta" min="0" max="0.99" value="0.9" step="0.01">
+                </div>
+
+                <button id="start-btn" class="btn btn-primary btn-full">Start Optimization</button>
+                <button id="step-btn" class="btn btn-secondary btn-full">Single Step</button>
+                <button id="reset-params-btn" class="btn btn-secondary btn-full"
+                    style="background-color: #64748b; color: white; margin-top: 0.5rem;">Reset Defaults</button>
+                <button id="reset-btn" class="btn btn-outline btn-full" style="margin-top: 0.5rem;">Reset
+                    Position</button>
+
+                <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                    <div style="font-size: 0.875rem; color: #666;">
+                        <div id="optimizer-status" style="font-weight: 600; color: #2563eb; margin-bottom: 0.5rem;">
+                            Ready</div>
+                        <div>Iteration: <strong id="iteration-display">0</strong></div>
+                        <div>Loss: <strong id="loss-display">-</strong></div>
+                        <div>Position: (<strong id="pos-x-display">-</strong>, <strong id="pos-y-display">-</strong>)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualization Panel (Middle) -->
+            <div class="demo-panel visualization-panel"
+                style="display: flex; flex-direction: column; height: 100%; min-height: 600px; padding: 0;">
+                <div class="zoom-controls"
+                    style="padding: 10px; border-bottom: 1px solid #eee; display: flex; gap: 10px; align-items: center; justify-content: flex-end; background: #fff;">
+                    <button id="zoom-out-btn" class="btn btn-secondary" style="padding: 2px 8px;">-</button>
+                    <span id="zoom-level" style="font-size: 0.9rem; min-width: 45px; text-align: center;">100%</span>
+                    <button id="zoom-in-btn" class="btn btn-secondary" style="padding: 2px 8px;">+</button>
+                    <button id="zoom-fit-btn" class="btn btn-secondary"
+                        style="padding: 2px 8px; font-size: 0.8rem;">Fit</button>
+                </div>
+                <div id="scroll-container" style="overflow: auto; flex: 1; background: #fafafa; padding: 10px;">
+                    <div id="scale-container">
+                        <div id="content-wrapper" style="transform-origin: 0 0; display: inline-block;">
+                            <canvas id="surface-canvas" width="800" height="800"
+                                style="display: block;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intuition Panel (Right) -->
+            <div class="demo-panel intuition-panel">
+                <h3>Understanding Optimizers</h3>
+                <div id="intuition-content" class="intuition-content">
+                    <h3>Try This</h3>
+                    <p>Start with SGD at learning rate 0.05. Notice the oscillations. Then try Adam with the same
+                        learning rate and observe the smoother, faster convergence.</p>
+
+                    <p style="margin-top: 1.5rem; border-top: 1px solid #e0e0e0; padding-top: 1rem;">Optimizers
+                        determine how parameters move through the loss landscape to find the minimum.</p>
+
+                    <h3>The Rosenbrock Loss Function</h3>
+                    <p>The contour plot visualizes the <strong>Rosenbrock function</strong>, a classic benchmark for
+                        optimization algorithms:</p>
+                    <div style="background:#f8f9fa; border-left:3px solid #2563eb; border-radius:6px;
+                        padding:0.5rem 0.75rem; margin:0.5rem 0; font-family:'Courier New',monospace; font-size:0.82rem; line-height:1.7;">
+                        f(x, y) = (1&minus;x)&sup2; + 100&middot;(y&minus;x&sup2;)&sup2;
+                    </div>
+                    <p>Its <strong>global minimum is at (1, 1)</strong> where f&nbsp;=&nbsp;0, marked with a gold
+                        crosshair on the plot.</p>
+                    <p>The function has two key terms:</p>
+                    <ul>
+                        <li><strong>(1&minus;x)²</strong> — pulls x toward 1; relatively easy to minimize</li>
+                        <li><strong>100(y&minus;x²)²</strong> — pulls y toward x²; creates a curved banana-shaped valley</li>
+                    </ul>
+                    <p>The narrow, curved valley makes this a <em>hard</em> problem: the gradient points mostly
+                        across the valley rather than down its length, causing SGD to oscillate. This is why adaptive
+                        optimizers like Adam converge much more efficiently here.</p>
+
+                    <h3>The Loss Surface</h3>
+                    <p>Darker regions = lower loss. The banana-shaped contour curves show the narrow valley
+                        leading to the minimum at (1,&nbsp;1).</p>
+
+                    <h3>SGD (Stochastic Gradient Descent)</h3>
+                    <ul>
+                        <li>Moves directly opposite to the gradient</li>
+                        <li>Can oscillate in narrow valleys</li>
+                        <li>Simple but often inefficient</li>
+                    </ul>
+
+                    <h3>SGD + Momentum</h3>
+                    <ul>
+                        <li>Accumulates velocity from previous steps</li>
+                        <li>Smooths out oscillations</li>
+                        <li>Accelerates in consistent directions</li>
+                        <li>β controls how much history to keep (0.9 = 90% of previous velocity)</li>
+                    </ul>
+
+                    <h3>Adam (Adaptive Moment Estimation)</h3>
+                    <ul>
+                        <li>Adapts learning rate per parameter</li>
+                        <li>Combines momentum with adaptive learning rates</li>
+                        <li>Generally converges faster and more reliably</li>
+                        <li>Default choice for most deep learning tasks</li>
+                    </ul>
+
+                    <div class="intuition-highlight">
+                        <strong>Key Insight:</strong> The optimizer doesn't change what the network can learn (that's
+                        determined by architecture and activation functions), but it dramatically affects how
+                        efficiently it learns.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Zoom Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollContainer = document.getElementById('scroll-container');
+            const scaleContainer = document.getElementById('scale-container');
+            const contentWrapper = document.getElementById('content-wrapper');
+            const zoomLevelDisplay = document.getElementById('zoom-level');
+            let currentZoom = 1;
+
+            function updateZoom() {
+                contentWrapper.style.transform = `scale(${currentZoom})`;
+                const contentWidth = contentWrapper.scrollWidth;
+                const contentHeight = contentWrapper.scrollHeight;
+                scaleContainer.style.width = `${contentWidth * currentZoom}px`;
+                scaleContainer.style.height = `${contentHeight * currentZoom}px`;
+                zoomLevelDisplay.textContent = `${Math.round(currentZoom * 100)}%`;
+            }
+
+            document.getElementById('zoom-in-btn').addEventListener('click', () => {
+                currentZoom += 0.1;
+                updateZoom();
+            });
+
+            document.getElementById('zoom-out-btn').addEventListener('click', () => {
+                currentZoom = Math.max(0.1, currentZoom - 0.1);
+                updateZoom();
+            });
+
+            document.getElementById('zoom-fit-btn').addEventListener('click', () => {
+                contentWrapper.style.transform = 'scale(1)';
+                const naturalW = contentWrapper.scrollWidth;
+                const containerW = scrollContainer.clientWidth - 20;
+                let newZoom = naturalW > 0 ? containerW / naturalW : 1;
+                newZoom = Math.min(1, Math.max(0.15, newZoom));
+                currentZoom = newZoom;
+                updateZoom();
+            });
+
+            // Re-fit on window resize (orientation change, window resize)
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => document.getElementById('zoom-fit-btn').click(), 200);
+            });
+
+            setTimeout(() => { document.getElementById('zoom-fit-btn').click(); }, 150);
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../../js/math.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="demo.js"></script>
+</body>
+
+</html>
